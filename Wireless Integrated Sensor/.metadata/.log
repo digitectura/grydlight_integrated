@@ -1,0 +1,1825 @@
+!SESSION 2022-11-21 16:48:24.515 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\SumeetK\SimplicityStudio\v4_workspace\DALI IS code
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-11-21 16:48:31.697
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-11-21 16:48:31.709
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-21 16:48:45.373
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-21 16:48:47.288
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-21 16:49:06.164
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-21 16:49:06.170
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:12.627
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:12.627
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:12.628
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:13.816
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.787
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.789
+!MESSAGE Unknown board 'BRD4171A' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.791
+!MESSAGE Unknown board 'BRD4183B' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.792
+!MESSAGE Unknown board 'BRD4310A' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.796
+!MESSAGE Unknown board 'BRD4311A' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.955
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220pc22wga]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220pc22wga]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[112]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc12wga]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[112]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc12wga]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc22wga]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc22wga]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.961
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.962
+!MESSAGE Unknown board 'BRD4171A' in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.964
+!MESSAGE Unknown board 'BRD4176A' in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-21 16:49:15.977
+!MESSAGE Unknown architecture(s) [EFR32BG13P632F512IM48, EFR32FG13P231F512IM48, EFR32MG13P732F512IM48, EFR32MG13P733F512IM48, EFR32MG13P832F512IM48, EFR32FG14V132F256GM32, EFR32FG14V132F256GM48, RM21Z000F1024IM32, EFR32ZG13P531F512GM32, EFR32ZG13P531F512GM48, EFR32FG22C121F256GM32, EFR32FG22C121F256GM40, EFR32MG22A224F512IM40] in framework flex
+
+!ENTRY org.eclipse.core.resources 4 567 2022-11-21 16:54:48.194
+!MESSAGE Failed to read project description file from location 'C:\Users\SumeetK\SimplicityStudio\v4_workspace\DALI IS code\Gryd_WireLess_DALI_1024_PIR_ALS_TH_2\.project'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\SumeetK\SimplicityStudio\v4_workspace\DALI IS code\Gryd_WireLess_DALI_1024_PIR_ALS_TH_2\.project (The system cannot find the path specified)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at org.eclipse.core.internal.resources.ProjectDescriptionReader.read(ProjectDescriptionReader.java:955)
+	at org.eclipse.core.internal.resources.Workspace.loadProjectDescription(Workspace.java:1920)
+	at com.silabs.ss.framework.ide.api.project.sls.core.creator.BaseCreateConvertProjectHandler.runImportSLSArchive(BaseCreateConvertProjectHandler.java:329)
+	at com.silabs.ss.framework.ide.api.project.sls.core.creator.BaseCreateConvertProjectHandler.createOrConvertProject(BaseCreateConvertProjectHandler.java:281)
+	at com.silabs.ss.framework.project.api.core.external.ImportProjectHandler.createOrConvertProject(ImportProjectHandler.java:82)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine.createConvertProject(SLSProjectHandlerEngine.java:157)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine.importProject(SLSProjectHandlerEngine.java:192)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine.runImport(SLSProjectHandlerEngine.java:336)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine.access$3(SLSProjectHandlerEngine.java:326)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine$1.execute(SLSProjectHandlerEngine.java:220)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation$1.run(WorkspaceModifyOperation.java:108)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:130)
+	at com.silabs.ss.framework.ide.api.project.ui.util.SLSProjectHandlerEngine$2.runInWorkspace(SLSProjectHandlerEngine.java:250)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:39)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-11-21 16:59:04.705
+!MESSAGE Indexed 'Gryd_WireLess_DALI_1024_PIR_ALS_TH' (73 sources, 265 headers) in 13.5 sec: 41,549 declarations; 1,15,721 references; 6 unresolved inclusions; 169 syntax errors; 201 unresolved names (0.13%)
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-22 02:52:25.085
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 10:46:00.189
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 10:46:02.449
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2022-11-22 10:46:05.321
+!MESSAGE The given part number (rm21z000f1024im32) does not match the detected device (EFR32BG21A010F1024IM32)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-11-22 10:46:05.338
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@7a87ab9c): Status ERROR: com.silabs.ss.support.mcu.part.core code=0 The given part number (rm21z000f1024im32) does not match the detected device (EFR32BG21A010F1024IM32) null' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.support.mcu.part.core 4 0 2022-11-22 10:46:05.338
+!MESSAGE The given part number (rm21z000f1024im32) does not match the detected device (EFR32BG21A010F1024IM32)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2022-11-22 10:46:05.434
+!MESSAGE The given part number (rm21z000f1024im32) does not match the detected device (EFR32BG21A010F1024IM32)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-22 10:47:28.593
+!MESSAGE Invalid option in dependsOn list: sleepEnable
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-22 10:47:28.832
+!MESSAGE Illegal configuration for min/max in plugin option: NUMBER:3for plugin: NVM3 Library
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-11-22 10:47:31.459
+!MESSAGE Undefined variable 'chipFamilyUpperCase'
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.error(VariableSubstitutionEngine.java:325)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.reportIfNull(VariableSubstitutionEngine.java:314)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.substitute(VariableSubstitutionEngine.java:224)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModel.resolveString(ProjectModel.java:218)
+	at com.silabs.ss.framework.project.api.core.engine.operations.AddToolOptionOperation.<init>(AddToolOptionOperation.java:36)
+	at com.silabs.ss.framework.project.api.core.engine.BaseProjectEngineOperationFactory.createAddToolOptionOperation(BaseProjectEngineOperationFactory.java:162)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createSettingSiteOperations(ProjectModelEngine.java:637)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createRecursiveSettingSiteOperations(ProjectModelEngine.java:736)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-11-22 10:47:31.461
+!MESSAGE Undefined variable 'chipFamily'
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.error(VariableSubstitutionEngine.java:325)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.reportIfNull(VariableSubstitutionEngine.java:314)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.substitute(VariableSubstitutionEngine.java:224)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModel.resolveString(ProjectModel.java:218)
+	at com.silabs.ss.framework.project.api.core.engine.operations.AddToolOptionOperation.<init>(AddToolOptionOperation.java:36)
+	at com.silabs.ss.framework.project.api.core.engine.BaseProjectEngineOperationFactory.createAddToolOptionOperation(BaseProjectEngineOperationFactory.java:162)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createSettingSiteOperations(ProjectModelEngine.java:637)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createRecursiveSettingSiteOperations(ProjectModelEngine.java:736)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 10:49:23.277
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 10:49:23.290
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 10:49:28.775
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-11-22 10:49:34.760
+!MESSAGE Failed to parse debug info from section .debug_info in file C:/Users/SumeetK/SimplicityStudio/v4_workspace/DALI IS code/Gryd_WireLess_DALI_1024_PIR_ALS_TH/GNU ARM v7.2.1 - Default/Gryd_WireLess_DALI_1024_PIR_ALS_TH.axf
+!STACK 0
+java.lang.IllegalArgumentException: Comparison method violates its general contract!
+	at java.util.ComparableTimSort.mergeHi(ComparableTimSort.java:866)
+	at java.util.ComparableTimSort.mergeAt(ComparableTimSort.java:483)
+	at java.util.ComparableTimSort.mergeCollapse(ComparableTimSort.java:406)
+	at java.util.ComparableTimSort.sort(ComparableTimSort.java:213)
+	at java.util.Arrays.sort(Arrays.java:1312)
+	at java.util.Arrays.sort(Arrays.java:1506)
+	at java.util.ArrayList.sort(ArrayList.java:1454)
+	at java.util.Collections.sort(Collections.java:141)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseLineTable(DwarfInfoReader.java:1323)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.parseLineTable(DwarfCompileUnit.java:132)
+	at org.eclipse.cdt.debug.edc.internal.symbols.CompileUnitScope.getLineEntries(CompileUnitScope.java:78)
+	at org.eclipse.cdt.debug.edc.internal.symbols.ModuleLineEntryProvider.addCompileUnit(ModuleLineEntryProvider.java:89)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.getModuleLineEntryProvider(DwarfModuleScope.java:236)
+	at org.eclipse.cdt.debug.edc.internal.symbols.Scope.addLineInfoToParent(Scope.java:361)
+	at org.eclipse.cdt.debug.edc.internal.symbols.FunctionScope.addChild(FunctionScope.java:189)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.processInlinedSubroutine(DwarfInfoReader.java:2547)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.processDebugInfoEntry(DwarfInfoReader.java:1660)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseForAddresses(DwarfInfoReader.java:1384)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCompilationUnitForAddressesPrivate(DwarfInfoReader.java:851)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCompilationUnitForAddresses(DwarfInfoReader.java:870)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.ensureParsedForAddresses(DwarfCompileUnit.java:245)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.getScopeAtAddress(DwarfCompileUnit.java:275)
+	at org.eclipse.cdt.debug.edc.internal.symbols.Scope.getScopeAtAddress(Scope.java:137)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.getScopeAtAddress(DwarfModuleScope.java:145)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Symbols.getFunctionAtAddress(Symbols.java:97)
+	at org.eclipse.cdt.debug.edc.services.Stack$StackFrameDMC.<init>(Stack.java:372)
+	at org.eclipse.cdt.debug.edc.services.Stack.updateFrames(Stack.java:1683)
+	at org.eclipse.cdt.debug.edc.services.Stack.getFramesForDMC(Stack.java:1659)
+	at org.eclipse.cdt.debug.edc.services.Stack$3.run(Stack.java:1477)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 10:56:53.407
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 10:56:53.430
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 10:56:56.789
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-11-22 10:57:01.115
+!MESSAGE Failed to parse debug info from section .debug_info in file C:/Users/SumeetK/SimplicityStudio/v4_workspace/DALI IS code/Gryd_WireLess_DALI_1024_PIR_ALS_TH/GNU ARM v7.2.1 - Default/Gryd_WireLess_DALI_1024_PIR_ALS_TH.axf
+!STACK 0
+java.lang.IllegalArgumentException: Comparison method violates its general contract!
+	at java.util.ComparableTimSort.mergeHi(ComparableTimSort.java:866)
+	at java.util.ComparableTimSort.mergeAt(ComparableTimSort.java:483)
+	at java.util.ComparableTimSort.mergeCollapse(ComparableTimSort.java:406)
+	at java.util.ComparableTimSort.sort(ComparableTimSort.java:213)
+	at java.util.Arrays.sort(Arrays.java:1312)
+	at java.util.Arrays.sort(Arrays.java:1506)
+	at java.util.ArrayList.sort(ArrayList.java:1454)
+	at java.util.Collections.sort(Collections.java:141)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseLineTable(DwarfInfoReader.java:1323)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.parseLineTable(DwarfCompileUnit.java:132)
+	at org.eclipse.cdt.debug.edc.internal.symbols.CompileUnitScope.getLineEntries(CompileUnitScope.java:78)
+	at org.eclipse.cdt.debug.edc.internal.symbols.ModuleLineEntryProvider.addCompileUnit(ModuleLineEntryProvider.java:89)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.addChild(DwarfModuleScope.java:254)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.processCompileUnit(DwarfInfoReader.java:2221)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCompilationUnitForNames(DwarfInfoReader.java:601)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCUDebugInfo(DwarfInfoReader.java:521)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.access$0(DwarfInfoReader.java:496)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader$ParseJob.run(DwarfInfoReader.java:287)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 11:12:15.619
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:12:15.622
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:12:21.859
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-11-22 11:12:25.030
+!MESSAGE Failed to parse debug info from section .debug_info in file C:/Users/SumeetK/SimplicityStudio/v4_workspace/DALI IS code/Gryd_WireLess_DALI_1024_PIR_ALS_TH/GNU ARM v7.2.1 - Default/Gryd_WireLess_DALI_1024_PIR_ALS_TH.axf
+!STACK 0
+java.lang.IllegalArgumentException: Comparison method violates its general contract!
+	at java.util.ComparableTimSort.mergeHi(ComparableTimSort.java:866)
+	at java.util.ComparableTimSort.mergeAt(ComparableTimSort.java:483)
+	at java.util.ComparableTimSort.mergeCollapse(ComparableTimSort.java:406)
+	at java.util.ComparableTimSort.sort(ComparableTimSort.java:213)
+	at java.util.Arrays.sort(Arrays.java:1312)
+	at java.util.Arrays.sort(Arrays.java:1506)
+	at java.util.ArrayList.sort(ArrayList.java:1454)
+	at java.util.Collections.sort(Collections.java:141)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseLineTable(DwarfInfoReader.java:1323)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.parseLineTable(DwarfCompileUnit.java:132)
+	at org.eclipse.cdt.debug.edc.internal.symbols.CompileUnitScope.getLineEntries(CompileUnitScope.java:78)
+	at org.eclipse.cdt.debug.edc.internal.symbols.ModuleLineEntryProvider.addCompileUnit(ModuleLineEntryProvider.java:89)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.addChild(DwarfModuleScope.java:254)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.processCompileUnit(DwarfInfoReader.java:2221)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCompilationUnitForNames(DwarfInfoReader.java:601)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCUDebugInfo(DwarfInfoReader.java:521)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.access$0(DwarfInfoReader.java:496)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader$ParseJob.run(DwarfInfoReader.java:287)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 11:19:38.273
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:19:38.277
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:19:43.522
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-11-22 11:19:47.878
+!MESSAGE Failed to parse debug info from section .debug_info in file C:/Users/SumeetK/SimplicityStudio/v4_workspace/DALI IS code/Gryd_WireLess_DALI_1024_PIR_ALS_TH/GNU ARM v7.2.1 - Default/Gryd_WireLess_DALI_1024_PIR_ALS_TH.axf
+!STACK 0
+java.lang.IllegalArgumentException: Comparison method violates its general contract!
+	at java.util.ComparableTimSort.mergeHi(ComparableTimSort.java:866)
+	at java.util.ComparableTimSort.mergeAt(ComparableTimSort.java:483)
+	at java.util.ComparableTimSort.mergeCollapse(ComparableTimSort.java:406)
+	at java.util.ComparableTimSort.sort(ComparableTimSort.java:213)
+	at java.util.Arrays.sort(Arrays.java:1312)
+	at java.util.Arrays.sort(Arrays.java:1506)
+	at java.util.ArrayList.sort(ArrayList.java:1454)
+	at java.util.Collections.sort(Collections.java:141)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseLineTable(DwarfInfoReader.java:1323)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.parseLineTable(DwarfCompileUnit.java:132)
+	at org.eclipse.cdt.debug.edc.internal.symbols.CompileUnitScope.getLineEntries(CompileUnitScope.java:78)
+	at org.eclipse.cdt.debug.edc.internal.symbols.ModuleLineEntryProvider.addCompileUnit(ModuleLineEntryProvider.java:89)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.getModuleLineEntryProvider(DwarfModuleScope.java:236)
+	at org.eclipse.cdt.debug.edc.internal.symbols.Scope.addLineInfoToParent(Scope.java:361)
+	at org.eclipse.cdt.debug.edc.internal.symbols.FunctionScope.addChild(FunctionScope.java:189)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.processInlinedSubroutine(DwarfInfoReader.java:2547)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.processDebugInfoEntry(DwarfInfoReader.java:1660)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseForAddresses(DwarfInfoReader.java:1384)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCompilationUnitForAddressesPrivate(DwarfInfoReader.java:851)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfInfoReader.parseCompilationUnitForAddresses(DwarfInfoReader.java:870)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.ensureParsedForAddresses(DwarfCompileUnit.java:245)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfCompileUnit.getScopeAtAddress(DwarfCompileUnit.java:275)
+	at org.eclipse.cdt.debug.edc.internal.symbols.Scope.getScopeAtAddress(Scope.java:137)
+	at org.eclipse.cdt.debug.edc.internal.symbols.dwarf.DwarfModuleScope.getScopeAtAddress(DwarfModuleScope.java:145)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Symbols.getFunctionAtAddress(Symbols.java:97)
+	at org.eclipse.cdt.debug.edc.services.Stack$StackFrameDMC.<init>(Stack.java:372)
+	at org.eclipse.cdt.debug.edc.services.Stack.updateFrames(Stack.java:1683)
+	at org.eclipse.cdt.debug.edc.services.Stack.getFramesForDMC(Stack.java:1659)
+	at org.eclipse.cdt.debug.edc.services.Stack$3.run(Stack.java:1477)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2022-11-22 11:44:14.564
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 13861 DebugAdapter disconnect "root.000801017595"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-11-22 11:44:14.594
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2022-11-22 11:44:14.595
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 11:44:43.222
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:44:43.227
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:44:46.205
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 11:58:25.303
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:58:25.304
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:58:28.834
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 11:59:34.205
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:59:34.207
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 11:59:37.214
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 12:00:50.861
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:00:50.863
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:00:55.767
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 12:02:00.693
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:02:00.695
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:02:03.864
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 12:26:45.695
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:26:45.697
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:26:48.886
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 12:27:40.139
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:27:40.140
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:27:43.288
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 12:28:44.374
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:28:44.375
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:28:47.429
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 12:41:27.957
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:41:27.958
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 12:41:31.121
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 13:44:27.373
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 13:44:27.378
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 13:44:30.836
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 14:40:41.336
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 14:40:41.338
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 14:40:45.364
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 15:11:48.330
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:11:49.886
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:11:53.161
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 15:31:46.684
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:31:46.686
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:31:51.790
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 15:37:39.474
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:37:39.476
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:37:44.511
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 15:43:40.257
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:43:40.260
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 15:43:45.534
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 16:26:57.621
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 16:26:57.626
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 16:27:01.093
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 18:40:13.464
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:40:13.490
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:40:18.387
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 18:49:23.457
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:49:23.458
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:49:26.650
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 18:50:08.580
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:50:08.591
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:50:11.647
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 18:58:34.240
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:58:34.242
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:58:37.405
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 18:59:30.038
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:59:30.039
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 18:59:33.164
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:04:15.357
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:04:15.361
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:04:20.196
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:08:26.615
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:08:26.617
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:08:29.635
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:20:41.928
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:20:41.929
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:20:47.666
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:31:47.206
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:31:47.208
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:31:50.512
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:38:24.004
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:38:24.006
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:38:28.743
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:44:00.752
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:44:00.753
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:44:05.646
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 19:56:00.983
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:56:00.985
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 19:56:05.700
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-22 20:01:30.040
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 20:01:30.041
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-22 20:01:34.882
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-23 09:42:03.282
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-23 09:43:27.423
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 09:43:28.615
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 09:43:33.164
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2022-11-23 11:26:01.965
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 123268 DebugAdapter disconnect "root.000801017595"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-11-23 11:26:01.971
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2022-11-23 11:26:01.980
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-23 11:26:50.453
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 11:26:50.457
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 11:26:54.399
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2022-11-23 14:09:05.434
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 126950 DebugAdapter disconnect "root.000801017595"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2022-11-23 14:09:05.483
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2022-11-23 14:09:05.484
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2022-11-23 14:09:05.488
+!MESSAGE Lost connection to debugger agent "Silicon Labs TCF Agent". It's usually because the agent died abnormally.
+
+The debug session "Silicon Labs ARM MCU: EFR32BG21A010F1024IM32" will be terminated.
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-23 14:32:25.480
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 14:32:27.029
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 14:32:31.742
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-23 17:00:44.654
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 17:00:44.659
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 17:00:49.850
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-11-23 17:33:44.425
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 17:33:44.429
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-11-23 17:33:52.428
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-23 21:02:26.518
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-25 11:13:27.736
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-25 11:16:30.893
+!MESSAGE No network interfaces found.
+!SESSION 2022-11-28 10:45:04.367 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\SumeetK\SimplicityStudio\v4_workspace\DALI IS code
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-11-28 10:45:30.340
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-11-28 10:45:30.356
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-11-28 10:45:47.450
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.helpers.ServiceHelper.getService(ServiceHelper.java:30)
+	at org.eclipse.equinox.internal.p2.ui.ProvUIActivator.getProvisioningUI(ProvUIActivator.java:147)
+	at org.eclipse.equinox.p2.ui.ProvisioningUI.getDefaultUI(ProvisioningUI.java:57)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningUI(StudioLicenseManager.java:73)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningAgent(StudioLicenseManager.java:81)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getPreferences(StudioLicenseManager.java:68)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.initializeFromPreferences(StudioLicenseManager.java:85)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.<init>(StudioLicenseManager.java:36)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getStudioLicenseManager(StudioLicenseManager.java:42)
+	at com.silabs.ss.platform.internal.api.installer.ui.CheckLicenses.checkLicenses(CheckLicenses.java:28)
+	at com.silabs.ss.platform.internal.product.AppStartupCompleteEventHandler$1.run(AppStartupCompleteEventHandler.java:129)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-11-28 10:45:50.319
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-28 10:45:51.744
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-28 10:45:58.784
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY org.eclipse.jface 2 0 2022-11-28 10:46:03.421
+!MESSAGE Ignored reentrant call while viewer is busy. This is only logged once per viewer instance, but similar calls will still be ignored.
+!STACK 0
+java.lang.RuntimeException
+	at org.eclipse.jface.viewers.ColumnViewer.checkBusy(ColumnViewer.java:760)
+	at org.eclipse.jface.viewers.ColumnViewer.refresh(ColumnViewer.java:527)
+	at org.eclipse.ui.navigator.CommonViewer.refresh(CommonViewer.java:344)
+	at org.eclipse.ui.navigator.CommonViewer.refresh(CommonViewer.java:490)
+	at org.eclipse.cdt.ui.CElementContentProvider$RefreshElement.refresh(CElementContentProvider.java:367)
+	at org.eclipse.cdt.ui.CElementContentProvider$1.run(CElementContentProvider.java:452)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:135)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4155)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3772)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.runEventLoop(EventLoopProgressMonitor.java:125)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:99)
+	at org.eclipse.core.internal.jobs.ThreadJob.isCanceled(ThreadJob.java:144)
+	at org.eclipse.core.internal.jobs.ThreadJob.waitForRun(ThreadJob.java:233)
+	at org.eclipse.core.internal.jobs.ThreadJob.joinRun(ThreadJob.java:197)
+	at org.eclipse.core.internal.jobs.ImplicitJobs.begin(ImplicitJobs.java:92)
+	at org.eclipse.core.internal.jobs.JobManager.beginRule(JobManager.java:307)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runWspModification(CProjectDescriptionManager.java:483)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.runWspModification(CProjectDescriptionManager.java:454)
+	at org.eclipse.cdt.internal.core.settings.model.CProjectDescriptionManager.updateProjectDescriptions(CProjectDescriptionManager.java:556)
+	at org.eclipse.cdt.core.model.CoreModel.updateProjectDescriptions(CoreModel.java:1437)
+	at org.eclipse.cdt.internal.core.model.CModelManager.handleEvent(CModelManager.java:1006)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.notifyLanguageSettingsChangeListeners(LanguageSettingsProvidersSerializer.java:1411)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.serializeLanguageSettingsWorkspace(LanguageSettingsProvidersSerializer.java:574)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsManager.serializeLanguageSettingsWorkspace(LanguageSettingsManager.java:360)
+	at org.eclipse.cdt.core.language.settings.providers.LanguageSettingsSerializableProvider.serializeLanguageSettings(LanguageSettingsSerializableProvider.java:259)
+	at org.eclipse.cdt.managedbuilder.language.settings.providers.AbstractBuiltinSpecsDetector.runForEachLanguage(AbstractBuiltinSpecsDetector.java:582)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMBuiltinSpecsDetector.run(GNUARMBuiltinSpecsDetector.java:34)
+	at com.silabs.ss.tool.ide.arm.internal.toolchain.gnu.cdt.support.GNUARMCdtToolchain.fillLanguageSettings(GNUARMCdtToolchain.java:628)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettings(CdtToolchain.java:161)
+	at com.silabs.ss.framework.ide.api.project.core.cpp.CdtToolchain.getLanguageSettingEntries(CdtToolchain.java:58)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getToolchainLanguageSettings(SLSLanguageSettingsProvider.java:91)
+	at com.silabs.ss.framework.ide.internal.project.core.cpp.SLSLanguageSettingsProvider.getSettingEntries(SLSLanguageSettingsProvider.java:70)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer$LanguageSettingsWorkspaceProvider.getSettingEntries(LanguageSettingsProvidersSerializer.java:180)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesPooled(LanguageSettingsProvidersSerializer.java:1421)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesUpResourceTree(LanguageSettingsProvidersSerializer.java:1449)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1508)
+	at org.eclipse.cdt.internal.core.language.settings.providers.LanguageSettingsProvidersSerializer.getSettingEntriesByKind(LanguageSettingsProvidersSerializer.java:1550)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectResourceDataEntries(PathEntryTranslator.java:2064)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.access$11(PathEntryTranslator.java:2037)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator$1.visit(PathEntryTranslator.java:2025)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.doAccept(PathSettingsContainer.java:519)
+	at org.eclipse.cdt.core.settings.model.util.PathSettingsContainer.accept(PathSettingsContainer.java:515)
+	at org.eclipse.cdt.core.settings.model.util.PathEntryTranslator.collectEntries(PathEntryTranslator.java:2017)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getEntries(ConfigBasedPathEntryStore.java:237)
+	at org.eclipse.cdt.internal.core.settings.model.ConfigBasedPathEntryStore.getRawPathEntries(ConfigBasedPathEntryStore.java:118)
+	at org.eclipse.cdt.internal.core.model.PathEntryStoreProxy.getRawPathEntries(PathEntryStoreProxy.java:97)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getRawPathEntries(PathEntryManager.java:647)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:543)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:526)
+	at org.eclipse.cdt.internal.core.model.PathEntryManager.getResolvedPathEntries(PathEntryManager.java:510)
+	at org.eclipse.cdt.core.model.CoreModel.getResolvedPathEntries(CoreModel.java:948)
+	at org.eclipse.cdt.internal.core.model.CProject.getResolvedPathEntries(CProject.java:400)
+	at org.eclipse.cdt.internal.core.model.CProject.getOutputEntries(CProject.java:509)
+	at org.eclipse.cdt.internal.core.model.CProject.isOnOutputEntry(CProject.java:541)
+	at org.eclipse.cdt.internal.core.model.CContainer.computeChild(CContainer.java:215)
+	at org.eclipse.cdt.internal.core.model.CContainer.computeChildren(CContainer.java:182)
+	at org.eclipse.cdt.internal.core.model.CContainer.buildStructure(CContainer.java:154)
+	at org.eclipse.cdt.internal.core.model.Openable.generateInfos(Openable.java:261)
+	at org.eclipse.cdt.internal.core.model.CElement.openWhenClosed(CElement.java:427)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:305)
+	at org.eclipse.cdt.internal.core.model.CElement.getElementInfo(CElement.java:295)
+	at org.eclipse.cdt.internal.core.model.Parent.getChildren(Parent.java:55)
+	at org.eclipse.cdt.internal.ui.BaseCElementContentProvider.getSourceRoots(BaseCElementContentProvider.java:430)
+	at org.eclipse.cdt.internal.ui.BaseCElementContentProvider.getChildren(BaseCElementContentProvider.java:222)
+	at org.eclipse.cdt.internal.ui.cview.CViewContentProvider.getChildren(CViewContentProvider.java:90)
+	at org.eclipse.cdt.internal.ui.navigator.CNavigatorContentProvider.getChildren(CNavigatorContentProvider.java:244)
+	at org.eclipse.cdt.internal.ui.navigator.CNavigatorContentProvider.getPipelinedChildren(CNavigatorContentProvider.java:269)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getPipelinedChildren(SafeDelegateTreeContentProvider.java:172)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.pipelineChildren(NavigatorContentServiceContentProvider.java:212)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.access$1(NavigatorContentServiceContentProvider.java:198)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider$1.run(NavigatorContentServiceContentProvider.java:166)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.internalGetChildren(NavigatorContentServiceContentProvider.java:143)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.getChildren(NavigatorContentServiceContentProvider.java:129)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1365)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:353)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:906)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:617)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$1.run(AbstractTreeViewer.java:813)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:791)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:611)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:762)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleTreeExpand(AbstractTreeViewer.java:1493)
+	at org.eclipse.jface.viewers.TreeViewer.handleTreeExpand(TreeViewer.java:903)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$4.treeExpanded(AbstractTreeViewer.java:1505)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:132)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1137)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1122)
+	at org.eclipse.swt.widgets.Tree.wmNotifyChild(Tree.java:7633)
+	at org.eclipse.swt.widgets.Control.wmNotify(Control.java:5704)
+	at org.eclipse.swt.widgets.Composite.wmNotify(Composite.java:1956)
+	at org.eclipse.swt.widgets.Control.WM_NOTIFY(Control.java:5256)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4732)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5050)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2443)
+	at org.eclipse.swt.widgets.Tree.callWindowProc(Tree.java:1553)
+	at org.eclipse.swt.widgets.Tree.WM_LBUTTONDOWN(Tree.java:6501)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4712)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:6024)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5050)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2549)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3767)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:37)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-28 10:46:20.822
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-11-28 10:46:20.830
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-11-28 10:46:26.004
+!MESSAGE Indexed 'Gryd_WireLess_DALI_1024_PIR_ALS_TH' (73 sources, 265 headers) in 20.1 sec: 41,539 declarations; 1,15,710 references; 6 unresolved inclusions; 169 syntax errors; 201 unresolved names (0.13%)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-28 10:46:39.041
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-28 10:46:39.041
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-28 10:46:39.041
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-11-28 10:46:39.593
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY org.eclipse.ui 4 0 2022-11-28 12:03:38.717
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4491)
+	at org.eclipse.swt.SWT.error(SWT.java:4406)
+	at org.eclipse.swt.SWT.error(SWT.java:4377)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:482)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:354)
+	at org.eclipse.swt.widgets.Text.getText(Text.java:1359)
+	at org.eclipse.ui.internal.quickaccess.QuickAccessContents$4$1.run(QuickAccessContents.java:578)
+	at org.eclipse.swt.widgets.Display.runTimer(Display.java:4281)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3368)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2549)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3767)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:37)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-30 09:47:58.901
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-11-30 12:49:05.931
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-12-01 04:53:37.101
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2022-12-01 17:56:33.568
+!MESSAGE No network interfaces found.
+!SESSION 2022-12-02 18:35:11.440 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\SumeetK\SimplicityStudio\v4_workspace\DALI IS code
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:35:26.794
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:35:26.799
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:35:41.425
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:35:41.428
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:35:48.063
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:35:48.064
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:35:48.065
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:35:48.193
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-02 18:36:04.395
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.helpers.ServiceHelper.getService(ServiceHelper.java:30)
+	at org.eclipse.equinox.internal.p2.ui.ProvUIActivator.getProvisioningUI(ProvUIActivator.java:147)
+	at org.eclipse.equinox.p2.ui.ProvisioningUI.getDefaultUI(ProvisioningUI.java:57)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningUI(StudioLicenseManager.java:73)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningAgent(StudioLicenseManager.java:81)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getPreferences(StudioLicenseManager.java:68)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.initializeFromPreferences(StudioLicenseManager.java:85)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.<init>(StudioLicenseManager.java:36)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getStudioLicenseManager(StudioLicenseManager.java:42)
+	at com.silabs.ss.platform.internal.api.installer.ui.CheckLicenses.checkLicenses(CheckLicenses.java:28)
+	at com.silabs.ss.platform.internal.product.AppStartupCompleteEventHandler$1.run(AppStartupCompleteEventHandler.java:129)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-02 18:36:06.221
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:36:06.384
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+!SESSION 2022-12-02 18:46:12.632 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:46:19.452
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:46:19.458
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:46:23.556
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:46:23.559
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:46:29.136
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:46:29.136
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:46:29.137
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:46:29.289
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:46:35.071
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-02 18:46:45.216
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:47:15.320
+!MESSAGE Failed to parse assets.manifest file.  Exception: Read timed out
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1513)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1441)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:254)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadFile(AssetService.java:924)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.fetchAssetsFiles(AssetService.java:1037)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.checkForUpdates(AssetService.java:454)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:237)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:47:15.652
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+!SESSION 2022-12-02 18:51:54.665 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:52:01.516
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:52:01.522
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:52:05.126
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:52:05.131
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:52:10.257
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:52:10.257
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:52:10.258
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:52:10.368
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-02 18:52:25.165
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.helpers.ServiceHelper.getService(ServiceHelper.java:30)
+	at org.eclipse.equinox.internal.p2.ui.ProvUIActivator.getProvisioningUI(ProvUIActivator.java:147)
+	at org.eclipse.equinox.p2.ui.ProvisioningUI.getDefaultUI(ProvisioningUI.java:57)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningUI(StudioLicenseManager.java:73)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningAgent(StudioLicenseManager.java:81)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getPreferences(StudioLicenseManager.java:68)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.initializeFromPreferences(StudioLicenseManager.java:85)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.<init>(StudioLicenseManager.java:36)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getStudioLicenseManager(StudioLicenseManager.java:42)
+	at com.silabs.ss.platform.internal.api.installer.ui.CheckLicenses.checkLicenses(CheckLicenses.java:28)
+	at com.silabs.ss.platform.internal.product.AppStartupCompleteEventHandler$1.run(AppStartupCompleteEventHandler.java:129)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-02 18:52:25.692
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:52:25.775
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:52:38.959
+!MESSAGE Failed to load assets.manifest file.  Exception: Read timed out
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1513)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1441)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:254)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadFile(AssetService.java:924)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.fetchAssetsFiles(AssetService.java:1027)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.checkForUpdates(AssetService.java:454)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:237)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:52:39.142
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+!SESSION 2022-12-02 18:56:11.457 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:56:18.395
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-02 18:56:18.400
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:56:21.924
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:56:21.927
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:56:26.868
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:56:26.869
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:56:26.870
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-02 18:56:26.989
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:56:32.171
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-02 18:56:42.351
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:57:11.282
+!MESSAGE Failed to parse assets.manifest file.  Exception: Read timed out
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1513)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1441)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:254)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadFile(AssetService.java:924)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.fetchAssetsFiles(AssetService.java:1037)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.checkForUpdates(AssetService.java:454)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:237)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-02 18:57:11.598
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+!SESSION 2022-12-05 10:41:18.822 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-05 10:41:49.066
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-05 10:41:49.079
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:42:26.890
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:42:26.894
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:42:39.078
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:42:39.078
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:42:39.079
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:42:39.242
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:42:49.140
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-05 10:42:59.716
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:43:10.737
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+!SESSION 2022-12-05 10:56:50.078 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\SumeetK\SimplicityStudio\v4_workspace\DALI IS code
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-05 10:57:01.155
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH) in Python
+
+!ENTRY com.silabs.ss.platform.apack.core 1 0 2022-12-05 10:57:01.161
+!MESSAGE Ignoring path $(env.STUDIO_PYTHON3_PATH)/bin in Python
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:57:06.529
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/sdks_gecko_sdk_suite_v2.5_.studio_demos.xml for key com.silabs.sdk.stack.super:2.5.3./demosFile/0
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:57:06.533
+!MESSAGE No match for asset asset://aem/documents/referenced/studio/slThread_docContent.xml for key com.silabs.sdk.stack.super:2.5.3..com.silabs.sdk.stack.thread:2.9.3.0/docsFile/-1
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:57:14.222
+!MESSAGE Unknown board 'BRD4165B' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:57:14.223
+!MESSAGE Unknown board 'BRD4171A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:57:14.223
+!MESSAGE Unknown board 'BRD4311A' in framework btmesh
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 10:57:14.441
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework btmesh
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-05 10:57:30.456
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.helpers.ServiceHelper.getService(ServiceHelper.java:30)
+	at org.eclipse.equinox.internal.p2.ui.ProvUIActivator.getProvisioningUI(ProvUIActivator.java:147)
+	at org.eclipse.equinox.p2.ui.ProvisioningUI.getDefaultUI(ProvisioningUI.java:57)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningUI(StudioLicenseManager.java:73)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getProvisioningAgent(StudioLicenseManager.java:81)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getPreferences(StudioLicenseManager.java:68)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.initializeFromPreferences(StudioLicenseManager.java:85)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.<init>(StudioLicenseManager.java:36)
+	at com.silabs.ss.platform.internal.api.installer.ui.manager.StudioLicenseManager.getStudioLicenseManager(StudioLicenseManager.java:42)
+	at com.silabs.ss.platform.internal.api.installer.ui.CheckLicenses.checkLicenses(CheckLicenses.java:28)
+	at com.silabs.ss.platform.internal.product.AppStartupCompleteEventHandler$1.run(AppStartupCompleteEventHandler.java:129)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.ds 2 0 2022-12-05 10:57:33.424
+!MESSAGE Getting a lock required more than 10000 ms. There might be a synchronization problem in this callstack or just the build/dispose process of some components took too long! 
+!STACK 0
+java.lang.Exception: Debug stacktrace
+	at org.eclipse.equinox.internal.ds.InstanceProcess.getLock(InstanceProcess.java:120)
+	at org.eclipse.equinox.internal.ds.InstanceProcess.buildComponent(InstanceProcess.java:560)
+	at org.eclipse.equinox.internal.ds.ServiceReg.getService(ServiceReg.java:53)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse$1.run(ServiceFactoryUse.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.factoryGetService(ServiceFactoryUse.java:210)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceFactoryUse.getService(ServiceFactoryUse.java:111)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceConsumer$2.getService(ServiceConsumer.java:45)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistrationImpl.getService(ServiceRegistrationImpl.java:496)
+	at org.eclipse.osgi.internal.serviceregistry.ServiceRegistry.getService(ServiceRegistry.java:461)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.getService(BundleContextImpl.java:619)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.addingService(ProvisioningAgent.java:159)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:941)
+	at org.osgi.util.tracker.ServiceTracker$Tracked.customizerAdding(ServiceTracker.java:1)
+	at org.osgi.util.tracker.AbstractTracked.trackAdding(AbstractTracked.java:256)
+	at org.osgi.util.tracker.AbstractTracked.trackInitial(AbstractTracked.java:183)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:318)
+	at org.osgi.util.tracker.ServiceTracker.open(ServiceTracker.java:261)
+	at org.eclipse.equinox.internal.p2.core.ProvisioningAgent.getService(ProvisioningAgent.java:66)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.getLocalFile(SimpleMetadataRepositoryFactory.java:63)
+	at org.eclipse.equinox.internal.p2.metadata.repository.SimpleMetadataRepositoryFactory.load(SimpleMetadataRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.factoryLoad(MetadataRepositoryManager.java:57)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.refreshRepository(MetadataRepositoryManager.java:100)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:643)
+	at com.silabs.ss.platform.internal.api.installer.core.InstallerUtils.ensurePackagesFetched(InstallerUtils.java:2005)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:215)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:57:33.656
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:58:05.750
+!MESSAGE Failed to parse assets.manifest file.  Exception: Read timed out
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1513)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1441)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:254)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.downloadFile(AssetService.java:924)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.fetchAssetsFiles(AssetService.java:1037)
+	at com.silabs.ss.platform.internal.api.content.core.asset.AssetService.checkForUpdates(AssetService.java:454)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:237)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:286)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$4(UpdateManager.java:277)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-12-05 10:58:06.631
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v4_3\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-12-05 11:38:17.093
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-12-05 11:38:18.570
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2022-12-05 11:38:20.889
+!MESSAGE The given part number (efr32bg21a010f1024im32) does not match the detected device (EFR32MG21A010F1024IM32)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2022-12-05 11:38:20.894
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@1dc20d68): Status ERROR: com.silabs.ss.support.mcu.part.core code=0 The given part number (efr32bg21a010f1024im32) does not match the detected device (EFR32MG21A010F1024IM32) null' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.support.mcu.part.core 4 0 2022-12-05 11:38:20.894
+!MESSAGE The given part number (efr32bg21a010f1024im32) does not match the detected device (EFR32MG21A010F1024IM32)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2022-12-05 11:38:20.933
+!MESSAGE The given part number (efr32bg21a010f1024im32) does not match the detected device (EFR32MG21A010F1024IM32)
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:55.992
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:55.992
+!MESSAGE Unknown board 'BRD4171A' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:55.993
+!MESSAGE Unknown board 'BRD4183B' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:55.993
+!MESSAGE Unknown board 'BRD4310A' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:55.994
+!MESSAGE Unknown board 'BRD4311A' in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:56.074
+!MESSAGE Unknown architecture(s) [efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220pc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220pc22wga]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220pc22wga]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[112]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc12wga]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[112]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc12wga]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[224]~flash[512k]~temp[i]~package[m]~pins[40]~module[bgm220sc22hna]+gcc, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc22wga]+iar, efr32~family[b]~series[2]~device_configuration[2]~performance[c]~radio[222]~flash[352k]~temp[g]~package[m]~pins[40]~module[bgm220sc22wga]+gcc, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+iar, efr32~family[m]~series[1]~device_configuration[3]~performance[p]~radio[832]~flash[512k]~temp[i]~package[m]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:56.077
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:56.078
+!MESSAGE Unknown board 'BRD4171A' in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:56.078
+!MESSAGE Unknown board 'BRD4176A' in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 2 0 2022-12-05 11:38:56.085
+!MESSAGE Unknown architecture(s) [EFR32BG13P632F512IM48, EFR32FG13P231F512IM48, EFR32MG13P732F512IM48, EFR32MG13P733F512IM48, EFR32MG13P832F512IM48, EFR32FG14V132F256GM32, EFR32FG14V132F256GM48, RM21Z000F1024IM32, EFR32ZG13P531F512GM32, EFR32ZG13P531F512GM48, EFR32FG22C121F256GM32, EFR32FG22C121F256GM40, EFR32MG22A224F512IM40] in framework flex
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-12-05 11:39:19.810
+!MESSAGE Undefined variable 'chipFamilyUpperCase'
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.error(VariableSubstitutionEngine.java:325)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.reportIfNull(VariableSubstitutionEngine.java:314)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.substitute(VariableSubstitutionEngine.java:224)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModel.resolveString(ProjectModel.java:218)
+	at com.silabs.ss.framework.project.api.core.engine.operations.AddToolOptionOperation.<init>(AddToolOptionOperation.java:36)
+	at com.silabs.ss.framework.project.api.core.engine.BaseProjectEngineOperationFactory.createAddToolOptionOperation(BaseProjectEngineOperationFactory.java:162)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createSettingSiteOperations(ProjectModelEngine.java:637)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createRecursiveSettingSiteOperations(ProjectModelEngine.java:736)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY com.silabs.ss.platform.rcp.core 4 0 2022-12-05 11:39:19.811
+!MESSAGE Undefined variable 'chipFamily'
+!STACK 0
+java.lang.Exception
+	at com.silabs.java.utils.ExceptionUtils.newMinimalStackException(ExceptionUtils.java:29)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.error(VariableSubstitutionEngine.java:325)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.reportIfNull(VariableSubstitutionEngine.java:314)
+	at com.silabs.java.utils.variables.engine.VariableSubstitutionEngine.substitute(VariableSubstitutionEngine.java:224)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModel.resolveString(ProjectModel.java:218)
+	at com.silabs.ss.framework.project.api.core.engine.operations.AddToolOptionOperation.<init>(AddToolOptionOperation.java:36)
+	at com.silabs.ss.framework.project.api.core.engine.BaseProjectEngineOperationFactory.createAddToolOptionOperation(BaseProjectEngineOperationFactory.java:162)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createSettingSiteOperations(ProjectModelEngine.java:637)
+	at com.silabs.ss.framework.project.internal.core.engine.ProjectModelEngine.createRecursiveSettingSiteOperations(ProjectModelEngine.java:736)
+	at ... extra clipped....(Unknown Source)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-12-05 11:39:27.572
+!MESSAGE Indexed 'Gryd_WireLess_DALI_1024_PIR_ALS_TH' (73 sources, 265 headers) in 5.22 sec: 41,540 declarations; 1,15,719 references; 6 unresolved inclusions; 169 syntax errors; 201 unresolved names (0.13%)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 1 0 2022-12-05 11:40:21.221
+!MESSAGE MCUUtils#setTargetInterface()::tif => swd
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-12-05 11:40:21.247
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2022-12-05 11:40:30.201
+!MESSAGE com.silabs.ss.framework.debugger.api.tcf.agent.DeviceAgentSession::ahbap.index=0
+
+!ENTRY org.eclipse.ui 4 0 2022-12-05 12:22:20.118
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Widget is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4491)
+	at org.eclipse.swt.SWT.error(SWT.java:4406)
+	at org.eclipse.swt.SWT.error(SWT.java:4377)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:482)
+	at org.eclipse.swt.widgets.Widget.checkWidget(Widget.java:354)
+	at org.eclipse.swt.widgets.Text.getText(Text.java:1359)
+	at org.eclipse.ui.internal.quickaccess.QuickAccessContents$4$1.run(QuickAccessContents.java:578)
+	at org.eclipse.swt.widgets.Display.runTimer(Display.java:4281)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3368)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2549)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3767)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at com.silabs.ss.platform.internal.product.Application.start(Application.java:37)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)

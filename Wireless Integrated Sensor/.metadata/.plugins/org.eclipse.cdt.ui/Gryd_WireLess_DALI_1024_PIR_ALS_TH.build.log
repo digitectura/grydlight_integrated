@@ -1,0 +1,6 @@
+12:44:06 **** Incremental Build of configuration GNU ARM v7.2.1 - Default for project Gryd_WireLess_DALI_1024_PIR_ALS_TH ****
+make -j4 all 
+make: Nothing to be done for `all'.
+
+12:44:20 Build Finished (took 13s.449ms)
+
