@@ -2,4 +2,5 @@ Before main() function there is a variable 'mux_control_select', by changing the
 
 
 mux_control_select = 0    //Integrated DALI
+
 mux_control_select = 1    //Integrated ANALOG
