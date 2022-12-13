@@ -64,6 +64,7 @@
 #define DEFAULT_PIR_UNOCCUPANCY_TIME_4			600	//SEC==>10mins
 #define DEFAULT_PIR_UNOCCUPANCY_TIME_5			900	//SEC==>15mins
 
+#define DEFAULT_PIR_RETRANSMIT_TIME_FIVEMIN             300
 #define DEFAULT_PIR_RETRANSMIT_TIME				1800	//SEC==>30mins
 #define DEFAULT_PIR_WAIT_AND_WATCH_TIME			80	//mSEC
 #define PIR_POWER_ON_STATUS_INTERVAL			60 //120 sec -- 2mins
@@ -124,7 +125,7 @@
 
 /*................................Application Macros....................................*/
 #define CONFIG_VER								1
-#define FW_VER									10
+#define FW_VER									12
 
 #define SNSR_CFG_SAVE_INTERVAL					30		//sec
 #define IDENTIFY_INTERVAL						1		//sec

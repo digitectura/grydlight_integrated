@@ -8,7 +8,7 @@
 #define ALS_TEST
 
 //#define SELF_PROVISIONING
-#define AREA
+//#define AREA
 
 #define DEFAULT_DEVICE_TYPE		263
 #define DEFAULT_DEST_ADDR		0xFFFF
@@ -100,6 +100,7 @@ typedef struct
 	uint8_t WL_LIGHT_RcvdExternalCmd_flag;				//on receiving Light control commands from UI or switch set this flag
 	uint8_t WL_LIGHT_CONTROL_2_flag;
 	uint16_t thRetransmitTimerStart;
+	uint16_t alsRetransmitTimerStart;
 	bool ForcedReq;
 }__attribute__((__packed__))snsrAppData_t;
 /*******************************************************************************************************************************/

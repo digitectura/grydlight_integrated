@@ -53,6 +53,7 @@ snsrAppData_t snsrAppData 							= 	{
 															.broadCastComplete				= false ,
 															.pirRetransmitTimerStart 		= 1 ,
 															.thRetransmitTimerStart			= 1 ,
+															.alsRetransmitTimerStart		= 1,
 															.switchState					= SWITCH_RELEASED,
 															.global_daliStatus				= 0,
 															.WL_LIGHT_RcvdExternalCmd_flag 	= 0,
@@ -76,9 +77,9 @@ snsrMinCfg_t	 snsrMinCfg 	 					= 	{
 														};
 snsrCfg_t		snsrCfg								=	{
 															.pir_cfg			= 	{
-																						.unoccupancyTimer_s 	= DEFAULT_PIR_UNOCCUPANCY_TIME_5 ,
+																						.unoccupancyTimer_s 	= DEFAULT_PIR_UNOCCUPANCY_TIME_1 ,
 																						.wait_watch_Time_ms 	= DEFAULT_PIR_WAIT_AND_WATCH_TIME ,
-																						.retransmission_timeout	= DEFAULT_PIR_RETRANSMIT_TIME ,
+																						.retransmission_timeout	=  DEFAULT_PIR_RETRANSMIT_TIME_FIVEMIN ,
 																						.cfg_id					= CFG_5
 																					},
 															.als_cfg			= 	{
@@ -1786,6 +1787,15 @@ void fn_sensorIdentify(void)
 	}
 	return ;
 }
+
+void fn_ALS_Retransmit(void)
+{
+	if(fn_IsSecTimerElapsed(snsrAppData.alsRetransmitTimerStart ,snsrCfg.als_cfg.retransmission_timeout))
+	{
+		printf("ALS data retransmitted\r\n");
+		send_packet(ALS,snsrMinCfg.dest_addr,false);
+	}
+}
 /****************************************************************************************************************/
 void fn_thRetransmit(void)
 {
@@ -1819,6 +1829,7 @@ void fn_pirRetransmit(void)
 		case TWO:
 		{
 			send_packet(PIR,snsrMinCfg.dest_addr,false);
+			DBG_PRINT("REtxmsn pkt\r\n");
 			reTrnsState = ONE;
 		}
 		break;
@@ -1838,6 +1849,7 @@ void fn_SnsrPrcss(void)
 	if(snsrMinCfg.device_type & ALS_SENSOR)
 	{
 		fn_ALSprocess();
+		fn_ALS_Retransmit();
 	}
 	if(snsrMinCfg.device_type & TH_SENSOR)
 	{

@@ -10,6 +10,7 @@ void fn_ALSprocess(void)
 {
 	static uint8_t alsProcess_state = INIT_ALS_SENSOR_PROCESS;
 	static uint16_t alsProcess_WaitTimeStart = 0;
+	static uint8_t	failureCnt = 0;
 	switch(alsProcess_state)
 	{
 		case INIT_ALS_SENSOR_PROCESS:
@@ -19,6 +20,11 @@ void fn_ALSprocess(void)
 			{
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				alsProcess_state = ENABLE_ALS_CONVERSIONS;
+			}else{		//	Failure to read ALS data SET
+				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
+				snsrCurrStatus.als_LUXvalue = 10;
+				alsProcess_state = WAIT_FOR_NEXT_READ;
+				failureCnt++;
 			}
 		break;
 		case ENABLE_ALS_CONVERSIONS:
@@ -28,6 +34,11 @@ void fn_ALSprocess(void)
 			{
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				alsProcess_state = READ_ALS_DATA;
+			}else{		//	Failure to read ALS data SET
+				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
+				snsrCurrStatus.als_LUXvalue = 10;
+				alsProcess_state = WAIT_FOR_NEXT_READ;
+				failureCnt++;
 			}
 		break;
 
@@ -38,6 +49,11 @@ void fn_ALSprocess(void)
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				memset(i2c_rxBuffer,'\0',I2C_RXBUFFER_SIZE);
 				alsProcess_state = COMPUTE_ALS_DATA;
+			}else{		//	Failure to read ALS data SET
+				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
+				snsrCurrStatus.als_LUXvalue = 10;
+				alsProcess_state = WAIT_FOR_NEXT_READ;
+				failureCnt++;
 			}
 		break;
 
@@ -57,6 +73,11 @@ void fn_ALSprocess(void)
 
 
 				alsProcess_state = CHECK_STATUS_CHANGE;
+			}else{		//	Failure to read ALS data SET
+				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
+				snsrCurrStatus.als_LUXvalue = 10;
+				alsProcess_state = WAIT_FOR_NEXT_READ;
+				failureCnt++;
 			}
 		break;
 
@@ -73,6 +94,10 @@ void fn_ALSprocess(void)
 		case WAIT_FOR_NEXT_READ :
 			if(fn_IsSecTimerElapsed (alsProcess_WaitTimeStart , snsrCfg.als_cfg.freq_LUXmeasure_s ))
 			{
+				if(failureCnt > 10){
+					DBG_PRINT("I2C -- ALS Sensor failed trying to reinit to enable..\r\n");
+					fn_initI2C();
+				}
 				alsProcess_state = READ_ALS_DATA;
 			}
 		break;

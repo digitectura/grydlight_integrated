@@ -21,8 +21,8 @@
 
 #ifdef ALS_TEST
 uint16_t MaxLuxOnTable = 600;
-static uint8_t Prev_mLevel = 0;
-static int16_t Curr_mLevel = 1;
+uint8_t Prev_mLevel = 0;
+int16_t Curr_mLevel = 1;
 #endif
 
 
@@ -38,10 +38,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 		{
 			if(!isReq && !(snsrAppData.WL_LIGHT_RcvdExternalCmd_flag || snsrAppData.WL_LIGHT_CONTROL_2_flag))
 			{
-//					m_level = (uint8_t) (((100 - ((snsrCurrStatus.als_LUXvalue * sAlsCalibValue.m_gain) / sAlsCalibValue.req_lux)) < 0) ?
-//									0 : (100 - ((snsrCurrStatus.als_LUXvalue * sAlsCalibValue.m_gain) / sAlsCalibValue.req_lux)));
-
-
 #ifdef ALS_TEST
 								Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
 								Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
@@ -84,12 +80,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 
 					if(mux_control_select == 0)							//DALI
 					{
-//						if(m_level <= g_sDaliRetention.m_LevelThreshold)
-//						{
-//							m_level = 0;
-//						}
-
-
 //NOTE: Check and uncomment it later. COmmented out for testing als new formula.
 #ifdef DALI_SPACE
 	#ifdef AREA
@@ -127,10 +117,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 					}
 	#endif
 #endif
-
-						printf("delay done PIR\r\n");
-//						fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?m_level:0), 0x11);
-
 
 #ifdef ALS_TEST
 	#ifdef AREA
@@ -268,7 +254,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 							{
 	#endif
 								(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
-								fn_sendTriacStatus(0x12);
+								fn_sendTriacStatus(0x12);			//	Muruga is commented out
 	#ifdef AREA
 							}
 	#endif

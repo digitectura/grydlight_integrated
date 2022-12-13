@@ -78,7 +78,7 @@ void initBoard(void)
 	CMU_ClockEnable(cmuClock_GPIO, true);									// Enable GPIO clock source
 	RETARGET_SwoInit();														//initializing for dbg_prints ; just comment out this line for disabling the dbg_prints
 
-	fn_pir_init();
+
 #ifndef DALI_SPACE
 	fn_initI2C();
 #endif
@@ -124,6 +124,13 @@ void fn_deviceInit(void)
 	initMcu();
 	// Initialize board
 	initBoard();
+
+	uint16_t led_delay = fn_GetSecTimerStart();
+	LED_TOGGLING(APP_LED1);
+	LED_TOGGLING(APP_LED2);
+	while(!(fn_IsSecTimerElapsed(led_delay, 2)));
+	TURN_OFF_LED(APP_LED1);
+	TURN_OFF_LED(APP_LED2);
 
 	// Minimize advertisement latency by allowing the advertiser to always
 	// interrupt the scanner.

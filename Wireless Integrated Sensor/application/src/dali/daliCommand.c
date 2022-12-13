@@ -1990,16 +1990,8 @@ void fn_daliProcess()
 			{
 #ifndef RELAY_EN
 				criticalOpnLock = true;
-//				memset(criticalOpnMonitor, '\0', sizeof(criticalOpnMonitor));
-//				sprintf(criticalOpnMonitor, "Func: %s Line: %d", __func__, __LINE__);
 				m_DaliState = QUEUE_SEGREGATION_2;
 				edaliProcessStatus = DALI_PROCESSING;
-
-//				memset(&sDaliAction_loc, 0, sizeof(sDaliAction_loc));
-//				memcpy(&sDaliAction_loc, &sDaliActQueue.dfront->sDaliAct, sizeof(struct_DaliAction));
-
-//				printf("DALI Cmd Dequeued\r\n");
-//				fn_deQueueAC(&sDaliActQueue);
 #else
 				fn_deQueueAC(&sDaliActQueue);
 #endif
@@ -2009,24 +2001,7 @@ void fn_daliProcess()
 		else if (sDaliActWaitQueue.dfront != NULL)
 		{
 			fn_deQueueAC(&sDaliActWaitQueue);
-			/*
-			 if (criticalOpnLock == false)
-			 {
-			 criticalOpnLock = true;
-			 memset(criticalOpnMonitor, '\0', sizeof(criticalOpnMonitor));
-			 sprintf(criticalOpnMonitor, "Func: %s Line: %d", __func__, __LINE__);
-			 if (GET_GRP(sDaliActWaitQueue.dfront->sDaliAct.d_add))
-			 {
-			 m_DaliState = 8;
-			 }
-			 else
-			 {
-			 m_DaliState = 4;
-			 }
-			 edaliProcessStatus = DALI_PROCESSING;
 
-			 }
-			 */
 		}
 //#endif
 		else if (sDaliSceneActQueue.d_scnActFront != NULL)
@@ -2202,6 +2177,28 @@ void fn_daliProcess()
 									0 :
 									LEVEL_PERCENT(
 											sDaliActQueueStat.sDaliActSQ[sDaliActQueueStat.mHead].d_Intensity))), sDaliActQueueStat.sDaliActSQ[sDaliActQueueStat.mHead].d_statFrom);
+
+					switch(sDaliActQueueStat.sDaliActSQ[sDaliActQueueStat.mHead].d_statFrom){
+					case 0x11:
+						DBG_PRINT("PIR TRIGGERED \r\n");
+						break;
+					case 0x12:		//	ALS
+						DBG_PRINT("ALS TRIGGERED \r\n");
+						break;
+					case 0x13:
+
+						break;
+					case 0x14:
+
+						break;
+					case 0x15:
+
+						break;
+					case 0x16:
+						DBG_PRINT("AREA TRIGGERED \r\n");
+						break;
+
+					}
 
 /*
 					if(fn_IsSecTimerElapsed(DaliQueryWaitTimer, 10))

@@ -13,6 +13,7 @@ uint8_t mux_control_select = 0;		//	O = DALI & 1 = ANALOG
 
 int main()
 {
+
 	// Initialize device
 	fn_deviceInit();
 #ifdef DALI_SPACE							//on bootup delay of 5 sec. As the ESP is taking time to derive the i2c_SDA pin high
@@ -42,7 +43,7 @@ int main()
 	fn_snsRestore();
 	printf("System bootup Delay ... 15 secs\r\n ");
 	while(!(fn_IsSecTimerElapsed(bootup_delay, 15)));		//	Muruga	-	Changed bootup delay from 5 sec to 15 seconds
-	//pir_enable();
+	fn_pir_init();
 	while (1)
 	{
 
@@ -54,9 +55,9 @@ int main()
 		}
 		fn_ctrlHandshake();
 		fn_SnsrPrcss();
-
+#ifdef AREA
 		fn_AreaControl();
-
+#endif
 		if(mux_control_select == 0)					//DALI
 		{
 			fn_daliProcess();
