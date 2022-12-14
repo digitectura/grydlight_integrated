@@ -78,6 +78,7 @@
 
 #define DEFAULT_ALS_LUX_THRESHOLD				50  //LUX
 #define DEFAULT_ALS_CALBFACTOR					100	//multiplication factor
+#define DEFAULT_ALS_RETRANSMIT                  900
 
 /*.....................................TH app Macros.....................................*/
 #define DEFAULT_TH_RETRANSMIT_TIME				1800//sec ==> 30mins
@@ -125,7 +126,7 @@
 
 /*................................Application Macros....................................*/
 #define CONFIG_VER								1
-#define FW_VER									12
+#define FW_VER									13
 
 #define SNSR_CFG_SAVE_INTERVAL					30		//sec
 #define IDENTIFY_INTERVAL						1		//sec

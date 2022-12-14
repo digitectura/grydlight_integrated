@@ -13,7 +13,6 @@ uint8_t mux_control_select = 0;		//	O = DALI & 1 = ANALOG
 
 int main()
 {
-
 	// Initialize device
 	fn_deviceInit();
 #ifdef DALI_SPACE							//on bootup delay of 5 sec. As the ESP is taking time to derive the i2c_SDA pin high

@@ -280,6 +280,8 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 						}
 					}
 			}
+
+			snsrAppData.alsRetransmitTimerStart = fn_GetSecTimerStart();
 			m_data.datacmd = ALS;
 			m_data.data[0] = snsrCurrStatus.als_LUXvalue;
 			m_data.data[1] = (snsrCurrStatus.als_LUXvalue >> 8);

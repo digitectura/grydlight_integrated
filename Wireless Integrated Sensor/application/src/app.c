@@ -70,22 +70,23 @@ snsrMinCfg_t	 snsrMinCfg 	 					= 	{
 															.cfgAvailable		= false,
 															.aggBinded			= false,
 															.lghtMpng			= {
-																					.loopMap	= BOTH_LOOP,
-																					.reqLux		= DEFAULT_REQ_LUX,
-																					.gain		= DEFAULT_GAIN_FACTOR
-																				  }
+															.loopMap			= BOTH_LOOP,
+															.reqLux				= DEFAULT_REQ_LUX,
+															.gain				= DEFAULT_GAIN_FACTOR
+														  }
 														};
 snsrCfg_t		snsrCfg								=	{
 															.pir_cfg			= 	{
-																						.unoccupancyTimer_s 	= DEFAULT_PIR_UNOCCUPANCY_TIME_1 ,
+																						.unoccupancyTimer_s 	= DEFAULT_PIR_UNOCCUPANCY_TIME_5 ,
 																						.wait_watch_Time_ms 	= DEFAULT_PIR_WAIT_AND_WATCH_TIME ,
-																						.retransmission_timeout	=  DEFAULT_PIR_RETRANSMIT_TIME_FIVEMIN ,
+																						.retransmission_timeout	=  DEFAULT_PIR_RETRANSMIT_TIME ,
 																						.cfg_id					= CFG_5
 																					},
 															.als_cfg			= 	{
 																						.freq_LUXmeasure_s		= DEFAULT_ALS_FREQ_OF_MEASURMT_1 ,
 																						.luxThreshold			= DEFAULT_ALS_LUX_THRESHOLD ,
 																						.calibration_factor		= DEFAULT_ALS_CALBFACTOR ,
+																						.retransmission_timeout	= DEFAULT_ALS_RETRANSMIT,
 																						.cfg_id					= CFG_1
 																					},
 															.th_cfg				=	{
@@ -1790,11 +1791,11 @@ void fn_sensorIdentify(void)
 
 void fn_ALS_Retransmit(void)
 {
-	if(fn_IsSecTimerElapsed(snsrAppData.alsRetransmitTimerStart ,snsrCfg.als_cfg.retransmission_timeout))
-	{
-		printf("ALS data retransmitted\r\n");
-		send_packet(ALS,snsrMinCfg.dest_addr,false);
-	}
+//	if(fn_IsSecTimerElapsed(snsrAppData.alsRetransmitTimerStart ,snsrCfg.als_cfg.retransmission_timeout))
+//	{
+//		printf("ALS data retransmitted\r\n");
+//		send_packet(ALS,snsrMinCfg.dest_addr,false);
+//	}
 }
 /****************************************************************************************************************/
 void fn_thRetransmit(void)
