@@ -69,11 +69,11 @@ uint16_t g_ballastCount[NUM_OF_DALI_LOOPS];
 uint8_t g_randomizeDali = 0;
 struct_Dim s_DimEntity;                                  // Srikanth 01-6-22
 
-void fn_assignAddressbyte(uint32_t*, uint32_t, uint32_t);
-uint16_t fn_isDaliShidAvailable(uint8_t m_loop, uint32_t m_randId);
-bool fn_isDaliRndIDAvailable(uint8_t m_loop, uint32_t m_randId);
-bool fn_isSHIDAvailable(uint8_t m_shid, daliLoop_typedef m_loop);
-int8_t fn_findFree_id(daliLoop_typedef m_loop);
+//void fn_assignAddressbyte(uint32_t*, uint32_t, uint32_t);
+//uint16_t fn_isDaliShidAvailable(uint8_t m_loop, uint32_t m_randId);
+//bool fn_isDaliRndIDAvailable(uint8_t m_loop, uint32_t m_randId);
+//bool fn_isSHIDAvailable(uint8_t m_shid, daliLoop_typedef m_loop);
+//int8_t fn_findFree_id(daliLoop_typedef m_loop);
 /*		========= ballastOn ==========
  *
  * @brief 	This function is called to switch on the luminaries on the DALI bus.
@@ -1970,7 +1970,7 @@ bool fn_Get16bitValue(daliLoop_typedef m_loop, uint8_t m_address,
 void fn_daliProcess()
 {
 	static uint8_t m_DaliState = QUEUE_SEGREGATION_1;
-	static uint8_t m_dresponse = 0;
+//	static uint8_t m_dresponse = 0;
 	static struct_DaliAction *sPtr;
 	static uint16_t m_waitTimeout = 0;
 	static uint16_t m_curWaitTimeout = 0;
@@ -2494,9 +2494,9 @@ void fn_daliProcess()
 						sDaliActQueue.dfront->sDaliAct.d_add))) {
 			// 0x40 because the short id will be left shift in the function
 			if (GET_GRP(sDaliActQueue.dfront->sDaliAct.d_add)) {
-				uint8_t m_gpids = (uint8_t) ((GET_SADD(
+		/*				uint8_t m_gpids = (uint8_t) ((GET_SADD(
 						sDaliActQueue.dfront->sDaliAct.d_add) << 4));
-/*
+
 				m_gpids |= (uint8_t) (
 						((daliLoop_typedef) GET_LOOP(
 								sDaliActQueue.dfront->sDaliAct.d_add)

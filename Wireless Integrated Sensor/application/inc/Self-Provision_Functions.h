@@ -9,7 +9,7 @@
 #define SELF_PROVISION_FUNCTIONS_H_
 
 #define ONE_SECOND 					32768
-#define TIMER_ID_RESTART            78
+//#define TIMER_ID_RESTART            78
 
 extern uint16_t Unicast;
 extern char unicast_array[4];

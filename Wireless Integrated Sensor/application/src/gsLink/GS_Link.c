@@ -64,12 +64,12 @@ struct_gsLinkCmdParser gsLink_cmdFrame[MAX_NUM_PKTS] =
 struct_gsLinkCmdParser gsLink_cmdFrame[MAX_NUM_PKTS] =
 														{
 															[FT_WHOIS]				= {NULL},
-															[FT_IAM]				= {fn_gsLink_Iam} ,
+															[FT_IAM]				= {(void *)fn_gsLink_Iam} ,
 															[FT_DATAREQ]			= {NULL} ,
 															[FT_DATARES]			= {NULL} ,
-															[FT_STATUSCHANGE]		= {fn_gsLink_statusChange_from_Ctrl} ,
+															[FT_STATUSCHANGE]		= {(void *)fn_gsLink_statusChange_from_Ctrl} ,
 															[FT_COMMISSIONING]		= {NULL} ,
-															[FT_COMMAND]			= {fn_gsLink_command} ,
+															[FT_COMMAND]			= {(void *)fn_gsLink_command} ,
 															[FT_ACK]				= {NULL} ,
 															[FT_NACK]				= {NULL} ,
 															[FT_WL_LIGHT_COMMANDS]	= {NULL} ,

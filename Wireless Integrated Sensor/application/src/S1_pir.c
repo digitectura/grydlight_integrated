@@ -14,9 +14,7 @@
 uint16_t pir_SleepTime_Start = 1;
 uint16_t pir_unoccupancyTime = 0;
 enum_PIR_trigger_state ePIR_trggr_state = NO_MOTION_DETECTED;
-enum_PIR_ProcessState ePIR_process_state;
 uint8_t g_PIRState = false;
-
 enum_PIR_ProcessState ePIRprocess_state = SET_PIR_CONFIG;
 
 
@@ -38,7 +36,7 @@ void fn_pir_init(void)
 //*******************************************************************************************************************************************************************//
 void fn_PIR_Process(void)
 {
-	static uint8_t PIRCounter = 0;
+	//static uint8_t PIRCounter = 0;
 
 	switch(ePIRprocess_state)
 	{
@@ -96,16 +94,7 @@ void fn_PIR_Process(void)
 //*******************************************************************************************************************************************************************//
 void fn_PIR_int_CallBack(uint8_t intNum)
 {
-	pir_unoccupancyTime = fn_GetSecTimerStart();
-	DBG_PRINT(".........motion detected...... %d \r\n",pir_unoccupancyTime);
-	if(!snsrCurrStatus.pir_State){
-		ePIRprocess_state = UPDATE_PIR_STATUS_CHANGE;
-	}
-	snsrCurrStatus.pir_State = OCCUPIED;
-
-	(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
-	fn_sendTriacStatus(0x12);
-
+	gecko_external_signal(EXT_SIGNAL_PIR_INTERRUPT);		//	Register the PIR interrupt and do the processing in event
 	return ;
 }
 //*******************************************************************************************************************************************************************//

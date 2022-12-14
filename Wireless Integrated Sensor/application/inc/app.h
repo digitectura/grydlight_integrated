@@ -19,6 +19,10 @@
 
 #define MAX_SENSOR_IN_GRP		16
 
+#define EXT_SIGNAL_PIR_INTERRUPT			0x40
+#define EXT_SIGNAL_SWITCH_INTERRUPT 		0x20
+#define EXT_SIGNAL_DALI_INTERRUPT			0x10
+
 extern uint8_t debugPrints;
 
 
@@ -256,7 +260,8 @@ void fn_loopALS_cfg(void);
 void fn_send_Cmd_onGSLink				(struct gecko_msg_mesh_vendor_model_receive_evt_t *v_data);
 void fn_handle_Vendor_FT_wl_LightCmds	(struct gecko_msg_mesh_vendor_model_receive_evt_t *v_data);
 void fn_snsRestore						(void);
-void fn_mux_init(void);
-void fn_AreaControl(void);
+void fn_mux_init						(void);
+void fn_AreaControl						(void);
+void fn_saveTriacState					(void);
 /*******************************************************************************************************************************/
 #endif /* APPLICATION_INC_APP_H_ */

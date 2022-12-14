@@ -45,5 +45,9 @@ void fn_pir_init(void);
 void pir_disable(void);
 void pir_enable(void);
 void pir_enable_disable(uint8_t pir_en_dis);
+
+extern uint16_t pir_unoccupancyTime;
+extern enum_PIR_trigger_state ePIR_trggr_state;
+extern enum_PIR_ProcessState ePIRprocess_state;
 /*******************************************************************************************************************************************************************/
 #endif /* APPLICATION_PIR_PIR_H_ */

@@ -1019,7 +1019,6 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			gecko_cmd_hardware_set_soft_timer(SECONDS(1), FCTORY_RESET_ID,ONESHOT_TIMER);
 		break;
 	/*............................................................................................*/
-#ifdef ALS_TEST
 		case DISABLE_DEBUG_PRINTS:
 			if(v_data->payload.data[1] == 1)
 			{
@@ -1035,7 +1034,6 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			MaxLuxOnTable = (uint16_t)((v_data->payload.data[2] << 8) | v_data->payload.data[1]);
 			printf("Mux_on_table = %d\r\n", MaxLuxOnTable);
 		break;
-#endif
 
 		//.......................................................................................................//
 #ifdef AREA
@@ -1246,6 +1244,63 @@ void fn_send_Cmd_onGSLink(struct gecko_msg_mesh_vendor_model_receive_evt_t *v_da
 /****************************************************************************************************************/
 void fn_process_extrnlSgnl_Evnt(struct gecko_cmd_packet *evt)
 {
+	if(evt->data.evt_system_external_signal.extsignals & EXT_SIGNAL_PIR_INTERRUPT)									//	PIR Interrupt
+	{
+		pir_unoccupancyTime = fn_GetSecTimerStart();
+		DBG_PRINT(".........motion detected...... %d \r\n",pir_unoccupancyTime);
+		if(!snsrCurrStatus.pir_State){
+			ePIRprocess_state = UPDATE_PIR_STATUS_CHANGE;
+		}
+		snsrCurrStatus.pir_State = OCCUPIED;
+
+		(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
+		fn_sendTriacStatus(0x12);
+	}
+	if(evt->data.evt_system_external_signal.extsignals & EXT_SIGNAL_SWITCH_INTERRUPT)								//	Switch Intterupt
+	{
+		DBG_PRINT("s1\r\n");
+		NVIC_ClearPendingIRQ(SWITCH_INTRPT_IRQn);
+		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(20),SWITCH_DEBOUNCE_TIMER,ONESHOT_TIMER);
+	}
+	if((evt->data.evt_system_external_signal.extsignals & EXT_SIGNAL_DALI_INTERRUPT) && (mux_control_select == 0))		//	DALI Interrupt
+	{
+		switch (GPIO_PinModeGet(DALI_RX_PORT, DALI_RX_PIN))
+		{
+
+		case PIN_RESET:
+			if (sdaliRxParams[DALI_LOOP1].rxDataBegin_flag == 0)
+			{
+				// Invalid packet : To be Discarded
+				fn_discardPacket(DALI_LOOP1);
+			}
+			else
+			{
+				sdaliRxParams[DALI_LOOP1].timeCount[sdaliRxParams[DALI_LOOP1].rxDataIndex] =
+						fn_GetuSecTimerStart();
+				sdaliRxParams[DALI_LOOP1].rxData[sdaliRxParams[DALI_LOOP1].rxDataIndex++] = 0; //0
+				__NOP();
+			}
+			break;
+		case PIN_SET:
+			if (sdaliRxParams[DALI_LOOP1].rxDataIndex == 0)
+			{
+				sdaliRxParams[DALI_LOOP1].rxDataBegin_flag = 1;
+				sdaliRxParams[DALI_LOOP1].rxStartTime = fn_GetuSecTimerStart();
+			}
+			if (sdaliRxParams[DALI_LOOP1].rxDataBegin_flag == 1)
+			{
+				sdaliRxParams[DALI_LOOP1].timeCount[sdaliRxParams[DALI_LOOP1].rxDataIndex] =
+						fn_GetuSecTimerStart();
+				sdaliRxParams[DALI_LOOP1].rxData[sdaliRxParams[DALI_LOOP1].rxDataIndex++] = 1; //1
+				__NOP();
+			}
+			break;
+		default:
+
+			break;
+		}
+
+	}
 	return ;
 }
 /****************************************************************************************************************/

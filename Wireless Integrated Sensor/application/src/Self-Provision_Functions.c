@@ -72,7 +72,7 @@ void Self_Provision_Device(void)
 	printf("Set Relay gecko_cmd_mesh_test_set_nettx %x\n\r", result);
 
 	/* Set Proxy */
-	uint8_t ProxyValue = 1;
+	const uint8_t ProxyValue = 1;
 	result = gecko_cmd_mesh_test_set_local_config(mesh_node_gatt_proxy,0,sizeof(ProxyValue), &ProxyValue);
 
 	

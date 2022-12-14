@@ -25,12 +25,13 @@ uint8_t Prev_mLevel = 0;
 int16_t Curr_mLevel = 1;
 #endif
 
+void als_debug_sendData(void);
 
 void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 {
 	uint8_t m_packet_size = 0;
 	sensorpayload_t  m_data;
-	static uint8_t m_level = 1;
+//	static uint8_t m_level = 1;
 
 	switch (data_cmd_type)
 	{
@@ -38,34 +39,12 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 		{
 			if(!isReq && !(snsrAppData.WL_LIGHT_RcvdExternalCmd_flag || snsrAppData.WL_LIGHT_CONTROL_2_flag))
 			{
-#ifdef ALS_TEST
 								Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
 								Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
 								Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
 								printf("PIR Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
 								printf("PIR Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-								if(debugPrints == 1)
-								{
-									m_data.datacmd = DALI_M_LEVEL;
-									m_data.data[0] = Curr_mLevel;
-									m_data.data[1] = Prev_mLevel;
-//									fn_enQ_blePkt(FT_STATUSCHANGE, 2, (uint8_t*)&m_data,destAddr);
-									uint16_t sentRspns = gecko_cmd_mesh_vendor_model_send(
-																			PRIMARY_ELEMENT,			\
-																			MY_VENDOR_ID,				\
-																			MY_MODEL_ID,				\
-																			0xFFFF,		\
-																			0,							\
-																			0,							\
-																			0,							\
-																			FT_STATUSCHANGE,			\
-																			0xff,						\
-																			3,			\
-																			&m_data)->result;
-									DBG_PRINT("sent rspns = %d\r\n",sentRspns);
-								}
-#endif
-
+								als_debug_sendData();
 #ifdef AREA
 					for(int i = 0; i < sConfigAreaParameters.TotalArea_Sensors_count;)
 					{
@@ -80,7 +59,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 
 					if(mux_control_select == 0)							//DALI
 					{
-//NOTE: Check and uncomment it later. COmmented out for testing als new formula.
+
 #ifdef DALI_SPACE
 	#ifdef AREA
 					if(sConfigAreaParameters.SensorIsPartOfArea == 1)
@@ -104,9 +83,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 							GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
 							triacCfg.triacStatus = true;
 							fn_saveTriacState();
-//							gecko_cmd_hardware_set_soft_timer(MILLISECONDS(1000), EMERGENCY_LIGHT_TIMER_ID_2, ONESHOT_TIMER);
 						}
-//						g_m_level = Curr_mLevel;
 						printf("m_level = %d\r\n", Curr_mLevel);
 						if((snsrCfg.emergency_light == false) && (!(snsrCurrStatus.pir_State)))
 						{
@@ -118,7 +95,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#endif
 #endif
 
-#ifdef ALS_TEST
 	#ifdef AREA
 						if(sConfigAreaParameters.SensorIsPartOfArea == 1)
 						{
@@ -136,7 +112,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#ifdef AREA
 						}
 	#endif
-#endif
 					}
 					else if(mux_control_select == 1)					//Analog
 					{
@@ -180,38 +155,12 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 					if(snsrCurrStatus.pir_State)
 				#endif
 					{
-//						m_level = (uint8_t) (((100 - ((snsrCurrStatus.als_LUXvalue * sAlsCalibValue.m_gain) / sAlsCalibValue.req_lux)) < 0) ?
-//										0 : (100 - ((snsrCurrStatus.als_LUXvalue * sAlsCalibValue.m_gain) / sAlsCalibValue.req_lux)));
-
-
-#ifdef ALS_TEST
-								Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
-								Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
-								Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
-								printf("ALS Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
-								printf("ALS Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-								if(debugPrints == 1)
-								{
-									m_data.datacmd = DALI_M_LEVEL;
-									m_data.data[0] = Curr_mLevel;
-									m_data.data[1] = Prev_mLevel;
-//									fn_enQ_blePkt(FT_STATUSCHANGE, 2, (uint8_t*)&m_data,destAddr);
-									uint16_t sentRspns = gecko_cmd_mesh_vendor_model_send(
-																			PRIMARY_ELEMENT,			\
-																			MY_VENDOR_ID,				\
-																			MY_MODEL_ID,				\
-																			0xFFFF,		\
-																			0,							\
-																			0,							\
-																			0,							\
-																			FT_STATUSCHANGE,			\
-																			0xff,						\
-																			3,			\
-																			&m_data)->result;
-									DBG_PRINT("sent rspns = %d\r\n",sentRspns);
-								}
-#endif
-
+						Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
+						Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
+						Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
+						printf("ALS Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
+						printf("ALS Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+						als_debug_sendData();
 
 					#ifdef TRIAC_FEATURE
 						(snsrCurrStatus.pir_State && m_level) ? fn_switchOnTriac() : fn_switchOffTriac();
@@ -220,14 +169,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 
 						if(mux_control_select == 0)
 						{
-//							if(m_level <= g_sDaliRetention.m_LevelThreshold)
-//							{
-//								m_level = 0;
-//							}
-//							g_m_level = m_level;
-//							fn_daliMode1_Level(0xFF, (m_level), 0x12);
-
-#ifdef ALS_TEST
 	#ifdef AREA
 							if(sConfigAreaParameters.SensorIsPartOfArea == 1)
 							{
@@ -242,7 +183,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#ifdef AREA
 							}
 	#endif
-#endif
+
 
 					#ifdef DALI_SPACE
 	#ifdef AREA
@@ -316,7 +257,6 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 			for(uint8_t m_index = 0; m_index<6; m_index++){
 				m_data.data[m_index] = pAddr->address.addr[5-m_index];
 			}
-//			memcpy(m_data.data, pAddr->address.addr, 6);
 			m_packet_size = 7;
 			isReq = 1;
 		}
@@ -360,5 +300,28 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 		fn_enQ_blePkt((isReq?FT_DATARES:FT_STATUSCHANGE),(m_packet_size),(uint8_t*)&m_data,destAddr);
 	}
 	return ;
+}
+
+void als_debug_sendData(void){
+	sensorpayload_t  m_data;
+	if(debugPrints == 1)
+	{
+		m_data.datacmd = DALI_M_LEVEL;
+		m_data.data[0] = Curr_mLevel;
+		m_data.data[1] = Prev_mLevel;
+		uint16_t sentRspns = gecko_cmd_mesh_vendor_model_send(
+												PRIMARY_ELEMENT,			\
+												MY_VENDOR_ID,				\
+												MY_MODEL_ID,				\
+												0xFFFF,		\
+												0,							\
+												0,							\
+												0,							\
+												FT_STATUSCHANGE,			\
+												0xff,						\
+												3,			\
+												&m_data)->result;
+		DBG_PRINT("sent rspns = %d\r\n",sentRspns);
+	}
 }
 

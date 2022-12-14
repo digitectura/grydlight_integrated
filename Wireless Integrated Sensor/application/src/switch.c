@@ -30,51 +30,10 @@ uint8_t fn_getCurntMappedIndx(void)
 /****************************************************************************************************************/
 void fn_switch_intrpt_callBack(uint8_t intNum)
 {
-	if(intNum == SWITCH_INTRPT_NUM)
-	{
-		DBG_PRINT("s1\r\n");
-		NVIC_ClearPendingIRQ(SWITCH_INTRPT_IRQn);
-		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(20),SWITCH_DEBOUNCE_TIMER,ONESHOT_TIMER);
-	}
-	if(mux_control_select == 0)								//DALI
-	{
-		if(intNum == DALI_RX_PIN){
-			switch (GPIO_PinModeGet(DALI_RX_PORT, DALI_RX_PIN))
-			{
-
-			case PIN_RESET:
-				if (sdaliRxParams[DALI_LOOP1].rxDataBegin_flag == 0)
-				{
-					// Invalid packet : To be Discarded
-					fn_discardPacket(DALI_LOOP1);
-				}
-				else
-				{
-					sdaliRxParams[DALI_LOOP1].timeCount[sdaliRxParams[DALI_LOOP1].rxDataIndex] =
-							fn_GetuSecTimerStart();
-					sdaliRxParams[DALI_LOOP1].rxData[sdaliRxParams[DALI_LOOP1].rxDataIndex++] = 0; //0
-					__NOP();
-				}
-				break;
-			case PIN_SET:
-				if (sdaliRxParams[DALI_LOOP1].rxDataIndex == 0)
-				{
-					sdaliRxParams[DALI_LOOP1].rxDataBegin_flag = 1;
-					sdaliRxParams[DALI_LOOP1].rxStartTime = fn_GetuSecTimerStart();
-				}
-				if (sdaliRxParams[DALI_LOOP1].rxDataBegin_flag == 1)
-				{
-					sdaliRxParams[DALI_LOOP1].timeCount[sdaliRxParams[DALI_LOOP1].rxDataIndex] =
-							fn_GetuSecTimerStart();
-					sdaliRxParams[DALI_LOOP1].rxData[sdaliRxParams[DALI_LOOP1].rxDataIndex++] = 1; //1
-					__NOP();
-				}
-				break;
-			default:
-
-				break;
-			}
-		}
+	if(intNum == 0){
+		gecko_external_signal(EXT_SIGNAL_SWITCH_INTERRUPT);		//	Register the PIR interrupt and do the processing in event
+	}else if(intNum == 2){
+		gecko_external_signal(EXT_SIGNAL_DALI_INTERRUPT);
 	}
 	return ;
 }
