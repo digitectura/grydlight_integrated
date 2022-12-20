@@ -2147,7 +2147,6 @@ void fn_daliProcess()
 				}
 				else
 				{
-
 					fn_queueLightStat(
 							(uint8_t) (GET_SADD(
 									sDaliActQueueStat.sDaliActSQ[sDaliActQueueStat.mHead].d_add)),
@@ -2180,10 +2179,10 @@ void fn_daliProcess()
 
 					switch(sDaliActQueueStat.sDaliActSQ[sDaliActQueueStat.mHead].d_statFrom){
 					case 0x11:
-						DBG_PRINT("PIR TRIGGERED \r\n");
+						DBG_PRINT("PIR TRIGGERED --  0x11\r\n");
 						break;
 					case 0x12:		//	ALS
-						DBG_PRINT("ALS TRIGGERED \r\n");
+						DBG_PRINT("ALS TRIGGERED -- 0x12 \r\n");
 						break;
 					case 0x13:
 
@@ -2195,7 +2194,7 @@ void fn_daliProcess()
 
 						break;
 					case 0x16:
-						DBG_PRINT("AREA TRIGGERED \r\n");
+						DBG_PRINT("AREA TRIGGERED -- 0X16 \r\n");
 						break;
 
 					}

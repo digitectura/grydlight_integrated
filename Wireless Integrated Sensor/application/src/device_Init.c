@@ -84,7 +84,7 @@ void initBoard(void)
 #endif
 	if(mux_control_select == 1)					//Analog
 	{
-		printf("Analog I2C init done \r\n");
+		MAN_PRINT("Analog I2C init done \r\n");
 		initI2C1_Analog();
 	}
 	else if(mux_control_select == 0)			//DALI

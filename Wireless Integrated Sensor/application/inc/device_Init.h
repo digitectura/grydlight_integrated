@@ -52,6 +52,7 @@
 #define EMERGENCY_LIGHT_TIMER_ID_2				21
 
 #define TIMER_ID_CONFIGURE_AREA					22
+#define TIMER_ID_PROVISION_FAIL					23
 
 /*.....................................PIR app Macros.....................................*/
 #define DEFAULT_SNSR_MASKING_TIMEOUT			1800		//SECS ==> 30 mins
@@ -126,7 +127,7 @@
 
 /*................................Application Macros....................................*/
 #define CONFIG_VER								1
-#define FW_VER									13
+#define FW_VER									15
 
 #define SNSR_CFG_SAVE_INTERVAL					30		//sec
 #define IDENTIFY_INTERVAL						1		//sec
@@ -170,11 +171,19 @@
 #define CFG_5									FOUR
 /*.......................................................................................*/
 #define DEBUG_MODE
+#define MANDATORY_PRINT
 #ifdef DEBUG_MODE
 #define DBG_PRINT(...) printf(__VA_ARGS__)
 #else
 #define DBG_PRINT(...)
 #endif
+
+#ifdef MANDATORY_PRINT
+#define MAN_PRINT(...) printf(__VA_ARGS__)
+#else
+#define MAN_PRINT(...)
+#endif
+
 /****************************************************************************************************************/
 enum
 {

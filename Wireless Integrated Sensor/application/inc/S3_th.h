@@ -28,6 +28,11 @@
 
 #define CALC_SHTC3_TEMP(sensorTempData)			( (175 * (sensorTempData /65536.0) ) - 45 ) * 100
 #define CALC_SHTC3_HUMIDITY(sensorHumidityData)   ( (100 * (sensorHumidityData /65536.0) ))*100
+
+#define SEND_WAKUP_COMMAND_FAILED					0xFFF0
+#define ENABLE_TH_MEASUREMENT_FAILED				0xFFF1
+#define READ_and_COMPUTE_TEMP_HUMIDITY_FAILED		0xFFF2
+
 /*********************************************************************************************************************/
 enum
 {

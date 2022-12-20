@@ -25,11 +25,11 @@ void fn_pir_init(void)
 	GPIO_PinModeSet(PIR_OUT_PORT, PIR_OUT_PIN, gpioModeInput, 0);
 	// interrupt call back register
 	GPIOINT_CallbackRegister(PIR_INTRPT_NUM, fn_PIR_int_CallBack);
-	DBG_PRINT("PIR int disabled\r\n");
+	MAN_PRINT("PIR int disabled\r\n");
 	GPIO_ExtIntConfig(PIR_OUT_PORT, PIR_OUT_PIN, PIR_INTRPT_NUM, true, false, true);
 	NVIC_ClearPendingIRQ(PIR_INTRPT_IRQn);
 	NVIC_EnableIRQ(PIR_INTRPT_IRQn);
-	DBG_PRINT("PIR initialized\r\n");
+	MAN_PRINT("PIR initialized\r\n");
 }
 
 
@@ -37,6 +37,9 @@ void fn_pir_init(void)
 void fn_PIR_Process(void)
 {
 	//static uint8_t PIRCounter = 0;
+	if(GPIO_PinInGet(PIR_OUT_PORT, PIR_OUT_PIN)){
+		GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
+	}
 
 	switch(ePIRprocess_state)
 	{
@@ -52,11 +55,12 @@ void fn_PIR_Process(void)
 			if(fn_IsSecTimerElapsed(pir_unoccupancyTime, snsrCfg.pir_cfg.unoccupancyTimer_s))
 			{
 				pir_unoccupancyTime = fn_GetSecTimerStart();
-				DBG_PRINT("UnOccupied .. %d \r\n ",pir_unoccupancyTime);
+				MAN_PRINT("UnOccupied .. %d \r\n ",pir_unoccupancyTime);
 				if(snsrCurrStatus.pir_State)
 					ePIRprocess_state = UPDATE_PIR_STATUS_CHANGE;
 				//no motion detected , switch off the lights
 				snsrCurrStatus.pir_State = UNOCCUPIED;
+
 			}else if(pir_unoccupancyTime == 0){
 				pir_unoccupancyTime = fn_GetSecTimerStart();
 			}
@@ -69,7 +73,7 @@ void fn_PIR_Process(void)
 				DBG_PRINT("PIR ---> %s ---> %s\r\n",(snsrCurrStatus.pir_State?"OCCUPIED":"UNOCCUIPED"),
 													(snsrCurrStatus.pir_State?"RTS_PULL_HIGH":"RTS_PULL_LOW"));
 			#else
-				DBG_PRINT("PIR rs485 data ---> %s\r\n",(snsrCurrStatus.pir_State?"OCCUPIED":"UNOCCUIPED"));
+				MAN_PRINT("PIR rs485 data ---> %s\r\n",(snsrCurrStatus.pir_State?"OCCUPIED":"UNOCCUIPED"));
 			#endif
 
 			send_packet(PIR,snsrMinCfg.dest_addr,false);

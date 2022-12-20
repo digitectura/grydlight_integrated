@@ -14,6 +14,7 @@ void fn_THprocess(void)
 {
 	static uint8_t thProcess_state = SEND_WAKUP_COMMAND;
 	static uint16_t thProcess_WaitTimeStart = 0;
+	static uint8_t thFailureCount = 0;
 	switch(thProcess_state)
 	{
 		case SEND_WAKUP_COMMAND:
@@ -24,6 +25,15 @@ void fn_THprocess(void)
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				thProcess_WaitTimeStart = fn_GetmSecTimerStart();
 				thProcess_state = WAIT_FOR_TH_STABLE_MODE;
+				thFailureCount = 0;
+			}
+			else
+			{
+				thFailureCount++;
+				if(thFailureCount > 5){
+					DBG_PRINT("TH Sensor I2C Failure .. Disabling TH until power recycle\n");
+					thFailureDisable = SEND_WAKUP_COMMAND_FAILED;
+				}
 			}
 		break;
 		case WAIT_FOR_TH_STABLE_MODE:
@@ -40,6 +50,15 @@ void fn_THprocess(void)
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				thProcess_WaitTimeStart = fn_GetmSecTimerStart();
 				thProcess_state = READ_and_COMPUTE_TEMP_HUMIDITY;
+				thFailureCount = 0;
+			}
+			else
+			{
+				thFailureCount++;
+				if(thFailureCount > 5){
+					DBG_PRINT("TH Sensor I2C Failure .. Disabling TH until power recycle\n");
+					thFailureDisable = ENABLE_TH_MEASUREMENT_FAILED;
+				}
 			}
 		break;
 		case READ_and_COMPUTE_TEMP_HUMIDITY:
@@ -56,6 +75,15 @@ void fn_THprocess(void)
 					thProcess_state = CHECK_TH_STATUS_CHANGE;
 					DBG_PRINT("/*...........................................*/\n");
 					DBG_PRINT("currTmp = %d \t currHumid = %d \n",snsrCurrStatus.temp ,snsrCurrStatus.humidity);
+					thFailureCount = 0;
+				}
+				else
+				{
+					thFailureCount++;
+					if(thFailureCount > 5){
+						DBG_PRINT("TH Sensor I2C Failure .. Disabling TH until power recycle\n");
+						thFailureDisable = READ_and_COMPUTE_TEMP_HUMIDITY_FAILED;
+					}
 				}
 			}
 		break;

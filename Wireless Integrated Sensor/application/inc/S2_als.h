@@ -27,6 +27,11 @@ enum
 	CHECK_STATUS_UPDATE ,
 	WAIT_FOR_NEXT_READ
 };
+
+#define INIT_ALS_SENSOR_PROCESS_FAILED		0xFFFF
+#define ENABLE_ALS_CONVERSIONS_FAILED		0xFFFE
+#define READ_ALS_DATA_FAILED				0xFFFD
+#define COMPUTE_ALS_DATA_FAILED				0xFFFC
 /*******************************************************************************************************************/
 void fn_ALSprocess(void);
 /*******************************************************************************************************************/

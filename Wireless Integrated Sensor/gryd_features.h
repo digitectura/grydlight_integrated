@@ -12,8 +12,8 @@
 
 /******************************************************************************/
 #define PIR_FEATURE
-#define ALS_FEATURE
-#define TH_FEATURE
+//#define ALS_FEATURE
+//#define TH_FEATURE
 /******************************************************************************/
 #undef GSLINK_FEATURE
 #undef ANALOG_FEATURE

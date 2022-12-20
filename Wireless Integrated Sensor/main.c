@@ -23,22 +23,22 @@ int main()
 	if(!rsp->result)
 	{
 		memcpy(&mux_control_select,&rsp->value.data,1);
-		printf("Mux_Control_select = %d\r\n", mux_control_select);
+		MAN_PRINT("Mux_Control_select = %d\r\n", mux_control_select);
 		fn_mux_init();
 	}
 	else
 	{
-		printf("Mux PS Load Response = %04x\r\n", rsp->result);
+		MAN_PRINT("Mux PS Load Response = %04x\r\n", rsp->result);
 	}
 
 	if(mux_control_select == 1)					//Analog
 	{
-		printf("Analog I2C init done \r\n");
+		MAN_PRINT("Analog I2C init done \r\n");
 		initI2C1_Analog();
 	}
 	fn_initI2C();		//	ALS and Temperature Humidity Sensor I2C...
 
-	printf("Restoring sensor configuration and details from PS \r\n ");
+	MAN_PRINT("Restoring sensor configuration and details from PS \r\n ");
 	fn_snsRestore();
 	printf("System bootup Delay ... 15 secs\r\n ");
 	while(!(fn_IsSecTimerElapsed(bootup_delay, 15)));		//	Muruga	-	Changed bootup delay from 5 sec to 15 seconds
@@ -73,3 +73,4 @@ int main()
 	return 0;
 }
 /****************************************************************************************************************/
+

@@ -10,7 +10,7 @@ void fn_ALSprocess(void)
 {
 	static uint8_t alsProcess_state = INIT_ALS_SENSOR_PROCESS;
 	static uint16_t alsProcess_WaitTimeStart = 0;
-	static uint8_t	failureCnt = 0;
+	static uint8_t alsFailureCount = 0;
 	switch(alsProcess_state)
 	{
 		case INIT_ALS_SENSOR_PROCESS:
@@ -20,11 +20,15 @@ void fn_ALSprocess(void)
 			{
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				alsProcess_state = ENABLE_ALS_CONVERSIONS;
-			}else{		//	Failure to read ALS data SET
-				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
-				snsrCurrStatus.als_LUXvalue = 10;
-				alsProcess_state = WAIT_FOR_NEXT_READ;
-				failureCnt++;
+				alsFailureCount = 0;
+			}
+			else
+			{
+				alsFailureCount++;
+				if(alsFailureCount > 5){
+					DBG_PRINT("ALS Sensor I2C Failure .. Disabling ALS until power recycle\n");
+					alsFailureDisable = INIT_ALS_SENSOR_PROCESS_FAILED;
+				}
 			}
 		break;
 		case ENABLE_ALS_CONVERSIONS:
@@ -34,11 +38,15 @@ void fn_ALSprocess(void)
 			{
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				alsProcess_state = READ_ALS_DATA;
-			}else{		//	Failure to read ALS data SET
-				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
-				snsrCurrStatus.als_LUXvalue = 10;
-				alsProcess_state = WAIT_FOR_NEXT_READ;
-				failureCnt++;
+				alsFailureCount = 0;
+			}
+			else
+			{
+				alsFailureCount++;
+				if(alsFailureCount > 5){
+					DBG_PRINT("ALS Sensor I2C Failure .. Disabling ALS until power recycle\n");
+					alsFailureDisable = ENABLE_ALS_CONVERSIONS_FAILED;
+				}
 			}
 		break;
 
@@ -49,11 +57,15 @@ void fn_ALSprocess(void)
 				memset(i2c_txBuffer,'\0',I2C_TXBUFFER_SIZE);
 				memset(i2c_rxBuffer,'\0',I2C_RXBUFFER_SIZE);
 				alsProcess_state = COMPUTE_ALS_DATA;
-			}else{		//	Failure to read ALS data SET
-				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
-				snsrCurrStatus.als_LUXvalue = 10;
-				alsProcess_state = WAIT_FOR_NEXT_READ;
-				failureCnt++;
+				alsFailureCount = 0;
+			}
+			else
+			{
+				alsFailureCount++;
+				if(alsFailureCount > 5){
+					DBG_PRINT("ALS Sensor I2C Failure .. Disabling ALS until power recycle\n");
+					alsFailureDisable = READ_ALS_DATA_FAILED;
+				}
 			}
 		break;
 
@@ -66,24 +78,33 @@ void fn_ALSprocess(void)
 				snsrCurrStatus.als_LUXvalue  = (snsrCurrStatus.als_LUXvalue * snsrCfg.als_cfg.calibration_factor)/100;
 				memset(i2c_rxBuffer,'\0',I2C_RXBUFFER_SIZE);
 				DBG_PRINT("/*...........................................*/\n");
-				DBG_PRINT("currLUX = %d\n",snsrCurrStatus.als_LUXvalue);
+				MAN_PRINT("currLUX = %d\n",snsrCurrStatus.als_LUXvalue);
 
 				snsrCurrStatus.als_LUXvalue = sAlsCalibValue.m*snsrCurrStatus.als_LUXvalue+sAlsCalibValue.c;
-				printf("Calib Val = %d\r\n", snsrCurrStatus.als_LUXvalue);
+				MAN_PRINT("Calib Val = %d\r\n", snsrCurrStatus.als_LUXvalue);
 
 
 				alsProcess_state = CHECK_STATUS_CHANGE;
-			}else{		//	Failure to read ALS data SET
-				alsProcess_WaitTimeStart = fn_GetSecTimerStart();
-				snsrCurrStatus.als_LUXvalue = 10;
-				alsProcess_state = WAIT_FOR_NEXT_READ;
-				failureCnt++;
+				alsFailureCount = 0;
+			}
+			else
+			{
+				alsFailureCount++;
+				if(alsFailureCount > 5){
+					DBG_PRINT("ALS Sensor I2C Failure .. Disabling ALS until power recycle\n");
+					alsFailureDisable = COMPUTE_ALS_DATA_FAILED;
+				}
 			}
 		break;
 
 		case CHECK_STATUS_CHANGE :
 			if(abs(snsrCurrStatus.als_LUXvalue - snsrPrevStatus.als_LUXvalue) >= snsrCfg.als_cfg.luxThreshold)
 			{
+				DBG_PRINT("/*...........................................*/\n");
+				DBG_PRINT("currLUX = %d\n",snsrCurrStatus.als_LUXvalue);
+				printf("Calib Val = %d\r\n", snsrCurrStatus.als_LUXvalue);
+				DBG_PRINT("/*...........................................*/\n");
+
 				snsrPrevStatus.als_LUXvalue = snsrCurrStatus.als_LUXvalue;
 				send_packet(ALS,snsrMinCfg.dest_addr,false);
 			}
@@ -94,11 +115,8 @@ void fn_ALSprocess(void)
 		case WAIT_FOR_NEXT_READ :
 			if(fn_IsSecTimerElapsed (alsProcess_WaitTimeStart , snsrCfg.als_cfg.freq_LUXmeasure_s ))
 			{
-				if(failureCnt > 10){
-					DBG_PRINT("I2C -- ALS Sensor failed trying to reinit to enable..\r\n");
-					fn_initI2C();
-				}
 				alsProcess_state = READ_ALS_DATA;
+				alsFailureCount = 0;
 			}
 		break;
 		default:

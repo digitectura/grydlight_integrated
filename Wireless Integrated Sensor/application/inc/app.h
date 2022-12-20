@@ -47,6 +47,13 @@ enum
 	HAND_SHAKE_WITH_CTRL	,
 	REPORT_TO_AGG
 };
+
+//enum{
+//	DALI_IDENTIFICATION,
+//	ANALOG_IDENTIFICATION,
+//	SWITCH_STATE,
+//	DEVICE_IDENTITY
+//};
 /*******************************************************************************************************************************/
 typedef struct
 {
@@ -189,7 +196,6 @@ typedef struct
 }__attribute__((__packed__))struct_alsLinearCalib;
 
 
-#ifdef SELF_PROVISIONING
 typedef struct
 {
 	uint32_t index_no;
@@ -205,7 +211,7 @@ typedef struct
 
 
 extern struct_Keys_Msc_t s_keys_msc;
-#endif
+
 
 typedef struct
 {
@@ -220,6 +226,21 @@ typedef struct
 	uint8_t SensorIsPartOfArea;
 }__attribute__((__packed__))struct_Config_Area_Parameters_t;
 
+typedef enum{
+	DALI,
+	ANALAOG,
+	TRIAC,
+	INTEGRATED
+}enum_boardType;
+
+typedef struct{
+	bool PIR_enabled;
+	bool ALS_enabled;
+	bool TH_enabled;
+	bool area_enabled;
+	bool self_provisioing;
+	enum_boardType boardtype;				//	Use enum
+}__attribute__((__packed__))struct_features_t;
 /*******************************************************************************************************************************/
 extern struct_Configure_Area_t sConfigArea[MAX_SENSOR_IN_GRP];
 extern struct_Config_Area_Parameters_t sConfigAreaParameters;
@@ -231,7 +252,10 @@ extern snsrStatus_t	snsrCurrStatus;
 extern snsrStatus_t snsrPrevStatus;
 extern struct_sceneConfig	sSceneCfg[MAX_SCENES];
 extern struct_alsLinearCalib sAlsCalibValue;
+extern uint16_t alsFailureDisable;							//if ALS I2C fails set this variable
+extern uint16_t thFailureDisable;							//if TH I2C fails set this variable
 extern triacCfg_t triacCfg;
+extern struct_features_t brdFeature;
 /*******************************************************************************************************************************/
 void fn_handleVendorModel_Rcv			(uint32_t evt_id,struct gecko_cmd_packet *evt);
 void handle_gecko_event					(uint32_t evt_id, struct gecko_cmd_packet *evt);

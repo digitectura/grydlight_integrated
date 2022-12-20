@@ -29,17 +29,17 @@ void Self_Provision_Device(void)
 	uint16 result=0;
 		
 	result = gecko_cmd_mesh_node_set_provisioning_data(DevKey, NetKey, 0, 0, Unicast, 0)->result;
-	printf("gecko_cmd_mesh_node_set_provisioning_data %x\n\r", result);
+	DBG_PRINT("gecko_cmd_mesh_node_set_provisioning_data %x\n\r", result);
 	
 	result = gecko_cmd_mesh_test_add_local_key(1, AppKey,0,0)->result;
-	printf("gecko_cmd_mesh_test_add_local_key %x\n\r", result);
+	DBG_PRINT("gecko_cmd_mesh_test_add_local_key %x\n\r", result);
 
 	gecko_cmd_hardware_set_soft_timer(10 * ONE_SECOND, FCTORY_RESET_ID, 1); //Restart device to ensure changes are implimented.
 	
 	// Bind Models
 	
 	result = gecko_cmd_mesh_test_bind_local_model_app(0, 0, 0x02ff, 0xABCD)->result;
-	printf("Vendor model: gecko_cmd_mesh_test_bind_local_model_app %x\n\r", result);
+	DBG_PRINT("Vendor model: gecko_cmd_mesh_test_bind_local_model_app %x\n\r", result);
 
 //	result = gecko_cmd_mesh_test_bind_local_model_app(0, 0, 0xffff, GENERIC_LEVEL_CLIENT)->result;
 //	printf("GENERIC_LEVEL_CLIENT: gecko_cmd_mesh_test_bind_local_model_app %x\n\r", result);
@@ -47,14 +47,14 @@ void Self_Provision_Device(void)
 	//Set Models Pub Address
 
 	result = gecko_cmd_mesh_test_set_local_model_pub(0, 0, 0x02ff, 0xABCD, 0xC003, 5, 0, 3, 0)->result;
-	printf("Vendor model gecko_cmd_mesh_test_set_local_model_pub %x\n\r", result);
+	DBG_PRINT("Vendor model gecko_cmd_mesh_test_set_local_model_pub %x\n\r", result);
 //	result = gecko_cmd_mesh_test_set_local_model_pub(0, 0, 0x02ff, GENERIC_LEVEL_CLIENT, CLIENT_PUB_ADD, 5, 0, 3, 0)->result; //Mulitcast = SERVER_PUB_ADD
 //	printf("GENERIC_LEVEL_CLIENT gecko_cmd_mesh_test_set_local_model_pub %x\n\r", result);
 
 	//Set Models Sub Address
 
 	result = gecko_cmd_mesh_test_add_local_model_sub(0, 0x02ff, 0xABCD, 0xC003)->result;
-	printf("LIGHT_LIGHTNESS_CLIENT gecko_cmd_mesh_test_add_local_model_sub %x\n\r", result);
+	DBG_PRINT("LIGHT_LIGHTNESS_CLIENT gecko_cmd_mesh_test_add_local_model_sub %x\n\r", result);
 
 //	result = gecko_cmd_mesh_test_add_local_model_sub(0, 0xffff, GENERIC_LEVEL_CLIENT, CLIENT_SUB_ADD)->result;
 //	printf(" vendor gecko_cmd_mesh_test_add_local_model_sub %x\n\r", result);
@@ -62,14 +62,14 @@ void Self_Provision_Device(void)
 
 	//set Relay
 	result = gecko_cmd_mesh_test_set_relay(1, 2, 0)->result;
-	printf("Set Relay gecko_cmd_mesh_test_set_relay %x\n\r", result);
+	DBG_PRINT("Set Relay gecko_cmd_mesh_test_set_relay %x\n\r", result);
 
 	struct gecko_msg_mesh_test_get_relay_rsp_t *reps = gecko_cmd_mesh_test_get_relay();
-	printf("gecko_cmd_mesh_test_get_relay returns %x for enabled \r\n", reps->enabled);
+	DBG_PRINT("gecko_cmd_mesh_test_get_relay returns %x for enabled \r\n", reps->enabled);
 
 	//set Network
 	result = gecko_cmd_mesh_test_set_nettx(2, 0)->result;
-	printf("Set Relay gecko_cmd_mesh_test_set_nettx %x\n\r", result);
+	DBG_PRINT("Set Relay gecko_cmd_mesh_test_set_nettx %x\n\r", result);
 
 	/* Set Proxy */
 	const uint8_t ProxyValue = 1;

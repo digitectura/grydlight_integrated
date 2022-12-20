@@ -42,8 +42,8 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 								Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
 								Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
 								Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
-								printf("PIR Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
-								printf("PIR Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+								MAN_PRINT("PIR Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
+								MAN_PRINT("PIR Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 								als_debug_sendData();
 #ifdef AREA
 					for(int i = 0; i < sConfigAreaParameters.TotalArea_Sensors_count;)
@@ -78,16 +78,16 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#endif
 						if(snsrCurrStatus.pir_State && Curr_mLevel != 0)
 						{
-							printf("TRIAC set high in PIR 1\r\n");
+							DBG_PRINT("TRIAC set high in PIR 1\r\n");
 							DBG_PRINT("RTS high\r\n");
 							GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
 							triacCfg.triacStatus = true;
 							fn_saveTriacState();
 						}
-						printf("m_level = %d\r\n", Curr_mLevel);
+						DBG_PRINT("m_level = %d\r\n", Curr_mLevel);
 						if((snsrCfg.emergency_light == false) && (!(snsrCurrStatus.pir_State)))
 						{
-							printf("TRIAC timer set to low PIR\r\n");
+							DBG_PRINT("TRIAC timer set to low PIR\r\n");
 							gecko_cmd_hardware_set_soft_timer(SECONDS(13),EMERGENCY_LIGHT_TIMER_ID,ONESHOT_TIMER);	//to drive TRIAC to low to cutt of the power supply to DALI driver
 						}
 	#ifdef AREA
@@ -108,14 +108,14 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#endif
 							fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x11);
 							Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-							printf("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+							DBG_PRINT("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 	#ifdef AREA
 						}
 	#endif
 					}
 					else if(mux_control_select == 1)					//Analog
 					{
-						printf("Analog Command sent PIR\r\n");
+						DBG_PRINT("Analog Command sent PIR\r\n");
 	#ifdef AREA
 						if(sConfigAreaParameters.SensorIsPartOfArea == 1)
 						{
@@ -130,7 +130,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#endif
 						fn_setAnalogIntensity(((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x21);
 						Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-						printf("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+						DBG_PRINT("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 	#ifdef AREA
 						}
 	#endif
@@ -158,8 +158,8 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 						Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
 						Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
 						Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
-						printf("ALS Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
-						printf("ALS Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+						MAN_PRINT("ALS Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
+						MAN_PRINT("ALS Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 						als_debug_sendData();
 
 					#ifdef TRIAC_FEATURE
@@ -179,7 +179,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#endif
 								fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x12);
 								Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-								printf("ALS After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+								DBG_PRINT("ALS After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 	#ifdef AREA
 							}
 	#endif
@@ -203,7 +203,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 						}
 						else if(mux_control_select == 1)
 						{
-							printf("Analog Command sent ALS\r\n");
+							DBG_PRINT("Analog Command sent ALS\r\n");
 	#ifdef AREA
 							if(sConfigAreaParameters.SensorIsPartOfArea == 1)
 							{
@@ -214,7 +214,7 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 	#endif
 								fn_setAnalogIntensity((Curr_mLevel), 0x22);
 								Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-								printf("ALS After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+								DBG_PRINT("ALS After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 	#ifdef AREA
 							}
 	#endif

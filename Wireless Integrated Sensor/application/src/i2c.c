@@ -60,7 +60,7 @@ void initI2C1_Analog(void){
 
 	  ANALOG_I2C_HANDLE->CTRL = I2C_CTRL_AUTOSN;
 	  I2C_Enable(ANALOG_I2C_HANDLE, true);
-	  DBG_PRINT("Analog I2C (Re)Initialised \r\n");
+	  MAN_PRINT("Analog I2C (Re)Initialised \r\n");
 }
 
 //*******************************************************************************************************************//
@@ -195,7 +195,7 @@ int8_t fn_I2C_MasterRead(I2C_TypeDef *m_i2cH, uint8_t i2c_slaveAddress, uint8_t 
 
   if((result != i2cTransferDone) || (timeout == 0))
   {
-	  DBG_PRINT("I2C Read unsuccessful\n");
+	  MAN_PRINT("I2C Read unsuccessful\n");
 	  return false;
   }
   return true;

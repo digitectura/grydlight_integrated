@@ -59,7 +59,7 @@ void fn_enableSwitch_int(void)
 	{
 		GPIO_ExtIntConfig(SWITCH_PORT,SWITCH_PIN,SWITCH_INTRPT_NUM,true,true,true);
 		g_switchIntrptEnabled = true;
-		DBG_PRINT("/`/`/`/`/`/switch interrupt enabled/`/`/`/`/`/`/\r\n");
+		MAN_PRINT("/`/`/`/`/`/switch interrupt enabled/`/`/`/`/`/`/\r\n");
 	}
 	return ;
 }
@@ -137,23 +137,23 @@ void fn_switchReleased(void)
 	else if( diffTime >= MAGNET_SWITCH_SYSTEM_RESET_TIMEOUT && diffTime <= (MAGNET_SWITCH_SYSTEM_RESET_TIMEOUT + BUFFER_TIME))
 	{
 		//system_reset
-		DBG_PRINT("system_reset by switch\r\n");
+		MAN_PRINT("system_reset by switch\r\n");
 		gecko_cmd_hardware_set_soft_timer(SECONDS(1),FCTORY_RESET_ID,ONESHOT_TIMER);
 	}
 	else if( diffTime >= OTA_TIMEOUT && (diffTime <= OTA_TIMEOUT+BUFFER_TIME) )
 	{
-		DBG_PRINT("OTA MODE INIT\r\n");
+		MAN_PRINT("OTA MODE INIT\r\n");
 		gecko_cmd_system_reset(OTA_DFU_RESET);
 	}
 	else if( diffTime >= MAGNET_SWITCH_FCATORY_RESET_TIMEOUT && (diffTime <= MAGNET_SWITCH_FCATORY_RESET_TIMEOUT+BUFFER_TIME) )
 	{
 		//factory reset
-		DBG_PRINT("factory_reset by switch\r\n");
+		MAN_PRINT("factory_reset by switch\r\n");
 		fn_initiate_factory_reset(0);
 	}
 	else if(diffTime >= MAGNET_SWITCH_NETWORK_RESET_TIMEOUT)
 	{
-		DBG_PRINT("Network Reset initiated by magnetic switch\r\n");
+		MAN_PRINT("Network Reset initiated by magnetic switch\r\n");
 		fn_initiate_factory_reset(1);
 	}
 	else

@@ -122,7 +122,7 @@ snsrStatus_t	snsrPrevStatus						=   {
 														};														
 struct_sceneConfig sSceneCfg[MAX_SCENES] 			= { 0 };
 
-#ifdef AREA
+
 struct_Configure_Area_t sConfigArea[MAX_SENSOR_IN_GRP]				= { 0 };
 struct_Config_Area_Parameters_t sConfigAreaParameters				= {
 																		.TotalArea_Sensors_count = 0,
@@ -130,7 +130,7 @@ struct_Config_Area_Parameters_t sConfigAreaParameters				= {
 																		.SensorIsPartOfArea = 0
 																	};
 uint8_t AreaSensorCount = 0;
-#endif
+
 
 struct_alsLinearCalib sAlsCalibValue				= {
 															.c = 0.0,
@@ -139,9 +139,14 @@ struct_alsLinearCalib sAlsCalibValue				= {
 															.req_lux = DEFAULT_REQ_LUX,
 													  };
 
-uint8_t debugPrints = 1;
+uint8_t debugPrints = 0;
 
-#ifdef SELF_PROVISIONING
+uint16_t alsFailureDisable = false;				//if ALS I2C fails set this variable
+uint16_t thFailureDisable = false;				//if TH I2C fails set this variable
+static uint8_t provPkt = 0;				//	To count the no of Model Config packets are received and within time
+
+
+
 struct_Keys_Msc_t s_keys_msc = {
 									.self_provisioned_flag = 0,
 									.s_App_Net_Key[0 ... 15].index_no	= 0,
@@ -151,12 +156,12 @@ struct_Keys_Msc_t s_keys_msc = {
 
 #define USERDATA ((uint32_t*)USERDATA_BASE)
 uint8_t keys_counter = 0;
-
+struct_features_t brdFeature;
 sl_se_command_context_t cmd_ctx;
-#endif
 /****************************************************************************************************************/
 void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 {
+
 	uint16 result;
 	if (NULL == evt)
 	{
@@ -166,24 +171,19 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 	{
 		case gecko_evt_system_boot_id:
 		{
-			DBG_PRINT("system boot_id evnt\r\n");
+			MAN_PRINT("system boot_id evnt\r\n");
 			// Initialize Mesh stack in Node operation mode, it will generate initialized event
 			result = gecko_cmd_mesh_node_init()->result;
 			if (result)
 			{
-				DBG_PRINT("mesh node init failed 0x%x\r\n",result);
+				MAN_PRINT("mesh node init failed 0x%x\r\n",result);
 				gecko_cmd_system_reset(NORMAL_RESET);
 			}
-			/*gecko_cmd_system_halt(1);
-			struct gecko_msg_system_set_tx_power_rsp_t *txpower = gecko_cmd_system_set_tx_power(150);
-			DBG_PRINT("tx power :%d dB\r\n",txpower->set_power/10);
-			gecko_cmd_le_gap_set_advertise_tx_power(0,100);
-			gecko_cmd_system_halt(0);*/
 		}
 		break;
 		/*............................................................................................*/
 		case gecko_cmd_mesh_friend_init_id:
-			DBG_PRINT("frnd mesh node init id event\r\n");
+			MAN_PRINT("frnd mesh node init id event\r\n");
 		break;
 		/*............................................................................................*/
 		case gecko_evt_hardware_soft_timer_id:
@@ -194,13 +194,13 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 		      for(uint8_t i = 0; i<=15; i++){
 		       DBG_PRINT("%02x ", gecko_cmd_mesh_node_get_uuid()->uuid.data[i]);
 		      }
-			DBG_PRINT("Sensor node initialized\n");
-			DBG_PRINT("FWver = %d/10\r\n",snsrMinCfg.firmwareversion);
+		      MAN_PRINT("Sensor node initialized\n");
+		      MAN_PRINT("FWver = %d/10\r\n",snsrMinCfg.firmwareversion);
 			// Initialize generic client models
 			result = gecko_cmd_mesh_generic_client_init()->result;
 			if (result)
 			{
-				DBG_PRINT("mesh_generic_client_init failed, code 0x%x\r\n", result);
+				MAN_PRINT("mesh_generic_client_init failed, code 0x%x\r\n", result);
 			}
 			struct gecko_msg_mesh_node_initialized_evt_t *pData = (struct gecko_msg_mesh_node_initialized_evt_t*)&(evt->data);
 			struct gecko_msg_mesh_vendor_model_init_rsp_t *vendorresponse;
@@ -211,27 +211,27 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 															  sizeof(gc_opcodes),
 															  gc_opcodes);
 
-			DBG_PRINT("vendorModel init response:%d\r\n",vendorresponse->result);
+			MAN_PRINT("vendorModel init response:%d\r\n",vendorresponse->result);
 
 			gecko_cmd_system_halt(1);
 			struct gecko_msg_system_set_tx_power_rsp_t *txpower = gecko_cmd_system_set_tx_power(CFG_OUTPUT_POWER*10);
-			printf("Transmit Power : %ddB\r\n", txpower->set_power/10);
+			MAN_PRINT("Transmit Power : %ddB\r\n", txpower->set_power/10);
 			gecko_cmd_system_halt(0);
 
 			if (pData->provisioned)
 			{
-				DBG_PRINT("node is provisioned. addr : %u[0x%04x], ivi:%lu\r\n", pData->address,pData->address, pData->ivi);
+				MAN_PRINT("node is provisioned. addr : %u[0x%04x], ivi:%lu\r\n", pData->address,pData->address, pData->ivi);
 				snsrMinCfg.snsrID = pData->address;
 
 				result = gecko_cmd_mesh_friend_init()->result;
 				if (result) {
-					DBG_PRINT("[E] Friend init failed 0x%x\r\n", result);
+					MAN_PRINT("[E] Friend init failed 0x%x\r\n", result);
 				}
 
 			}
-			else
+			else if(brdFeature.self_provisioing)
 			{
-#ifdef SELF_PROVISIONING
+
 				s_keys_msc.self_provisioned_flag = (*(uint32_t *)(USERDATA_BASE));
 				if(s_keys_msc.self_provisioned_flag == 0xFFFFFFFF)
 				{
@@ -249,12 +249,9 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 				}
 				else
 				{
-#endif
-				DBG_PRINT("node is unprovisioned, starting beaconing...\r\n");
-				gecko_cmd_mesh_node_start_unprov_beaconing(0x3);
-#ifdef SELF_PROVISIONING
+					MAN_PRINT("node is unprovisioned, starting beaconing...\r\n");
+					gecko_cmd_mesh_node_start_unprov_beaconing(0x3);
 				}
-#endif
 			}
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(300),RESET_INDICATOR_START,REPEATING_TIMER);
 			gecko_cmd_hardware_set_soft_timer(SECONDS(5),RESET_INDICATION_STOP,ONESHOT_TIMER);
@@ -266,43 +263,46 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 		break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_provisioning_started_id:
-			DBG_PRINT("Started provisioning\r\n");
+			MAN_PRINT("Started provisioning\r\n");
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200),RESET_INDICATOR_START,REPEATING_TIMER);
+			gecko_cmd_hardware_set_soft_timer(SECONDS(60),TIMER_ID_PROVISION_FAIL,ONESHOT_TIMER);			//	start timer to factory reset the device if all model configuration are not received in time
 		break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_provisioned_id:
-		  DBG_PRINT("node provisioned, got address=%x\r\n", evt->data.evt_mesh_node_provisioned.address);
-		  gecko_cmd_hardware_set_soft_timer(MILLISECONDS(10),RESET_INDICATION_STOP,ONESHOT_TIMER);
+			MAN_PRINT("node provisioned, got address=%x\r\n", evt->data.evt_mesh_node_provisioned.address);
+			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(10),RESET_INDICATION_STOP,ONESHOT_TIMER);			//	LED indication timer
 	    break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_provisioning_failed_id:
-		  DBG_PRINT("provisioning failed, code %x\r\n", evt->data.evt_mesh_node_provisioning_failed.result);
+			MAN_PRINT("provisioning failed, code %x\r\n", evt->data.evt_mesh_node_provisioning_failed.result);
 		  /* start a one-shot timer that will trigger soft reset after small delay */
 		  gecko_cmd_hardware_set_soft_timer(SECONDS(3),FCTORY_RESET_ID , 1);
 		break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_key_added_id:
-		  DBG_PRINT("got new %s key with index %x\r\n",
+			MAN_PRINT("got new %s key with index %x\r\n",
 				 evt->data.evt_mesh_node_key_added.type == 0 ? "network" : "application",
 				 evt->data.evt_mesh_node_key_added.index);
 		break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_model_config_changed_id:
-		  DBG_PRINT("model config changed\r\n");
+			MAN_PRINT("model config changed\r\n");
+			provPkt ++;
 		break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_config_set_id:
-		  DBG_PRINT("model config set\r\n");
-		  gecko_cmd_system_reset(NORMAL_RESET);
+			MAN_PRINT("model config set\r\n");
+			provPkt ++;
+			gecko_cmd_system_reset(NORMAL_RESET);
 	    break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_node_reset_id:
-		  DBG_PRINT("evt gecko_evt_mesh_node_reset_id\r\n");
+			MAN_PRINT("evt gecko_evt_mesh_node_reset_id\r\n");
 		  fn_initiate_factory_reset(0);
 		break;
 		/*............................................................................................*/
 		case gecko_evt_le_connection_parameters_id:
-			DBG_PRINT("connection params: interval %d, timeout %d\r\n",
+			MAN_PRINT("connection params: interval %d, timeout %d\r\n",
 				 evt->data.evt_le_connection_parameters.interval,
 				 evt->data.evt_le_connection_parameters.timeout);
 	    break;
@@ -314,11 +314,11 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 		break;
 		/*............................................................................................*/
 		case gecko_evt_mesh_friend_friendship_established_id:
-			DBG_PRINT("[I] evt fship_estd, lpn_address=%x\r\n", evt->data.evt_mesh_friend_friendship_established.lpn_address);
+			MAN_PRINT("[I] evt fship_estd, lpn_address=%x\r\n", evt->data.evt_mesh_friend_friendship_established.lpn_address);
 		break;
 		/*............................................................................................*/
 	    case gecko_evt_mesh_friend_friendship_terminated_id:
-			DBG_PRINT("[I] evt fship_term, reason=%x\r\n", evt->data.evt_mesh_friend_friendship_terminated.reason);
+	    	MAN_PRINT("[I] evt fship_term, reason=%x\r\n", evt->data.evt_mesh_friend_friendship_terminated.reason);
 		break;
 		/*............................................................................................*/
 	    case gecko_evt_le_gap_adv_timeout_id:
@@ -336,7 +336,7 @@ void fn_initiate_Iam_Pkt(void)
 {
 	srand(RTCC_CounterGet());
 	uint32_t randomBackOff = ((uint32_t)rand() & 0x1FFFFF) + (uint16_t)rand() + (5*32768);
-	DBG_PRINT("random backoff = %ld secs\r\n",(randomBackOff/TIMER_CLK_FREQ));
+	MAN_PRINT("random backoff = %ld secs\r\n",(randomBackOff/TIMER_CLK_FREQ));
 	gecko_cmd_hardware_set_soft_timer((randomBackOff), BROADCAST_I_AM_PKT, ONESHOT_TIMER);		//broadcast the IAM pkt after random backoff
 	gecko_cmd_hardware_set_soft_timer((SECONDS(2)), FIRST_AGG_HANDSHAKE_PKT, ONESHOT_TIMER);	//first packet before that random backoff
 	return ;
@@ -424,7 +424,7 @@ void fn_assign_snsrConfig(cfgRcvPkt_t *cfg)
 {
 	uint16 cfgVal = ( (cfg->cfgValue_MSB<<8) | (cfg->cfgValue_LSB) );
 	uint8_t paramN = cfg->cfgParam & 0x7F;
-	DBG_PRINT("param_%d\r\n",paramN);
+	MAN_PRINT("param_%d\r\n",paramN);
 	switch(cfg->snsrType)
 	{
 /*..............................................................................................................*/
@@ -435,17 +435,17 @@ void fn_assign_snsrConfig(cfgRcvPkt_t *cfg)
 				case PARAM1:			//unOccupancy Timer
 					snsrCfg.pir_cfg.unoccupancyTimer_s = cfgVal;
 					snsrCfg.pir_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("PIR_unoccupancyTime 0x%04x(%d)\r\n",snsrCfg.pir_cfg.unoccupancyTimer_s,snsrCfg.pir_cfg.unoccupancyTimer_s);
+					MAN_PRINT("PIR_unoccupancyTime 0x%04x(%d)\r\n",snsrCfg.pir_cfg.unoccupancyTimer_s,snsrCfg.pir_cfg.unoccupancyTimer_s);
 				break;
 				case PARAM2:			//retransmission Timer
 					snsrCfg.pir_cfg.retransmission_timeout = cfgVal;
 					snsrCfg.pir_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("PIR_retransmit 0x%04x(%d)\r\n",snsrCfg.pir_cfg.retransmission_timeout,snsrCfg.pir_cfg.retransmission_timeout);
+					MAN_PRINT("PIR_retransmit 0x%04x(%d)\r\n",snsrCfg.pir_cfg.retransmission_timeout,snsrCfg.pir_cfg.retransmission_timeout);
 				break;
 				case PARAM3:			//wait and watch Timer
 					snsrCfg.pir_cfg.wait_watch_Time_ms = cfgVal;
 					snsrCfg.pir_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("PIR_waitWatch 0x%04x(%d)\r\n",snsrCfg.pir_cfg.wait_watch_Time_ms,snsrCfg.pir_cfg.wait_watch_Time_ms);
+					MAN_PRINT("PIR_waitWatch 0x%04x(%d)\r\n",snsrCfg.pir_cfg.wait_watch_Time_ms,snsrCfg.pir_cfg.wait_watch_Time_ms);
 				break;
 				default:
 				break;
@@ -460,17 +460,17 @@ void fn_assign_snsrConfig(cfgRcvPkt_t *cfg)
 				case PARAM1:			//lux threshold
 					snsrCfg.als_cfg.luxThreshold = cfgVal;
 					snsrCfg.als_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("ALS thrshld 0x%04x(%d)\r\n",snsrCfg.als_cfg.luxThreshold,snsrCfg.als_cfg.luxThreshold);
+					MAN_PRINT("ALS thrshld 0x%04x(%d)\r\n",snsrCfg.als_cfg.luxThreshold,snsrCfg.als_cfg.luxThreshold);
 				break;
 				case PARAM2:			//frq of measurements
 					snsrCfg.als_cfg.freq_LUXmeasure_s = cfgVal;
 					snsrCfg.als_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("ALS snsngTime 0x%04x(%d)\r\n",snsrCfg.als_cfg.freq_LUXmeasure_s,snsrCfg.als_cfg.freq_LUXmeasure_s);
+					MAN_PRINT("ALS snsngTime 0x%04x(%d)\r\n",snsrCfg.als_cfg.freq_LUXmeasure_s,snsrCfg.als_cfg.freq_LUXmeasure_s);
 				break;
 				case PARAM3:			//als_calibration fcator
 					snsrCfg.als_cfg.calibration_factor = cfgVal;
 					snsrCfg.als_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("ALS calbFctr 0x%04x(%d)\r\n",snsrCfg.als_cfg.calibration_factor,snsrCfg.als_cfg.calibration_factor);
+					MAN_PRINT("ALS calbFctr 0x%04x(%d)\r\n",snsrCfg.als_cfg.calibration_factor,snsrCfg.als_cfg.calibration_factor);
 				break;
 				default:
 				break;
@@ -485,22 +485,22 @@ void fn_assign_snsrConfig(cfgRcvPkt_t *cfg)
 				case PARAM1:			//TMP_THRESHOLD
 					snsrCfg.th_cfg.tempThreshold = cfgVal;
 					snsrCfg.th_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("temp thrshld 0x%04x(%d)\r\n",snsrCfg.th_cfg.tempThreshold,snsrCfg.th_cfg.tempThreshold);
+					MAN_PRINT("temp thrshld 0x%04x(%d)\r\n",snsrCfg.th_cfg.tempThreshold,snsrCfg.th_cfg.tempThreshold);
 				break;
 				case PARAM2:			//HUMIDITY_THRESHOLD
 					snsrCfg.th_cfg.humidityThreshold = cfgVal;
 					snsrCfg.th_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("hum thrshld 0x%04x(%d)\r\n",snsrCfg.th_cfg.humidityThreshold,snsrCfg.th_cfg.humidityThreshold);
+					MAN_PRINT("hum thrshld 0x%04x(%d)\r\n",snsrCfg.th_cfg.humidityThreshold,snsrCfg.th_cfg.humidityThreshold);
 				break;
 				case PARAM3:			//FREQ_MEASUREMENT
 					snsrCfg.th_cfg.freq_THmeasure = cfgVal;
 					snsrCfg.th_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("th snsng time 0x%04x(%d)\r\n",snsrCfg.th_cfg.freq_THmeasure,snsrCfg.th_cfg.freq_THmeasure);
+					MAN_PRINT("th snsng time 0x%04x(%d)\r\n",snsrCfg.th_cfg.freq_THmeasure,snsrCfg.th_cfg.freq_THmeasure);
 				break;
 				case PARAM4:			//PERIODIC_TRANSMISSION
 					snsrCfg.th_cfg.retransmission_timeout = cfgVal;
 					snsrCfg.th_cfg.cfg_id = cfg->snsrCfgID;
-					DBG_PRINT("th periodicTransmit time 0x%04x(%d)\r\n",snsrCfg.th_cfg.retransmission_timeout,snsrCfg.th_cfg.retransmission_timeout);
+					MAN_PRINT("th periodicTransmit time 0x%04x(%d)\r\n",snsrCfg.th_cfg.retransmission_timeout,snsrCfg.th_cfg.retransmission_timeout);
 				break;
 				default:
 				break;
@@ -551,7 +551,7 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 				if(v_data->payload.data[3])													//intensityLevel
 				{
 //					fn_switchOnTriac();
-					DBG_PRINT("RTS high\r\n");
+					MAN_PRINT("RTS high\r\n");
 					GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
 					triacCfg.triacStatus = true;
 					fn_saveTriacState();
@@ -588,7 +588,7 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 			{
 				if(fn_gotoScene(*(uint16_t *)(v_data->payload.data+1), 0)==-1)
 				{
-					printf("Unable to set scene %d\r\n", *(uint16_t *)(v_data->payload.data+1));
+					MAN_PRINT("Unable to set scene %d\r\n", *(uint16_t *)(v_data->payload.data+1));
 				}
 			}
 		break;
@@ -663,7 +663,7 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 				if(v_data->payload.data[3])								//intensityLevel
 				{
 //					fn_switchOnTriac();
-					DBG_PRINT("RTS high\r\n");
+					MAN_PRINT("RTS high\r\n");
 					GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
 					triacCfg.triacStatus = true;
 					fn_saveTriacState();
@@ -698,13 +698,13 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 	{
 		if(snsrCfg.WL_LIGHT_CONTROL_2_timer)
 		{
-			printf("Enabled Sensor Masking for %d mins\r\n", snsrCfg.WL_LIGHT_CONTROL_2_timer);
+			MAN_PRINT("Enabled Sensor Masking for %d mins\r\n", snsrCfg.WL_LIGHT_CONTROL_2_timer);
 			snsrAppData.WL_LIGHT_CONTROL_2_flag = 1;
 			gecko_cmd_hardware_set_soft_timer(SECONDS(snsrCfg.WL_LIGHT_CONTROL_2_timer*60), WL_LIGHT_CONTROL_2_TIMER_ID, ONESHOT_TIMER);
 		}
 		else
 		{
-			printf("Sensor Not Masked\r\n");
+			MAN_PRINT("Sensor Not Masked\r\n");
 			snsrAppData.WL_LIGHT_CONTROL_2_flag = 0;
 		}
 	}
@@ -755,7 +755,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			struct gecko_msg_mesh_test_add_local_model_sub_rsp_t* rsp;
 			uint16_t subAddr = ((v_data->payload.data[1] << 8) | v_data->payload.data[2]);
 			rsp = gecko_cmd_mesh_test_add_local_model_sub(PRIMARY_ELEMENT,MY_VENDOR_ID, MY_MODEL_ID,subAddr);
-			DBG_PRINT("self addr config resp %04x  with grp_id %04x \r\n",rsp->result,subAddr);
+			MAN_PRINT("self addr config resp %04x  with grp_id %04x \r\n",rsp->result,subAddr);
 		}
 		break;
 	/*............................................................................................*/
@@ -764,7 +764,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			struct gecko_msg_mesh_test_del_local_model_sub_rsp_t* rsp;
 			rsp = gecko_cmd_mesh_test_del_local_model_sub(PRIMARY_ELEMENT,
 			MY_VENDOR_ID, MY_MODEL_ID,((v_data->payload.data[1] << 8) | v_data->payload.data[2]));
-			DBG_PRINT("de-assigning from grp %04x : resp %04x \r\n",((v_data->payload.data[1] << 8) | v_data->payload.data[2]),	rsp->result);
+			MAN_PRINT("de-assigning from grp %04x : resp %04x \r\n",((v_data->payload.data[1] << 8) | v_data->payload.data[2]),	rsp->result);
 		}
 		break;
 	/*............................................................................................*/
@@ -794,10 +794,10 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 	/*............................................................................................*/
 		case BIND_TO_AGGREGATOR:
 		{
-			DBG_PRINT("agg binding to %d\r\n", v_data->source_address);
+			MAN_PRINT("agg binding to %d\r\n", v_data->source_address);
 			snsrMinCfg.dest_addr = v_data->source_address;
 			snsrMinCfg.aggBinded = true;
-			DBG_PRINT("agg bind PS resp %d\r\n",
+			MAN_PRINT("agg bind PS resp %d\r\n",
 			gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrMinCfg),(uint8_t *)&snsrMinCfg)->result);
 			TURN_ON_LED(APP_LED2);
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200),LED2_TIMER_ID,ONESHOT_TIMER);		//	Start timer for LED OFF(green led)
@@ -817,7 +817,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			{
 				if(fn_sceneCfgD(true, *(uint16_t *)(v_data->payload.data+1),
 						v_data->payload.data[3], v_data->payload.data[5])==-1){
-					printf("Unable to configure scene %d\r\n", *(uint16_t *)(v_data->payload.data+1));
+					MAN_PRINT("Unable to configure scene %d\r\n", *(uint16_t *)(v_data->payload.data+1));
 				}
 			}
 		break;
@@ -832,7 +832,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 				if(fn_sceneCfgD(false, *(uint16_t *)(v_data->payload.data+1),
 						v_data->payload.data[3], 0)==-1)
 				{
-					printf("Unable to delete scene %d\r\n", *(uint16_t *)(v_data->payload.data+1));
+					MAN_PRINT("Unable to delete scene %d\r\n", *(uint16_t *)(v_data->payload.data+1));
 				}
 			}
 		break;
@@ -869,7 +869,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		{
 			sAlsCalibValue.m = *(float *)(v_data->payload.data+1);
 			gecko_cmd_flash_ps_save(ALS_CALIB_KEY,sizeof(sAlsCalibValue),(uint8_t *)&sAlsCalibValue);
-			DBG_PRINT("conf1 = %f\r\n",sAlsCalibValue.m);
+			MAN_PRINT("conf1 = %f\r\n",sAlsCalibValue.m);
 			TURN_ON_LED(APP_LED2);
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200),LED2_TIMER_ID,ONESHOT_TIMER);		//	Start timer for LED OFF(green led)
 		}
@@ -879,7 +879,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		{
 			sAlsCalibValue.c = *(float *)(v_data->payload.data+1);
 			gecko_cmd_flash_ps_save(ALS_CALIB_KEY,sizeof(sAlsCalibValue),(uint8_t *)&sAlsCalibValue);
-			DBG_PRINT("conf2 = %f\r\n",sAlsCalibValue.c);
+			MAN_PRINT("conf2 = %f\r\n",sAlsCalibValue.c);
 			TURN_ON_LED(APP_LED2);
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200),LED2_TIMER_ID,ONESHOT_TIMER);		//	Start timer for LED OFF(green led)
 		}
@@ -889,7 +889,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		{
 			sAlsCalibValue.m_gain = *(uint16_t *)(v_data->payload.data+1);
 			gecko_cmd_flash_ps_save(ALS_CALIB_KEY,sizeof(sAlsCalibValue),(uint8_t *)&sAlsCalibValue);
-			DBG_PRINT("gain:%d\r\n", sAlsCalibValue.m_gain);
+			MAN_PRINT("gain:%d\r\n", sAlsCalibValue.m_gain);
 			TURN_ON_LED(APP_LED2);
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200),LED2_TIMER_ID,ONESHOT_TIMER);		//	Start timer for LED OFF(green led)
 		}
@@ -899,7 +899,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		{
 			sAlsCalibValue.req_lux = *(uint16_t *)(v_data->payload.data+1);
 			gecko_cmd_flash_ps_save(ALS_CALIB_KEY,sizeof(sAlsCalibValue),(uint8_t *)&sAlsCalibValue);
-			printf("rlux:%d\r\n", sAlsCalibValue.req_lux);
+			MAN_PRINT("rlux:%d\r\n", sAlsCalibValue.req_lux);
 			TURN_ON_LED(APP_LED2);
 			gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200),LED2_TIMER_ID,ONESHOT_TIMER);		//	Start timer for LED OFF(green led)
 		}
@@ -908,7 +908,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		case DALI_PERSISTENT_STORAGE_TIMEOUT:
 		{
 			g_sDaliRetention.Dali_RetentionStroageTimeout = *(uint8_t *)(v_data->payload.data+1);
-			DBG_PRINT("dali level save rspns %d\r\n",(gecko_cmd_flash_ps_save(DALI_RETENTION_STORAGE_KEY, 1, (uint8_t *)&g_sDaliRetention.Dali_RetentionStroageTimeout))->result);
+			MAN_PRINT("dali level save rspns %d\r\n",(gecko_cmd_flash_ps_save(DALI_RETENTION_STORAGE_KEY, 1, (uint8_t *)&g_sDaliRetention.Dali_RetentionStroageTimeout))->result);
 		}
 		break;
 
@@ -964,8 +964,8 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 						snsrCfg.emergency_light = false;
 					}
 					snsrMinCfg.cfgAvailable = true;
-					DBG_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
-					DBG_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
+					MAN_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
+					MAN_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
 #endif
 					m_statusChangeFlag = 0x08;
 					fn_enQueueDC(&sDaliCfgQueue, &sDaliLightBallastCfg, m_statusChangeFlag);
@@ -981,13 +981,6 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 					fn_enQueueDC(&sDaliCfgQueue, &sDaliLightBallastCfg, m_statusChangeFlag);
                  break;
 
-
-//				case FADE_RATE:
-//				case PRESET_MAX:
-//				case PRESET_MIN:
-//				case SYS_FAIL_LEVEL:
-//				case POW_FAIL_LEVEL:
-//					break;
 			}
 		}
 		break;
@@ -996,8 +989,8 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		{
 			snsrCfg.WL_LIGHT_RcvdExternalCmd_timer = (uint16_t)((v_data->payload.data[2] << 8) | v_data->payload.data[1]);
 			snsrMinCfg.cfgAvailable = true;
-			DBG_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
-			DBG_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
+			MAN_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
+			MAN_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
 		}
 		break;
 	/*............................................................................................*/
@@ -1005,17 +998,17 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			if(mux_control_select == 0)
 			{
 				mux_control_select = 1;
-				printf("Analog Driver in use\r\n");
+				MAN_PRINT("Analog Driver in use\r\n");
 			}
 			else
 			{
 				mux_control_select = 0;
-				printf("DALI Driver in use\r\n");
+				MAN_PRINT("DALI Driver in use\r\n");
 			}
-			printf("Mux_control_select = %d\r\n", mux_control_select);
+			MAN_PRINT("Mux_control_select = %d\r\n", mux_control_select);
 			struct gecko_msg_flash_ps_save_rsp_t* rsp;
 			rsp = gecko_cmd_flash_ps_save(MUX, 1 , &mux_control_select);
-			printf("Mux Settings save result : %04x\r\n", rsp->result);
+			MAN_PRINT("Mux Settings save result : %04x\r\n", rsp->result);
 			gecko_cmd_hardware_set_soft_timer(SECONDS(1), FCTORY_RESET_ID,ONESHOT_TIMER);
 		break;
 	/*............................................................................................*/
@@ -1032,7 +1025,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 
 		case MAX_LUX_ON_TABLE:
 			MaxLuxOnTable = (uint16_t)((v_data->payload.data[2] << 8) | v_data->payload.data[1]);
-			printf("Mux_on_table = %d\r\n", MaxLuxOnTable);
+			MAN_PRINT("Mux_on_table = %d\r\n", MaxLuxOnTable);
 		break;
 
 		//.......................................................................................................//
@@ -1040,11 +1033,11 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		case AREA_DETAILS:
 		{
 			sConfigAreaParameters.TotalArea_Sensors_count = v_data->payload.data[1];
-			printf("Total number of sensors in Area = %d\r\n", sConfigAreaParameters.TotalArea_Sensors_count);
+			MAN_PRINT("Total number of sensors in Area = %d\r\n", sConfigAreaParameters.TotalArea_Sensors_count);
 			sConfigAreaParameters.Area_Group_ID = (uint16_t)((v_data->payload.data[3] << 8) | v_data->payload.data[2]);
 			printf("Group ID for AREA = %d\r\n", sConfigAreaParameters.Area_Group_ID);
 
-			printf("AREA config Parameters saved in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
+			MAN_PRINT("AREA config Parameters saved in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
 		}
 		break;
 
@@ -1064,7 +1057,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			}
 
 			struct gecko_msg_flash_ps_save_rsp_t *result = gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG,sizeof(sConfigArea), &sConfigArea);
-			printf("AREA config saved in PS result : %d\r\n",result->result);
+			MAN_PRINT("AREA config saved in PS result : %d\r\n",result->result);
 
 
 			if((snsrMinCfg.snsrID == SHID1) || (snsrMinCfg.snsrID == SHID2) || (snsrMinCfg.snsrID == SHID3))
@@ -1081,7 +1074,7 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 				}
 			}
 
-			printf("AREA config Parameters saved in PS result : %d\r\n",
+			MAN_PRINT("AREA config Parameters saved in PS result : %d\r\n",
 					gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
 
 			//Soft Timer to check if all CONFIGURE_AREA packets area received.
@@ -1117,9 +1110,9 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 				}
 			}
 			struct gecko_msg_flash_ps_save_rsp_t *result = gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG,sizeof(sConfigArea), &sConfigArea);
-			printf("AREA config saved after Deletion in PS result : %d\r\n",result->result);
+			MAN_PRINT("AREA config saved after Deletion in PS result : %d\r\n",result->result);
 
-			printf("AREA config Parameters saved after deletion in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
+			MAN_PRINT("AREA config Parameters saved after deletion in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
 		}
 		break;
 #endif
@@ -1158,7 +1151,7 @@ void fn_handleVendorModel_Rcv(uint32_t evt_id,struct gecko_cmd_packet *evt)
 				{
 					if(!snsrMinCfg.aggBinded)
 					{
-						DBG_PRINT("snsr is not binded to agg\r\n");
+						MAN_PRINT("snsr is not binded to agg\r\n");
 						fn_initiate_Iam_Pkt();
 						break;
 					}
@@ -1238,7 +1231,7 @@ void fn_send_Cmd_onGSLink(struct gecko_msg_mesh_vendor_model_receive_evt_t *v_da
 	&& (snsrMinCfg.snsrID != sCtrlCfg.UUID) )
 		return;
 	fn_gsLink_command(&v_data->payload.data[0],v_data->payload.len);
-	DBG_PRINT("sent the light control command to controller\r\n");
+	MAN_PRINT("sent the light control command to controller\r\n");
 	return ;
 }
 /****************************************************************************************************************/
@@ -1247,18 +1240,18 @@ void fn_process_extrnlSgnl_Evnt(struct gecko_cmd_packet *evt)
 	if(evt->data.evt_system_external_signal.extsignals & EXT_SIGNAL_PIR_INTERRUPT)									//	PIR Interrupt
 	{
 		pir_unoccupancyTime = fn_GetSecTimerStart();
-		DBG_PRINT(".........motion detected...... %d \r\n",pir_unoccupancyTime);
+		MAN_PRINT(".........motion detected...... %d \r\n",pir_unoccupancyTime);
 		if(!snsrCurrStatus.pir_State){
 			ePIRprocess_state = UPDATE_PIR_STATUS_CHANGE;
 		}
 		snsrCurrStatus.pir_State = OCCUPIED;
 
-		(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
-		fn_sendTriacStatus(0x12);
+		(snsrCurrStatus.pir_State && Curr_mLevel) ? GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN) : GPIO_PinOutClear(TRIAC_PORT,TRIAC_PIN);
+		//fn_sendTriacStatus(0x12);
 	}
 	if(evt->data.evt_system_external_signal.extsignals & EXT_SIGNAL_SWITCH_INTERRUPT)								//	Switch Intterupt
 	{
-		DBG_PRINT("s1\r\n");
+		MAN_PRINT("s1\r\n");
 		NVIC_ClearPendingIRQ(SWITCH_INTRPT_IRQn);
 		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(20),SWITCH_DEBOUNCE_TIMER,ONESHOT_TIMER);
 	}
@@ -1266,7 +1259,6 @@ void fn_process_extrnlSgnl_Evnt(struct gecko_cmd_packet *evt)
 	{
 		switch (GPIO_PinModeGet(DALI_RX_PORT, DALI_RX_PIN))
 		{
-
 		case PIN_RESET:
 			if (sdaliRxParams[DALI_LOOP1].rxDataBegin_flag == 0)
 			{
@@ -1400,7 +1392,7 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 			if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
 #endif
 			{
-				DBG_PRINT("SW1_pressed\r\n");
+				MAN_PRINT("SW1_pressed\r\n");
 				snsrAppData.switchState = SWITCH_PRESSED;
 				g_switchPressed_StartTime = fn_GetSecTimerStart();
 				g_loopMapStratTime = fn_GetSecTimerStart();
@@ -1418,7 +1410,7 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 				{
 					fn_switchReleased();
 				}
-				DBG_PRINT("SW1_released\r\n");
+				MAN_PRINT("SW1_released\r\n");
 				snsrAppData.switchState = SWITCH_RELEASED;
 			}
 		}
@@ -1487,7 +1479,7 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 //				GPIO_PinOutClear(gpioPortC, 5); 					//to drive TRIAC
 				fn_sendTriacStatus(0x11);
 
-				DBG_PRINT("RTS low\r\n");
+				MAN_PRINT("RTS low\r\n");
 				GPIO_PinOutClear(TRIAC_PORT,TRIAC_PIN);
 				triacCfg.triacStatus = false;
 				fn_saveTriacState();
@@ -1496,11 +1488,18 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 		break;
 
 		case EMERGENCY_LIGHT_TIMER_ID_2:
-			printf("Command send\r\n");
+			MAN_PRINT("Command send\r\n");
 			fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?g_m_level:0), 0x11);
-			printf("g_m_level = %d\r\n", g_m_level);
+			MAN_PRINT("g_m_level = %d\r\n", g_m_level);
 		break;
-
+		case TIMER_ID_PROVISION_FAIL:
+			MAN_PRINT("Provisioning Timedout \r\n");
+			if(provPkt < 4){
+				// TODO - Network Reset
+				MAN_PRINT("Initiating Complete Reset of the device.. Network reset and data erase\r\n");
+				fn_initiate_factory_reset(1);
+			}
+			break;
 #ifdef AREA
 		case TIMER_ID_CONFIGURE_AREA:
 			send_packet(PIR, 0xFFFF, false);
@@ -1615,15 +1614,15 @@ void fn_deleteSubAddr(void)
 	{
 		for(uint8_t idx = 1;idx<rsp->addresses.len-2;idx+=2)
 		{
-			printf("delAddr = 0x%4x\r\n",((rsp->addresses.data[idx] <<8)|rsp->addresses.data[idx+1]));
+			MAN_PRINT("delAddr = 0x%4x\r\n",((rsp->addresses.data[idx] <<8)|rsp->addresses.data[idx+1]));
 			delRsp = gecko_cmd_mesh_test_del_local_model_sub(PRIMARY_ELEMENT,MY_VENDOR_ID,MY_MODEL_ID,((rsp->addresses.data[idx] <<8)|rsp->addresses.data[idx+1]));
 			if(delRsp->result)
 			{
-				printf("delRsp unsuccess = %d\r\n",delRsp->result);
+				MAN_PRINT("delRsp unsuccess = %d\r\n",delRsp->result);
 			}
 			else
 			{
-				printf("delRsp success = %d\r\n",delRsp->result);
+				MAN_PRINT("delRsp success = %d\r\n",delRsp->result);
 			}
 		}
 	}
@@ -1632,31 +1631,6 @@ void fn_deleteSubAddr(void)
 /****************************************************************************************************************/
 void fn_initiate_factory_reset(uint8_t resetLevel)
 {
-	DBG_PRINT("factory reset initiated\r\n");
-	if(resetLevel)
-	{
-		DBG_PRINT("erasing prov data\r\n");
-		gecko_cmd_flash_ps_erase_all();
-		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),RESET_INDICATOR_START,REPEATING_TIMER);
-		gecko_cmd_hardware_set_soft_timer(SECONDS(NETWORK_RESET_INTERVAL),FCTORY_RESET_ID,ONESHOT_TIMER);
-	}
-	else
-	{
-		DBG_PRINT("Erase minCFG rsp : %d\r\n",gecko_cmd_flash_ps_erase(PS_SNSR_MINCFG)->result);
-		DBG_PRINT("Erase snsrCFG \r\n");
-		for(uint8_t i = 0;i<5;i++)
-		{
- 			DBG_PRINT("snsrCfg_%d rsp : %d\r\n",i+1,gecko_cmd_flash_ps_erase(PS_SNSR_CFG_BASE+i)->result);
-		}
-		DBG_PRINT("Erase ALSCFG rsp : %d\r\n",gecko_cmd_flash_ps_erase(ALS_CALIB_KEY)->result);
-		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),RESET_INDICATOR_START,REPEATING_TIMER);
-		gecko_cmd_hardware_set_soft_timer(SECONDS(FACTORY_RESET_INTERVAL),FCTORY_RESET_ID,ONESHOT_TIMER);
-		DBG_PRINT("Erase PS_SNSR_AREA_CONFIG rsp : %d\r\n",gecko_cmd_flash_ps_erase(PS_SNSR_AREA_CONFIG)->result);
-		DBG_PRINT("Erase PS_SNSR_AREA_CONFIG_PARAMETERS rsp : %d\r\n",gecko_cmd_flash_ps_erase(PS_SNSR_AREA_CONFIG_PARAMETERS)->result);
-		DBG_PRINT("Erase MUX rsp : %d\r\n",gecko_cmd_flash_ps_erase(MUX)->result);
-	}
-	fn_deleteSubAddr();
-
 	uint8_t freset_ack[2];
 	freset_ack[0] = EVENTS_PKT;
 	freset_ack[1] = (resetLevel) ? NETWORK_RESET : FACTORY_RESET;
@@ -1672,7 +1646,34 @@ void fn_initiate_factory_reset(uint8_t resetLevel)
 												0xff,						\
 												sizeof(freset_ack),			\
 												freset_ack)->result;
-		DBG_PRINT("sent rspns = %d\r\n",sentRspns);
+	DBG_PRINT("sent rspns = %d\r\n",sentRspns);
+
+	MAN_PRINT("factory reset initiated\r\n");
+	if(resetLevel)
+	{
+		MAN_PRINT("erasing prov data\r\n");
+		gecko_cmd_flash_ps_erase_all();
+		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),RESET_INDICATOR_START,REPEATING_TIMER);
+		gecko_cmd_hardware_set_soft_timer(SECONDS(NETWORK_RESET_INTERVAL),FCTORY_RESET_ID,ONESHOT_TIMER);
+	}
+	else
+	{
+		MAN_PRINT("Erase minCFG rsp : %d\r\n",gecko_cmd_flash_ps_erase(PS_SNSR_MINCFG)->result);
+		MAN_PRINT("Erase snsrCFG \r\n");
+		for(uint8_t i = 0;i<5;i++)
+		{
+			MAN_PRINT("snsrCfg_%d rsp : %d\r\n",i+1,gecko_cmd_flash_ps_erase(PS_SNSR_CFG_BASE+i)->result);
+		}
+		MAN_PRINT("Erase ALSCFG rsp : %d\r\n",gecko_cmd_flash_ps_erase(ALS_CALIB_KEY)->result);
+		gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),RESET_INDICATOR_START,REPEATING_TIMER);
+		gecko_cmd_hardware_set_soft_timer(SECONDS(FACTORY_RESET_INTERVAL),FCTORY_RESET_ID,ONESHOT_TIMER);
+		MAN_PRINT("Erase PS_SNSR_AREA_CONFIG rsp : %d\r\n",gecko_cmd_flash_ps_erase(PS_SNSR_AREA_CONFIG)->result);
+		MAN_PRINT("Erase PS_SNSR_AREA_CONFIG_PARAMETERS rsp : %d\r\n",gecko_cmd_flash_ps_erase(PS_SNSR_AREA_CONFIG_PARAMETERS)->result);
+		MAN_PRINT("Erase MUX rsp : %d\r\n",gecko_cmd_flash_ps_erase(MUX)->result);
+	}
+	fn_deleteSubAddr();
+
+	gecko_cmd_system_reset(NORMAL_RESET);			//	Reset the system to bootup from start
 
 	return ;
 }
@@ -1689,19 +1690,19 @@ void fn_update_snsrCfg(void)
 			{
 				snsrCfg.WL_LIGHT_RcvdExternalCmd_timer = DEFAULT_SNSR_MASKING_TIMEOUT;
 				snsrMinCfg.cfgAvailable = true;
-				DBG_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
-				DBG_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
+				MAN_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
+				MAN_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
 			}
-			DBG_PRINT("SnsrCfg is loaded from PS\r\n");
+			MAN_PRINT("SnsrCfg is loaded from PS\r\n");
 		}
 		else
 		{
-			DBG_PRINT("couldn't Load snsrCfg from PS : error %d\r\n",rsp->result);
+			MAN_PRINT("couldn't Load snsrCfg from PS : error %d\r\n",rsp->result);
 		}
 	}
 	else
 	{
-		DBG_PRINT("no snsrcfg data in PS\r\n");
+		MAN_PRINT("no snsrcfg data in PS\r\n");
 	}
 
 #ifdef ALS_FEATURE
@@ -1709,11 +1710,11 @@ void fn_update_snsrCfg(void)
 		if(!rsp->result)
 		{
 			memcpy(&sAlsCalibValue,&rsp->value.data,sizeof(sAlsCalibValue));
-			DBG_PRINT("ALS is loaded from PS\r\n");
+			MAN_PRINT("ALS is loaded from PS\r\n");
 		}
 		else
 		{
-			DBG_PRINT("couldn't Load ALSCfg from PS : error %d\r\n",rsp->result);
+			MAN_PRINT("couldn't Load ALSCfg from PS : error %d\r\n",rsp->result);
 		}
 #endif
 
@@ -1756,23 +1757,23 @@ void fn_update_snsrCfg(void)
 		snsrMinCfg.device_type |= 0x0310;
 	}
 
-	printf("Device Type : 0x%04x\r\n", snsrMinCfg.device_type);
+	MAN_PRINT("Device Type : 0x%04x\r\n", snsrMinCfg.device_type);
 	if(snsrMinCfg.device_type & PIR_SENSOR)
 	{
-		DBG_PRINT("PIR : unocc[%d] , retrans[%d] , ww[%d]\r\n",
+		MAN_PRINT("PIR : unocc[%d] , retrans[%d] , ww[%d]\r\n",
 				snsrCfg.pir_cfg.unoccupancyTimer_s,
 				snsrCfg.pir_cfg.retransmission_timeout,
 				snsrCfg.pir_cfg.wait_watch_Time_ms);
 	}
 	if(snsrMinCfg.device_type & ALS_SENSOR)
 	{
-		DBG_PRINT("ALS : freqM[%d] , thrshld[%d] , calbFactr[%d]\r\n",
+		MAN_PRINT("ALS : freqM[%d] , thrshld[%d] , calbFactr[%d]\r\n",
 				snsrCfg.als_cfg.freq_LUXmeasure_s, snsrCfg.als_cfg.luxThreshold,
 				snsrCfg.als_cfg.calibration_factor);
 	}
 	if(snsrMinCfg.device_type & TH_SENSOR)
 	{
-		DBG_PRINT("TH : freqM[%d] , t_thrshld[%d] , humd_thrshld[%d] , th_reTransmit[%d]\r\n",
+		MAN_PRINT("TH : freqM[%d] , t_thrshld[%d] , humd_thrshld[%d] , th_reTransmit[%d]\r\n",
 				snsrCfg.th_cfg.freq_THmeasure, snsrCfg.th_cfg.tempThreshold,
 				snsrCfg.th_cfg.humidityThreshold,snsrCfg.th_cfg.retransmission_timeout);
 	}
@@ -1780,11 +1781,11 @@ void fn_update_snsrCfg(void)
 	if(!rsp1->result)
 	{
 		g_sDaliRetention.Dali_RetentionStroageTimeout = rsp1->value.data[0];
-		DBG_PRINT("daliRetention Value = %d\r\n",g_sDaliRetention.Dali_RetentionStroageTimeout);
+		MAN_PRINT("daliRetention Value = %d\r\n",g_sDaliRetention.Dali_RetentionStroageTimeout);
 	}
 	else
 	{
-		DBG_PRINT("Couldn't restore the DALI retended values : read rspns %d\r\n",rsp1->result);
+		MAN_PRINT("Couldn't restore the DALI retended values : read rspns %d\r\n",rsp1->result);
 	}
 
 	struct gecko_msg_flash_ps_load_rsp_t *sceneCfgrsp = gecko_cmd_flash_ps_load(SCENE_PS_KEY);
@@ -1797,12 +1798,12 @@ void fn_update_snsrCfg(void)
 		else if(mux_control_select == 0)
 		{
 			memcpy(&sScnUIDLP,&sceneCfgrsp->value.data,sceneCfgrsp->value.len);
-			DBG_PRINT("sceneCfg is loaded from PS\r\n");
+			MAN_PRINT("sceneCfg is loaded from PS\r\n");
 		}
 	}
 	else
 	{
-		DBG_PRINT("couldn't Load sceneCfg from PS : error %d\r\n",sceneCfgrsp->result);
+		MAN_PRINT("couldn't Load sceneCfg from PS : error %d\r\n",sceneCfgrsp->result);
 	}
 
 	if(mux_control_select == 1)
@@ -1871,7 +1872,7 @@ void fn_pirRetransmit(void)
 			{
 				if(!snsrCurrStatus.pir_State)		//snsrCurrStatus.pir_State == UNOCCUPIED
 				{
-					printf("first Time PIR status out \r\n");
+					MAN_PRINT("first Time PIR status out \r\n");
 					reTrnsState = TWO;
 				}
 			}
@@ -1885,7 +1886,7 @@ void fn_pirRetransmit(void)
 		case TWO:
 		{
 			send_packet(PIR,snsrMinCfg.dest_addr,false);
-			DBG_PRINT("REtxmsn pkt\r\n");
+			MAN_PRINT("REtxmsn pkt\r\n");
 			reTrnsState = ONE;
 		}
 		break;
@@ -1897,12 +1898,14 @@ void fn_pirRetransmit(void)
 /****************************************************************************************************************/
 void fn_SnsrPrcss(void)
 {
+	static uint16_t alsFailure_WaitTimeStart = 0;
+	static uint16_t thFailure_WaitTimeStart = 0;
 	if(snsrMinCfg.device_type & PIR_SENSOR)
 	{
 		fn_PIR_Process();
 		fn_pirRetransmit();
 	}
-	if(snsrMinCfg.device_type & ALS_SENSOR)
+	if((snsrMinCfg.device_type & ALS_SENSOR) && (alsFailureDisable == false) )
 	{
 		fn_ALSprocess();
 		fn_ALS_Retransmit();
@@ -1915,6 +1918,46 @@ void fn_SnsrPrcss(void)
 	if(snsrAppData.identify)
 	{
 		fn_sensorIdentify();
+	}
+
+//	if(snsrAppData.switchState)									//if switch pressed
+//	{
+//		fn_handleSwitchIntrpt();
+//	}
+
+
+//	Handling Error Conditions for ALS
+	if(alsFailureDisable != false)
+	{
+		if(alsFailure_WaitTimeStart == 0){
+			alsFailure_WaitTimeStart = fn_GetSecTimerStart();
+		}
+		if(fn_IsSecTimerElapsed (alsFailure_WaitTimeStart , DEFAULT_ALS_FREQ_OF_MEASURMT_5))
+		{
+			snsrCurrStatus.als_LUXvalue = alsFailureDisable;
+			send_packet(ALS,snsrMinCfg.dest_addr,false);		//	ALS I2C read / Write failure status send
+			fn_initI2C();
+			alsFailure_WaitTimeStart = fn_GetSecTimerStart();
+			snsrCurrStatus.als_LUXvalue = 0;				//	Ensure that PIR based trigger switches on the Lamps
+		}
+	}
+
+//Handling error conditions for TH
+	if(thFailureDisable != false)
+	{
+		if(thFailure_WaitTimeStart == 0){
+			thFailure_WaitTimeStart = fn_GetSecTimerStart();
+		}
+		if(fn_IsSecTimerElapsed (thFailure_WaitTimeStart , DEFAULT_TH_FREQ_OF_MEASURMT))
+		{
+			snsrCurrStatus.temp = thFailureDisable;
+			snsrCurrStatus.humidity = thFailureDisable;
+			send_packet(TEMP_HUMIDITY,snsrMinCfg.dest_addr,false);		//	ALS I2C read / Write failure status send
+			fn_initI2C();
+			thFailure_WaitTimeStart = fn_GetSecTimerStart();
+			snsrCurrStatus.temp = 0;
+			snsrCurrStatus.humidity = 0;
+		}
 	}
 	return ;
 }
@@ -2120,7 +2163,7 @@ void fn_snsRestore(void){
 	struct gecko_msg_flash_ps_load_rsp_t *rsp = gecko_cmd_flash_ps_load(PS_SNSR_MINCFG);
 	if(!rsp->result)
 	{
-		DBG_PRINT("Restored MinCfg Data from PS\n");
+		MAN_PRINT("Restored MinCfg Data from PS\n");
 		snsrMinCfg_t tData;
 		memcpy(&tData,&rsp->value.data,sizeof(tData));
 		if(tData.aggBinded)
@@ -2171,3 +2214,78 @@ void fn_snsRestore(void){
 	}
 #endif
 }
+
+//void fn_HardwareIdentifier(void)
+//{
+//	uint8_t dali_identify_timer = fn_GetmSecTimerStart();
+//	uint8_t analog_identify_timer = fn_GetmSecTimerStart();
+//	uint8_t dali_is_present = 0;
+//	uint8_t analog_is_present = 0;
+//	uint8_t analog_rxData_test[10] = {0};
+//	uint8_t hw_type_identification = DALI_IDENTIFICATION;
+//	uint8_t wireless_sensor_device = 0;
+//	uint8_t integrated_device = 0;
+//
+//	switch(hw_type_identification)
+//	{
+//		case DALI_IDENTIFICATION:
+//			//call timer 1 init after this fn
+//			GPIO_PinOutClear(DALI_TX_PORT, DALI_TX_PIN);
+//			GPIO_PinOutSet(DALI_TX_PORT, DALI_TX_PIN);
+//			while(!fn_IsmSecTimerElapsed(dali_identify_timer, 10))
+//			{
+//				if(!GPIO_PinInGet(DALI_RX_PORT, DALI_RX_PIN)){
+//					MAN_PRINT("DALI is PRESENT");
+//					dali_is_present = 1;
+//					GPIO_PinOutClear(DALI_TX_PORT, DALI_TX_PIN);
+//				}
+//			}
+//
+//		case ANALOG_IDENTIFICATION:
+//			initI2C1_Analog();
+//			while(!fn_IsmSecTimerElapsed(dali_identify_timer, 100))
+//			{
+//				if(true == fn_readWiper(analog_rxData_test, MEM_WIPER|COM_READ, 2))
+//				{
+//					analog_is_present = 1;
+//					MAN_PRINT("ANALOG is PRESENT");
+//				}
+//			}
+//			I2C_Enable(ANALOG_I2C_HANDLE, false);  //Disable ANALOG I2C after checking
+//
+//		case SWITCH_STATE:
+//			if(GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
+//			{
+//				wireless_sensor_device = 1;
+//			}
+//			else if(GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
+//			{
+//				wireless_sensor_device = 1;
+//			}
+//
+//		case DEVICE_IDENTITY:
+//			if((dali_is_present == 1) && (analog_is_present == 1))
+//			{
+//				//by default ,select device type as DALI
+//				mux_control_select = 0;
+//			}
+//			else if(dali_is_present == 1)
+//			{
+//				mux_control_select = 0;
+//			}
+//			else if(analog_is_present == 1)
+//			{
+//				mux_control_select = 1;
+//			}
+//			struct gecko_msg_flash_ps_save_rsp_t* rsp;
+//			rsp = gecko_cmd_flash_ps_save(MUX, 1 , &mux_control_select);
+//			MAN_PRINT("Mux Settings save result : %04x\r\n", rsp->result);
+//			//gecko_cmd_hardware_set_soft_timer(SECONDS(1), FCTORY_RESET_ID,ONESHOT_TIMER);
+//			break;
+//
+//		default:
+//			hw_type_identification = DALI_IDENTIFICATION;
+//			break;
+//	}
+//}
+//
