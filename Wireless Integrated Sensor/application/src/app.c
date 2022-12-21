@@ -247,7 +247,8 @@ void handle_gecko_event(uint32_t evt_id, struct gecko_cmd_packet *evt)
 					Unicast = (uint16_t)(SYSTEM_GetUnique() & 0x7FFF);
 					Self_Provision_Device();
 				}
-				else
+			}
+			else
 				{
 					MAN_PRINT("node is unprovisioned, starting beaconing...\r\n");
 					gecko_cmd_mesh_node_start_unprov_beaconing(0x3);
@@ -530,9 +531,9 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 				fn_daliMode1_Level(0xFF,(g_daliLightStat)?0:100, 0);
 			}
 
-			#ifdef DALI_SPACE											//TRIAC
+			if(brdFeature.boardtype == INTEGRATED)						//TRIAC
 				fn_toggleTriac();
-			#endif
+
 		}
 		break;
 		/*............................................................................................*/
@@ -547,7 +548,8 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 				fn_daliMode1_Level(v_data->payload.data[1],v_data->payload.data[3], v_data->payload.data[2]);
 			}
 
-			#ifdef DALI_SPACE																//TRIAC
+			if(brdFeature.boardtype == INTEGRATED)                                                ////TRIAC
+			{
 				if(v_data->payload.data[3])													//intensityLevel
 				{
 //					fn_switchOnTriac();
@@ -561,7 +563,7 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 					fn_switchOffTriac();
 				}
 				fn_sendTriacStatus(v_data->payload.data[2]);								//attribute&reason
-			#endif
+			}
 		}
 		break;
 		/*............................................................................................*/
@@ -659,7 +661,8 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 				fn_daliMode1_Level(v_data->payload.data[1],v_data->payload.data[3], v_data->payload.data[2]);
 			}
 
-			#ifdef DALI_SPACE							//TRIAC
+			if(brdFeature.boardtype == INTEGRATED)                     ////TRIAC
+			{
 				if(v_data->payload.data[3])								//intensityLevel
 				{
 //					fn_switchOnTriac();
@@ -673,7 +676,7 @@ void fn_handle_Vendor_FT_wl_LightCmds(struct gecko_msg_mesh_vendor_model_receive
 					fn_switchOffTriac();
 				}
 				fn_sendTriacStatus(v_data->payload.data[2]);			//attribute&reason
-			#endif
+			}
 		}
 		break;
 		default:
@@ -954,19 +957,20 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 					v_data->payload.data[3] = (v_data->payload.data[3] != 0) ?	(uint8_t) ((253 * (1 + log10(v_data->payload.data[3])) / 3) + 1) : 0;
 
 					sDaliLightBallastCfg.sLightConfig.presetMin = v_data->payload.data[3];
-#ifdef DALI_SPACE
-					if(sDaliLightBallastCfg.sLightConfig.presetMin > 0)
+					if(brdFeature.boardtype == INTEGRATED)    //TRIAC
 					{
-						snsrCfg.emergency_light = true;
+						if(sDaliLightBallastCfg.sLightConfig.presetMin > 0)
+						{
+							snsrCfg.emergency_light = true;
+						}
+						else
+						{
+							snsrCfg.emergency_light = false;
+						}
+						snsrMinCfg.cfgAvailable = true;
+						MAN_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
+						MAN_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
 					}
-					else
-					{
-						snsrCfg.emergency_light = false;
-					}
-					snsrMinCfg.cfgAvailable = true;
-					MAN_PRINT("CFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_CFG_BASE,sizeof(snsrCfg),(uint8_t *)&snsrCfg)->result);
-					MAN_PRINT("MINCFG SAVE RESPONSE %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_MINCFG,sizeof(snsrCfg),(uint8_t *)&snsrMinCfg)->result);
-#endif
 					m_statusChangeFlag = 0x08;
 					fn_enQueueDC(&sDaliCfgQueue, &sDaliLightBallastCfg, m_statusChangeFlag);
                  break;
@@ -1029,62 +1033,70 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 		break;
 
 		//.......................................................................................................//
-#ifdef AREA
+
 		case AREA_DETAILS:
 		{
-			sConfigAreaParameters.TotalArea_Sensors_count = v_data->payload.data[1];
-			MAN_PRINT("Total number of sensors in Area = %d\r\n", sConfigAreaParameters.TotalArea_Sensors_count);
-			sConfigAreaParameters.Area_Group_ID = (uint16_t)((v_data->payload.data[3] << 8) | v_data->payload.data[2]);
-			printf("Group ID for AREA = %d\r\n", sConfigAreaParameters.Area_Group_ID);
+			if(brdFeature.area_enabled)
+			{
+				sConfigAreaParameters.TotalArea_Sensors_count = v_data->payload.data[1];
+				MAN_PRINT("Total number of sensors in Area = %d\r\n", sConfigAreaParameters.TotalArea_Sensors_count);
+				sConfigAreaParameters.Area_Group_ID = (uint16_t)((v_data->payload.data[3] << 8) | v_data->payload.data[2]);
+				printf("Group ID for AREA = %d\r\n", sConfigAreaParameters.Area_Group_ID);
 
-			MAN_PRINT("AREA config Parameters saved in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
+				MAN_PRINT("AREA config Parameters saved in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
+			}
 		}
 		break;
 
 		case CONFIGURE_AREA:
 		{
-			uint16_t SHID1 = (uint16_t)((v_data->payload.data[2] << 8) | v_data->payload.data[1]);
-			uint16_t SHID2 = (uint16_t)((v_data->payload.data[4] << 8) | v_data->payload.data[3]);
-			uint16_t SHID3 = (uint16_t)((v_data->payload.data[6] << 8) | v_data->payload.data[5]);
-			sConfigArea[AreaSensorCount++].SHID = SHID1;
-			if(AreaSensorCount  < sConfigAreaParameters.TotalArea_Sensors_count)
+			if(brdFeature.area_enabled)
 			{
-				sConfigArea[AreaSensorCount++].SHID = SHID2;
-			}
-			if(AreaSensorCount  < sConfigAreaParameters.TotalArea_Sensors_count)
-			{
-				sConfigArea[AreaSensorCount++].SHID = SHID3;
-			}
-
-			struct gecko_msg_flash_ps_save_rsp_t *result = gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG,sizeof(sConfigArea), &sConfigArea);
-			MAN_PRINT("AREA config saved in PS result : %d\r\n",result->result);
-
-
-			if((snsrMinCfg.snsrID == SHID1) || (snsrMinCfg.snsrID == SHID2) || (snsrMinCfg.snsrID == SHID3))
-			{
-				sConfigAreaParameters.SensorIsPartOfArea = 1;
-				for(int i = 0; i < AreaSensorCount;)
+				uint16_t SHID1 = (uint16_t)((v_data->payload.data[2] << 8) | v_data->payload.data[1]);
+				uint16_t SHID2 = (uint16_t)((v_data->payload.data[4] << 8) | v_data->payload.data[3]);
+				uint16_t SHID3 = (uint16_t)((v_data->payload.data[6] << 8) | v_data->payload.data[5]);
+				sConfigArea[AreaSensorCount++].SHID = SHID1;
+				if(AreaSensorCount  < sConfigAreaParameters.TotalArea_Sensors_count)
 				{
-					if(sConfigArea[i].SHID == snsrMinCfg.snsrID)
-					{
-						sConfigArea[i].Occupancy = snsrCurrStatus.pir_State;
-						break;
-					}
-					i++;
+					sConfigArea[AreaSensorCount++].SHID = SHID2;
 				}
+				if(AreaSensorCount  < sConfigAreaParameters.TotalArea_Sensors_count)
+				{
+					sConfigArea[AreaSensorCount++].SHID = SHID3;
+				}
+
+				struct gecko_msg_flash_ps_save_rsp_t *result = gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG,sizeof(sConfigArea), &sConfigArea);
+				MAN_PRINT("AREA config saved in PS result : %d\r\n",result->result);
+
+
+				if((snsrMinCfg.snsrID == SHID1) || (snsrMinCfg.snsrID == SHID2) || (snsrMinCfg.snsrID == SHID3))
+				{
+					sConfigAreaParameters.SensorIsPartOfArea = 1;
+					for(int i = 0; i < AreaSensorCount;)
+					{
+						if(sConfigArea[i].SHID == snsrMinCfg.snsrID)
+						{
+							sConfigArea[i].Occupancy = snsrCurrStatus.pir_State;
+							break;
+						}
+						i++;
+					}
+				}
+
+				MAN_PRINT("AREA config Parameters saved in PS result : %d\r\n",
+						gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
+
+				//Soft Timer to check if all CONFIGURE_AREA packets area received.
+				//If not send an FT_ACK packet
+				gecko_cmd_hardware_set_soft_timer(SECONDS(10), TIMER_ID_CONFIGURE_AREA, 1);
 			}
-
-			MAN_PRINT("AREA config Parameters saved in PS result : %d\r\n",
-					gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
-
-			//Soft Timer to check if all CONFIGURE_AREA packets area received.
-			//If not send an FT_ACK packet
-			gecko_cmd_hardware_set_soft_timer(SECONDS(10), TIMER_ID_CONFIGURE_AREA, 1);
 		}
 		break;
 
 		case DELETE_SENSOR_IN_AREA:
 		{
+		  if(brdFeature.area_enabled)
+		  {
 			uint16_t SHID = (uint16_t)((v_data->payload.data[2] << 8) | v_data->payload.data[1]);
 			for(int i = 0; i < MAX_SENSOR_IN_GRP; i++)
 			{
@@ -1113,9 +1125,10 @@ void fn_handle_Vendor_FT_Commands(struct gecko_msg_mesh_vendor_model_receive_evt
 			MAN_PRINT("AREA config saved after Deletion in PS result : %d\r\n",result->result);
 
 			MAN_PRINT("AREA config Parameters saved after deletion in PS result : %d\r\n",gecko_cmd_flash_ps_save(PS_SNSR_AREA_CONFIG_PARAMETERS,sizeof(sConfigAreaParameters), &sConfigAreaParameters)->result);
+		  }
 		}
+
 		break;
-#endif
 
 		default:
 		break;
@@ -1185,9 +1198,11 @@ void fn_handleVendorModel_Rcv(uint32_t evt_id,struct gecko_cmd_packet *evt)
 			send_packet(v_data->payload.data[0],v_data->source_address,true);
 		}
 		break;
-#ifdef AREA
+
 		case FT_STATUSCHANGE:
 		{
+		  if(brdFeature.area_enabled)
+		  {
 			if(v_data->payload.data[0] == PIR)
 			{
 				for(int i = 0; i < sConfigAreaParameters.TotalArea_Sensors_count;)
@@ -1197,26 +1212,27 @@ void fn_handleVendorModel_Rcv(uint32_t evt_id,struct gecko_cmd_packet *evt)
 						sConfigArea[i].Occupancy = v_data->payload.data[1];
 						if(sConfigArea[i].Occupancy)
 						{
-#ifdef DALI_FEATURE
-							fn_daliMode1_Level(0xFF, 100, 0x16);
-#endif
-#ifdef ANALOG_FEATURE
-							fn_setAnalogIntensity(100, 0x26);
-#endif
-#ifdef TRIAC_FEATURE
-							GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
-							triacCfg.triacStatus = true;
-							fn_saveTriacState();
-							fn_sendTriacStatus(0x16);
-#endif
+							if(brdFeature.boardtype == DALI)
+								fn_daliMode1_Level(0xFF, 100, 0x16);
+
+							if(brdFeature.boardtype == ANALAOG)
+								fn_setAnalogIntensity(100, 0x26);
+
+							if(brdFeature.boardtype == TRIAC)
+							{
+								GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
+								triacCfg.triacStatus = true;
+								fn_saveTriacState();
+								fn_sendTriacStatus(0x16);
+							}
 						}
 					}
 					i++;
 				}
 			}
+		  }
 		}
 		break;
-#endif
 /*..............................................................................................................*/
 		default:
 		break;
@@ -1351,19 +1367,33 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 	/*..............................................................................................................*/
 		case SWITCH_PRESS_INDICATION:
 		{
-#ifdef DALI_SPACE
-			if(GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
-#else
-			if(GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
-#endif
+			if(brdFeature.boardtype == INTEGRATED)
 			{
-				LED_TOGGLING(APP_LED2);
+				if(GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
+				{
+					LED_TOGGLING(APP_LED2);
+				}
+				else
+				{
+					//stop press indication
+					TURN_OFF_LED(APP_LED2);
+					gecko_cmd_hardware_set_soft_timer(MILLISECONDS(0),SWITCH_PRESS_INDICATION,REPEATING_TIMER);
+				}
 			}
-			else
+
+			if(brdFeature.boardtype == DALI || brdFeature.boardtype == ANALAOG || brdFeature.boardtype == TRIAC)
 			{
-				//stop press indication
-				TURN_OFF_LED(APP_LED2);
-				gecko_cmd_hardware_set_soft_timer(MILLISECONDS(0),SWITCH_PRESS_INDICATION,REPEATING_TIMER);
+				if(GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
+
+				{
+					LED_TOGGLING(APP_LED2);
+				}
+				else
+				{
+					//stop press indication
+					TURN_OFF_LED(APP_LED2);
+					gecko_cmd_hardware_set_soft_timer(MILLISECONDS(0),SWITCH_PRESS_INDICATION,REPEATING_TIMER);
+				}
 			}
 		}
 		break;
@@ -1386,32 +1416,51 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 	/*..............................................................................................................*/
 		case SWITCH_DEBOUNCE_TIMER:
 		{
-#ifdef DALI_SPACE
-			if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
-#else
-			if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
-#endif
+			if(brdFeature.boardtype == INTEGRATED)
 			{
-				MAN_PRINT("SW1_pressed\r\n");
-				snsrAppData.switchState = SWITCH_PRESSED;
-				g_switchPressed_StartTime = fn_GetSecTimerStart();
-				g_loopMapStratTime = fn_GetSecTimerStart();
-				g_loopMapIndex = fn_getCurntMappedIndx();
-				//start press indication
-				gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),SWITCH_PRESS_INDICATION,REPEATING_TIMER);
-			}
-#ifdef DALI_SPACE
-			else if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
-#else
-			else if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
-#endif
+				if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
 				{
-				if (snsrAppData.switchState == SWITCH_PRESSED)//check if previously the intrpt was enabled
-				{
-					fn_switchReleased();
+					MAN_PRINT("SW1_pressed\r\n");
+					snsrAppData.switchState = SWITCH_PRESSED;
+					g_switchPressed_StartTime = fn_GetSecTimerStart();
+					g_loopMapStratTime = fn_GetSecTimerStart();
+					g_loopMapIndex = fn_getCurntMappedIndx();
+					//start press indication
+					gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),SWITCH_PRESS_INDICATION,REPEATING_TIMER);
 				}
-				MAN_PRINT("SW1_released\r\n");
-				snsrAppData.switchState = SWITCH_RELEASED;
+				else if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
+				{
+					if (snsrAppData.switchState == SWITCH_PRESSED)//check if previously the intrpt was enabled
+					{
+						fn_switchReleased();
+					}
+					MAN_PRINT("SW1_released\r\n");
+					snsrAppData.switchState = SWITCH_RELEASED;
+				}
+			}
+
+			if(brdFeature.boardtype == DALI || brdFeature.boardtype == ANALAOG || brdFeature.boardtype == TRIAC)
+			{
+				if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_PRESSED)
+				{
+					MAN_PRINT("SW1_pressed\r\n");
+					snsrAppData.switchState = SWITCH_PRESSED;
+					g_switchPressed_StartTime = fn_GetSecTimerStart();
+					g_loopMapStratTime = fn_GetSecTimerStart();
+					g_loopMapIndex = fn_getCurntMappedIndx();
+					//start press indication
+					gecko_cmd_hardware_set_soft_timer(MILLISECONDS(500),SWITCH_PRESS_INDICATION,REPEATING_TIMER);
+				}
+
+				else if (GPIO_PinInGet(SWITCH_PORT, SWITCH_PIN) == SWITCH_RELEASED)
+				{
+					if (snsrAppData.switchState == SWITCH_PRESSED)//check if previously the intrpt was enabled
+					{
+						fn_switchReleased();
+					}
+					MAN_PRINT("SW1_released\r\n");
+					snsrAppData.switchState = SWITCH_RELEASED;
+				}
 			}
 		}
 		break;
@@ -1500,21 +1549,24 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 				fn_initiate_factory_reset(1);
 			}
 			break;
-#ifdef AREA
+
 		case TIMER_ID_CONFIGURE_AREA:
+			if(brdFeature.area_enabled)
+		{
 			send_packet(PIR, 0xFFFF, false);
-#ifdef DALI_FEATURE
-			fn_daliMode1_Level(0xFF, 50, 0x16);
-#endif
-#ifdef ANALOG_FEATURE
-			fn_setAnalogIntensity(50, 0x26);
-#endif
-#ifdef TRIAC_FEATURE
-			GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
-			triacCfg.triacStatus = true;
-			fn_saveTriacState();
-			fn_sendTriacStatus(0x16);
-#endif
+			if(brdFeature.boardtype == DALI)
+				fn_daliMode1_Level(0xFF, 50, 0x16);
+
+			if(brdFeature.boardtype == ANALAOG)
+				fn_setAnalogIntensity(50, 0x26);
+
+			if(brdFeature.boardtype == TRIAC)
+			{
+				GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
+				triacCfg.triacStatus = true;
+				fn_saveTriacState();
+				fn_sendTriacStatus(0x16);
+			}
 
 
 			if(AreaSensorCount != sConfigAreaParameters.TotalArea_Sensors_count)
@@ -1524,8 +1576,8 @@ void fn_process_HardwareSoftTimer_Evnt(struct gecko_cmd_packet *evt)
 				data[1] = CONFIGURE_AREA;		//Didnt receive SHID of all sensors in AREA(Packet loss)
 				fn_enQ_blePkt(FT_ACK, 2, data, snsrMinCfg.dest_addr);
 			}
+		}
 		break;
-#endif
 
 		default:
 		break;
@@ -1705,48 +1757,52 @@ void fn_update_snsrCfg(void)
 		MAN_PRINT("no snsrcfg data in PS\r\n");
 	}
 
-#ifdef ALS_FEATURE
-		struct gecko_msg_flash_ps_load_rsp_t *rsp = gecko_cmd_flash_ps_load(ALS_CALIB_KEY);
-		if(!rsp->result)
-		{
-			memcpy(&sAlsCalibValue,&rsp->value.data,sizeof(sAlsCalibValue));
-			MAN_PRINT("ALS is loaded from PS\r\n");
-		}
-		else
-		{
-			MAN_PRINT("couldn't Load ALSCfg from PS : error %d\r\n",rsp->result);
-		}
-#endif
+	if(brdFeature.ALS_enabled)
+	{
+			struct gecko_msg_flash_ps_load_rsp_t *rsp = gecko_cmd_flash_ps_load(ALS_CALIB_KEY);
+			if(!rsp->result)
+			{
+				memcpy(&sAlsCalibValue,&rsp->value.data,sizeof(sAlsCalibValue));
+				MAN_PRINT("ALS is loaded from PS\r\n");
+			}
+			else
+			{
+				MAN_PRINT("couldn't Load ALSCfg from PS : error %d\r\n",rsp->result);
+			}
+	}
 
 	// device type and firmware version are not allowed to be set by configuration packet
-#ifdef TRIAC_FEATURE
-	snsrMinCfg.device_type = TRIAC_SENSOR_DEVICE_ID;
-#else
-//TODO: Uncomment the line below for SPACE with DALI
-	snsrMinCfg.device_type = MORPHOUS_SESNSOR_DEVICE_ID;
-//	snsrMinCfg.device_type = TRIAC_SENSOR_DEVICE_ID;			//comment out for SPACE with DALI
-#endif
-
-#ifdef PIR_FEATURE
-	snsrMinCfg.device_type |= PIR_SENSOR;
-#endif
-
-#ifdef ALS_FEATURE
-	i2c_txBuffer[0]=ALS_PART_ID;
-	if( fn_I2C_MasterWriteonly(ALS_TH_I2C_HANDLE, ALS_WDEV_ADDR,i2c_txBuffer,1) )
-	{
-		snsrMinCfg.device_type |= ALS_SENSOR;
+	if(brdFeature.boardtype == TRIAC){
+		snsrMinCfg.device_type = TRIAC_SENSOR_DEVICE_ID;
 	}
-#endif
-
-#ifdef TH_FEATURE
-	i2c_txBuffer[0] = 0xB0;
-	i2c_txBuffer[1] = 0x98;
-	if(fn_I2C_MasterWriteonly(ALS_TH_I2C_HANDLE, TH_WDEV_ADDR, i2c_txBuffer, 2))
-	{
-		snsrMinCfg.device_type |= TH_SENSOR;
+	else{
+	//TODO: Uncomment the line below for SPACE with DALI
+		snsrMinCfg.device_type = MORPHOUS_SESNSOR_DEVICE_ID;
+	//	snsrMinCfg.device_type = TRIAC_SENSOR_DEVICE_ID;			//comment out for SPACE with DALI
 	}
-#endif
+
+	if(brdFeature.PIR_enabled)
+		snsrMinCfg.device_type |= PIR_SENSOR;
+
+
+	if(brdFeature.ALS_enabled)
+	{
+		i2c_txBuffer[0]=ALS_PART_ID;
+		if( fn_I2C_MasterWriteonly(ALS_TH_I2C_HANDLE, ALS_WDEV_ADDR,i2c_txBuffer,1) )
+		{
+			snsrMinCfg.device_type |= ALS_SENSOR;
+		}
+	}
+
+	if(brdFeature.TH_enabled)
+	{
+		i2c_txBuffer[0] = 0xB0;
+		i2c_txBuffer[1] = 0x98;
+		if(fn_I2C_MasterWriteonly(ALS_TH_I2C_HANDLE, TH_WDEV_ADDR, i2c_txBuffer, 2))
+		{
+			snsrMinCfg.device_type |= TH_SENSOR;
+		}
+	}
 
 	if(mux_control_select == 0)					//DALI device type
 	{
@@ -1920,11 +1976,6 @@ void fn_SnsrPrcss(void)
 		fn_sensorIdentify();
 	}
 
-//	if(snsrAppData.switchState)									//if switch pressed
-//	{
-//		fn_handleSwitchIntrpt();
-//	}
-
 
 //	Handling Error Conditions for ALS
 	if(alsFailureDisable != false)
@@ -2048,10 +2099,17 @@ void fn_saveTriacState(void)
 /****************************************************************************************************************/
 void fn_switchOnTriac(void)
 {
-#ifdef ALS_FEATURE
-	if(snsrCurrStatus.als_LUXvalue < sAlsCalibValue.req_lux)
-#endif
+	if(brdFeature.ALS_enabled)
 	{
+		if(snsrCurrStatus.als_LUXvalue < sAlsCalibValue.req_lux)
+		{
+			DBG_PRINT("RTS high\r\n");
+			GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
+			triacCfg.triacStatus = true;
+			fn_saveTriacState();
+		}
+	}
+	else{
 		DBG_PRINT("RTS high\r\n");
 		GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
 		triacCfg.triacStatus = true;
@@ -2126,10 +2184,13 @@ void fn_mux_init(void)
 }
 
 /****************************************************************************************************************/
-#ifdef AREA
-uint8_t counter = 0;
+
+
 void fn_AreaControl(void)
 {
+  if(brdFeature.area_enabled)
+ {
+	uint8_t counter = 0;
 	uint8_t flag = 0;
 	for(int i = 0; i < sConfigAreaParameters.TotalArea_Sensors_count;i++)
 	{
@@ -2143,20 +2204,23 @@ void fn_AreaControl(void)
 	{
 		printf("Lights off from fn_AreaControl\r\n");
 		counter = 1;
-#ifdef DALI_FEATURE
-		fn_daliMode1_Level(0xFF, 0, 0x16);
-#endif
-#ifdef ANALOG_FEATURE
-		fn_setAnalogIntensity(0, 0x26);
-#endif
-#ifdef TRIAC_FEATURE
-		fn_switchOffTriac();
-		fn_sendTriacStatus(0x16);
-#endif
-
-	}
+		if(brdFeature.boardtype == DALI)
+		{
+			fn_daliMode1_Level(0xFF, 0, 0x16);
+		}
+		if(brdFeature.boardtype == ANALAOG)
+		{
+			fn_setAnalogIntensity(0, 0x26);
+		}
+		if(brdFeature.boardtype == TRIAC)
+		{
+			fn_switchOffTriac();
+			fn_sendTriacStatus(0x16);
+		}
+	 }
+  }
 }
-#endif
+
 
 void fn_snsRestore(void){
 	//restoring data from flash
@@ -2175,44 +2239,47 @@ void fn_snsRestore(void){
 		snsrMinCfg.lghtMpng = tData.lghtMpng;
 	}
 
-#ifdef AREA
-	struct gecko_msg_flash_ps_load_rsp_t *rspns = gecko_cmd_flash_ps_load(PS_SNSR_AREA_CONFIG);
-	if(!rspns->result)
-	{
-		DBG_PRINT("Restored AREA Config Data from PS\n");
-		memcpy(&sConfigArea, &rspns->value.data, sizeof(sConfigArea));
-	}
+	if(brdFeature.area_enabled)
+    {
+		struct gecko_msg_flash_ps_load_rsp_t *rspns = gecko_cmd_flash_ps_load(PS_SNSR_AREA_CONFIG);
+		if(!rspns->result)
+		{
+			DBG_PRINT("Restored AREA Config Data from PS\n");
+			memcpy(&sConfigArea, &rspns->value.data, sizeof(sConfigArea));
+		}
 
-	rspns = gecko_cmd_flash_ps_load(PS_SNSR_AREA_CONFIG_PARAMETERS);
-	if(!rspns->result)
-	{
-		DBG_PRINT("Restored AREA Config Parameters Data from PS\n");
-		memcpy(&sConfigAreaParameters, &rspns->value.data, sizeof(sConfigAreaParameters));
-	}
-#endif
+		rspns = gecko_cmd_flash_ps_load(PS_SNSR_AREA_CONFIG_PARAMETERS);
+		if(!rspns->result)
+		{
+			DBG_PRINT("Restored AREA Config Parameters Data from PS\n");
+			memcpy(&sConfigAreaParameters, &rspns->value.data, sizeof(sConfigAreaParameters));
+		}
+    }
+
 
 	fn_update_snsrCfg();
 	gecko_cmd_hardware_set_soft_timer(MILLISECONDS(200), BLEQ_HANDLER, REPEATING_TIMER);
 
 
-#ifdef DALI_SPACE													//TRIAC
-	rsp = gecko_cmd_flash_ps_load(TRIAC_STATUS_KEY);
-	if(!rsp->result)
-	{
-		DBG_PRINT("PIR_prev state\t");
-		memcpy(&triacCfg,&rsp->value.data,sizeof(triacCfg));
-		if(triacCfg.triacStatus)
+	if(brdFeature.boardtype == INTEGRATED)
+	{													//TRIAC
+		rsp = gecko_cmd_flash_ps_load(TRIAC_STATUS_KEY);
+		if(!rsp->result)
 		{
-			DBG_PRINT("RTS PULLED HIGH\r\n");
-			fn_switchOnTriac();
-		}
-		else
-		{
-			DBG_PRINT("RTS PULLED LOW\r\n");
-			fn_switchOffTriac();
+			DBG_PRINT("PIR_prev state\t");
+			memcpy(&triacCfg,&rsp->value.data,sizeof(triacCfg));
+			if(triacCfg.triacStatus)
+			{
+				DBG_PRINT("RTS PULLED HIGH\r\n");
+				fn_switchOnTriac();
+			}
+			else
+			{
+				DBG_PRINT("RTS PULLED LOW\r\n");
+				fn_switchOffTriac();
+			}
 		}
 	}
-#endif
 }
 
 //void fn_HardwareIdentifier(void)

@@ -69,12 +69,12 @@ void fn_PIR_Process(void)
 
 		case UPDATE_PIR_STATUS_CHANGE:
 			DBG_PRINT("/*...........................................*/\r\n");
-			#ifdef TRIAC_FEATURE
+			if(brdFeature.boardtype == TRIAC)
 				DBG_PRINT("PIR ---> %s ---> %s\r\n",(snsrCurrStatus.pir_State?"OCCUPIED":"UNOCCUIPED"),
 													(snsrCurrStatus.pir_State?"RTS_PULL_HIGH":"RTS_PULL_LOW"));
-			#else
+			else
 				MAN_PRINT("PIR rs485 data ---> %s\r\n",(snsrCurrStatus.pir_State?"OCCUPIED":"UNOCCUIPED"));
-			#endif
+
 
 			send_packet(PIR,snsrMinCfg.dest_addr,false);
 

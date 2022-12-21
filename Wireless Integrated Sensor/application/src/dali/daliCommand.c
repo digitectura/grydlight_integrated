@@ -1975,9 +1975,9 @@ void fn_daliProcess()
 	static uint16_t m_waitTimeout = 0;
 	static uint16_t m_curWaitTimeout = 0;
 //	static struct_DaliAction sDaliAction_loc = {0};
-#ifdef DALI_FEATURE
+if(brdFeature.boardtype == DALI)
 	static bool isWaiting = false;
-#endif
+
 	switch (m_DaliState)
 	{
 	case QUEUE_SEGREGATION_1:
@@ -3973,26 +3973,28 @@ void fn_enqueueIdentify() {
 	fn_enQDAct(&sDaliAction);
 }
 
-void gpioDALISetup(void) {
-#ifdef DALI_FEATURE
-	/* Configure Button PB0 as input and enable interrupt */
-	GPIO_PinModeSet(DALI_RX_PORT, DALI_RX_PIN, gpioModeInput, 0);
-//  GPIO_PinModeSet(BUTTON_0_PORT, BUTTON_0_PIN, gpioModeInputPull, 1);
-	GPIO_ExtIntConfig(DALI_RX_PORT,
-	DALI_RX_PIN,
-	DALI_RX_PIN,
-	true,
-	true,
-	true);
+void gpioDALISetup(void)
+{
+	if(brdFeature.boardtype == DALI)
+	{
+		/* Configure Button PB0 as input and enable interrupt */
+		GPIO_PinModeSet(DALI_RX_PORT, DALI_RX_PIN, gpioModeInput, 0);
+	//  GPIO_PinModeSet(BUTTON_0_PORT, BUTTON_0_PIN, gpioModeInputPull, 1);
+		GPIO_ExtIntConfig(DALI_RX_PORT,
+		DALI_RX_PIN,
+		DALI_RX_PIN,
+		true,
+		true,
+		true);
 
-	/* Enable ODD interrupt to catch button press that changes slew rate */
-	NVIC_ClearPendingIRQ(GPIO_EVEN_IRQn);
-	NVIC_EnableIRQ(GPIO_EVEN_IRQn);
-	GPIOINT_CallbackRegister(DALI_RX_PIN, fn_switch_intrpt_callBack);
+		/* Enable ODD interrupt to catch button press that changes slew rate */
+		NVIC_ClearPendingIRQ(GPIO_EVEN_IRQn);
+		NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+		GPIOINT_CallbackRegister(DALI_RX_PIN, fn_switch_intrpt_callBack);
 
-	/* Configure pB00 as a push pull output for LED drive */
-	GPIO_PinModeSet(DALI_TX_PORT, DALI_TX_PIN, gpioModePushPull, 1);
-#endif
+		/* Configure pB00 as a push pull output for LED drive */
+		GPIO_PinModeSet(DALI_TX_PORT, DALI_TX_PIN, gpioModePushPull, 1);
+	}
 }
 
 void fn_ProcessDaliRetention(void) {

@@ -40,11 +40,13 @@ void fn_switch_intrpt_callBack(uint8_t intNum)
 /****************************************************************************************************************/
 void fn_switchInit(void)
 {
-#ifdef DALI_SPACE
-	GPIO_PinModeSet(SWITCH_PORT, SWITCH_PIN, gpioModeInputPull, 1);
-#else
-	GPIO_PinModeSet(SWITCH_PORT, SWITCH_PIN, gpioModeInput, 0);
-#endif
+	if(brdFeature.boardtype == INTEGRATED){
+		GPIO_PinModeSet(SWITCH_PORT, SWITCH_PIN, gpioModeInputPull, 1);
+	}
+
+	if(brdFeature.boardtype == DALI || brdFeature.boardtype == ANALAOG || brdFeature.boardtype == TRIAC){
+		GPIO_PinModeSet(SWITCH_PORT, SWITCH_PIN, gpioModeInput, 0);
+	}
 
 	GPIOINT_CallbackRegister(SWITCH_INTRPT_NUM, fn_switch_intrpt_callBack);
 	NVIC_ClearPendingIRQ(SWITCH_INTRPT_IRQn);
@@ -81,13 +83,15 @@ void fn_switchReleased(void)
 		snsrAppData.switchPIR_interrupt = true;
 		snsrAppData.switchPIR_state = ~(snsrAppData.switchPIR_state);
 		DBG_PRINT("Sent PIR %s status\r\n",(snsrAppData.switchPIR_state)?"occupied":"unoccupied");
-		#ifdef TRIAC_FEATURE
+		if(brdFeature.boardtype == TRIAC){
 			fn_pirBasedTriacCntrl();
-		#endif
+		}
 
-		#ifdef DALI_SPACE
+
+		if(brdFeature.boardtype == INTEGRATED){
 			fn_pirBasedTriacCntrl();
-		#endif
+		}
+
 
 		if(mux_control_select == 1)
 		{

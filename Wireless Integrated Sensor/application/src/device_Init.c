@@ -103,16 +103,17 @@ void initBoard(void)
 	fn_led_init();
 	fn_switchInit();
 	fn_msecTimerinit();
-#ifdef TRIAC_FEATURE
-	GPIO_PinModeSet(GSLink_RTS_DIR_PORT,GSLink_RTS_DIR_PIN,gpioModePushPull,1);
-	GPIO_PinModeSet(GSLink_RTS_PORT,GSLink_RTS_PIN,gpioModePushPull,0);
-	fn_changeRTSdirection(RTS_OUTPUT);
-#endif
+	if(brdFeature.boardtype == TRIAC)
+	{
+		GPIO_PinModeSet(GSLink_RTS_DIR_PORT,GSLink_RTS_DIR_PIN,gpioModePushPull,1);
+		GPIO_PinModeSet(GSLink_RTS_PORT,GSLink_RTS_PIN,gpioModePushPull,0);
+		fn_changeRTSdirection(RTS_OUTPUT);
+	}
 
-#ifdef DALI_SPACE
+	if(brdFeature.boardtype == INTEGRATED){
 	GPIO_PinModeSet(gpioPortC, 5, gpioModePushPull, 0);
 	GPIO_PortOutSet(gpioPortC, 5);
-#endif
+}
 
 	fn_mux_init();
 

@@ -127,7 +127,7 @@
 
 /*................................Application Macros....................................*/
 #define CONFIG_VER								1
-#define FW_VER									15
+#define FW_VER									16
 
 #define SNSR_CFG_SAVE_INTERVAL					30		//sec
 #define IDENTIFY_INTERVAL						1		//sec

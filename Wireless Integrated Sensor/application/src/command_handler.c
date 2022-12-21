@@ -39,13 +39,15 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 		{
 			if(!isReq && !(snsrAppData.WL_LIGHT_RcvdExternalCmd_flag || snsrAppData.WL_LIGHT_CONTROL_2_flag))
 			{
-								Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
-								Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
-								Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
-								MAN_PRINT("PIR Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
-								MAN_PRINT("PIR Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-								als_debug_sendData();
-#ifdef AREA
+				Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
+				Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
+				Curr_mLevel = ((Curr_mLevel > 100) ? 100 : Curr_mLevel);
+				MAN_PRINT("PIR Before: Current ALS = %d\t Prev ALS = %d\r\n", snsrCurrStatus.als_LUXvalue, snsrPrevStatus.als_LUXvalue);
+				MAN_PRINT("PIR Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+				als_debug_sendData();
+
+				if(brdFeature.area_enabled)
+				{
 					for(int i = 0; i < sConfigAreaParameters.TotalArea_Sensors_count;)
 					{
 						if(sConfigArea[i].SHID == snsrMinCfg.snsrID)
@@ -55,90 +57,26 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 						}
 						i++;
 					}
-#endif
+				}
 
-					if(mux_control_select == 0)							//DALI
+				if(mux_control_select == 0)							//DALI
+				{
+					if(brdFeature.boardtype == INTEGRATED)
 					{
+						fn_triacCntrl();
+					}
 
-#ifdef DALI_SPACE
-	#ifdef AREA
-					if(sConfigAreaParameters.SensorIsPartOfArea == 1)
-					{
-						if((snsrCurrStatus.pir_State))
-						{
-							DBG_PRINT("RTS high\r\n");
-							GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
-							triacCfg.triacStatus = true;
-							fn_saveTriacState();
-							fn_sendTriacStatus(0x16);
-						}
-					}
-					else
-					{
-	#endif
-						if(snsrCurrStatus.pir_State && Curr_mLevel != 0)
-						{
-							DBG_PRINT("TRIAC set high in PIR 1\r\n");
-							DBG_PRINT("RTS high\r\n");
-							GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
-							triacCfg.triacStatus = true;
-							fn_saveTriacState();
-						}
-						DBG_PRINT("m_level = %d\r\n", Curr_mLevel);
-						if((snsrCfg.emergency_light == false) && (!(snsrCurrStatus.pir_State)))
-						{
-							DBG_PRINT("TRIAC timer set to low PIR\r\n");
-							gecko_cmd_hardware_set_soft_timer(SECONDS(13),EMERGENCY_LIGHT_TIMER_ID,ONESHOT_TIMER);	//to drive TRIAC to low to cutt of the power supply to DALI driver
-						}
-	#ifdef AREA
-					}
-	#endif
-#endif
-
-	#ifdef AREA
-						if(sConfigAreaParameters.SensorIsPartOfArea == 1)
-						{
-							if((snsrCurrStatus.pir_State))
-							{
-								fn_daliMode1_Level(0xFF, 100, 0x16);
-							}
-						}
-						else
-						{
-	#endif
-							fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x11);
-							Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-							DBG_PRINT("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-	#ifdef AREA
-						}
-	#endif
-					}
-					else if(mux_control_select == 1)					//Analog
-					{
-						DBG_PRINT("Analog Command sent PIR\r\n");
-	#ifdef AREA
-						if(sConfigAreaParameters.SensorIsPartOfArea == 1)
-						{
-							if((snsrCurrStatus.pir_State))
-							{
-								fn_setAnalogIntensity(100, 0x26);
-								Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-							}
-						}
-						else
-						{
-	#endif
-						fn_setAnalogIntensity(((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x21);
-						Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
-						DBG_PRINT("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-	#ifdef AREA
-						}
-	#endif
-					}
-				#ifdef TRIAC_FEATURE
-					(snsrCurrStatus.pir_State && m_level) ? fn_switchOnTriac() : fn_switchOffTriac();
-					fn_sendTriacStatus(0x11);							//TODO : confirm with Ram sir for reason wch bit to set for TRIAC status change
-				#endif
+					fn_daliCntrl();
+				}
+				else if(mux_control_select == 1)					//Analog
+				{
+					fn_analogCntrl();
+				}
+				if(brdFeature.boardtype == TRIAC)					//TRIAC
+				{
+				   (snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
+				    fn_sendTriacStatus(0x11);							//TODO : confirm with Ram sir for reason wch bit to set for TRIAC status change
+				}
 			}
 			snsrAppData.pirRetransmitTimerStart = fn_GetSecTimerStart();
 			m_data.datacmd = PIR;
@@ -151,9 +89,9 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 		{
 			if(!isReq && !(snsrAppData.WL_LIGHT_RcvdExternalCmd_flag || snsrAppData.WL_LIGHT_CONTROL_2_flag))
 			{
-				#ifdef PIR_FEATURE
-					if(snsrCurrStatus.pir_State)
-				#endif
+				if(brdFeature.PIR_enabled)            //|| brdFeature.ALS_enabled
+				{
+					if(snsrCurrStatus.pir_State)      //|| brdFeature.ALS_enabled
 					{
 						Curr_mLevel = ((((sAlsCalibValue.req_lux - snsrCurrStatus.als_LUXvalue)*100)/MaxLuxOnTable) + Prev_mLevel);
 						Curr_mLevel = ((Curr_mLevel > 10) ? Curr_mLevel : 0);
@@ -162,64 +100,71 @@ void send_packet(Data_Cmd_t data_cmd_type,uint16_t destAddr,uint8_t isReq)
 						MAN_PRINT("ALS Before: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
 						als_debug_sendData();
 
-					#ifdef TRIAC_FEATURE
-						(snsrCurrStatus.pir_State && m_level) ? fn_switchOnTriac() : fn_switchOffTriac();
-						fn_sendTriacStatus(0x12);
-					#endif
+						if(brdFeature.boardtype == TRIAC)
+						{
+							(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
+							fn_sendTriacStatus(0x12);
+						}
 
 						if(mux_control_select == 0)
 						{
-	#ifdef AREA
-							if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+							if(brdFeature.area_enabled)
 							{
-								//do nothing
+								if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+								{
+									//do nothing
+								}
 							}
 							else
 							{
-	#endif
-								fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x12);
-								Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
+								if(brdFeature.PIR_enabled)
+								{
+									fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x12);
+									Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
+								}
 								DBG_PRINT("ALS After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-	#ifdef AREA
-							}
-	#endif
 
+							}
 
-					#ifdef DALI_SPACE
-	#ifdef AREA
-							if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+							if(brdFeature.boardtype == INTEGRATED)
 							{
-							//do nothing
+								if(brdFeature.area_enabled)
+								{
+									if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+									{
+									//do nothing
+									}
+								}
+								else
+								{
+									(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
+									fn_sendTriacStatus(0x12);			//	Muruga is commented out
+
+								}
 							}
-							else
-							{
-	#endif
-								(snsrCurrStatus.pir_State && Curr_mLevel) ? fn_switchOnTriac() : fn_switchOffTriac();
-								fn_sendTriacStatus(0x12);			//	Muruga is commented out
-	#ifdef AREA
-							}
-	#endif
-					#endif
 						}
 						else if(mux_control_select == 1)
 						{
 							DBG_PRINT("Analog Command sent ALS\r\n");
-	#ifdef AREA
-							if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+							if(brdFeature.area_enabled)
 							{
-							//do nothing
+								if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+								{
+								//do nothing
+								}
 							}
 							else
 							{
-	#endif
 								fn_setAnalogIntensity((Curr_mLevel), 0x22);
 								Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
 								DBG_PRINT("ALS After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
-	#ifdef AREA
+
 							}
-	#endif
+
 						}
+
 					}
+				}
 			}
 
 			snsrAppData.alsRetransmitTimerStart = fn_GetSecTimerStart();
@@ -325,3 +270,82 @@ void als_debug_sendData(void){
 	}
 }
 
+
+void fn_triacCntrl(void)
+{
+	if(brdFeature.area_enabled)
+	{
+		if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+		{
+			if((snsrCurrStatus.pir_State))
+			{
+				DBG_PRINT("RTS high\r\n");
+				GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
+				triacCfg.triacStatus = true;
+				fn_saveTriacState();
+				fn_sendTriacStatus(0x16);
+			}
+		}
+	}
+	else
+	{
+
+		if(snsrCurrStatus.pir_State && Curr_mLevel != 0)
+		{
+			DBG_PRINT("TRIAC set high in PIR 1\r\n");
+			DBG_PRINT("RTS high\r\n");
+			GPIO_PinOutSet(TRIAC_PORT,TRIAC_PIN);
+			triacCfg.triacStatus = true;
+			fn_saveTriacState();
+		}
+		DBG_PRINT("m_level = %d\r\n", Curr_mLevel);
+		if((snsrCfg.emergency_light == false) && (!(snsrCurrStatus.pir_State)))
+		{
+			DBG_PRINT("TRIAC timer set to low PIR\r\n");
+			gecko_cmd_hardware_set_soft_timer(SECONDS(13),EMERGENCY_LIGHT_TIMER_ID,ONESHOT_TIMER);	//to drive TRIAC to low to cutt of the power supply to DALI driver
+		}
+
+	}
+}
+
+void fn_daliCntrl(void)
+{
+	if(brdFeature.area_enabled)
+	{
+		if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+		{
+			if((snsrCurrStatus.pir_State))
+			{
+				fn_daliMode1_Level(0xFF, 100, 0x16);
+			}
+		}
+	}
+	else
+	{
+		fn_daliMode1_Level(0xFF, ((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x11);
+		Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
+		DBG_PRINT("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+	}
+}
+
+void fn_analogCntrl(void)
+{
+	DBG_PRINT("Analog Command sent PIR\r\n");
+	if(brdFeature.area_enabled)
+	{
+		if(sConfigAreaParameters.SensorIsPartOfArea == 1)
+		{
+			if((snsrCurrStatus.pir_State))
+			{
+				fn_setAnalogIntensity(100, 0x26);
+				Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
+			}
+		}
+    }
+	else
+	{
+		fn_setAnalogIntensity(((snsrCurrStatus.pir_State)?Curr_mLevel:0), 0x21);
+		Prev_mLevel = (snsrCurrStatus.pir_State) ? Curr_mLevel : 0;
+		DBG_PRINT("PIR After: Curr_mLevel = %d\t Prev_mLevel = %d\r\n", Curr_mLevel, Prev_mLevel);
+	}
+}
